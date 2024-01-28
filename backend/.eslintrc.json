@@ -1,0 +1,46 @@
+{
+  "extends": [
+    "prettier",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:@typescript-eslint/stylistic"
+  ],
+  "plugins": [
+    "prettier",
+    "@typescript-eslint",
+    "no-null",
+    "eslint-plugin-local",
+    "simple-import-sort"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "env": {
+    "node": true,
+    "es6": true
+  },
+  "ignorePatterns": [
+    "**/node_modules/**",
+    "/built/**",
+    "/tests/**",
+    "/lib/**",
+    "/src/lib/*.generated.d.ts",
+    "/scripts/**/*.js",
+    "/scripts/**/*.d.*",
+    "/internal/**",
+    "/coverage/**"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "spaced-comment": "off",
+    "no-console": "warn",
+    "consistent-return": "off",
+    "func-names": "off",
+    "object-shorthand": "off",
+    "no-process-exit": "off",
+    "no-param-reassign": "off",
+    "no-return-await": "off",
+    "no-underscore-dangle": "off",
+    "class-methods-use-this": "off",
+    "prefer-destructuring": ["error", { "object": true, "array": false }]
+    "no-unused-vars": ["error", { "argsIgnorePattern": "req|res|next|val" }]
+  }
+}

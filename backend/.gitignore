@@ -9,3 +9,4 @@ notes.md
 *.txt
 emailTemplate/
 dist/
+__test__/

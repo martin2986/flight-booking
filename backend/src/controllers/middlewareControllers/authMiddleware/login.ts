@@ -9,7 +9,6 @@ import AppError from '../../../handlers/appError';
 export const login = catchErrors(async (req: Request, res: Response, next: NextFunction) => {
   const { email, password } = req.body;
 
-  //Log in Validation
   const objectSchema = Joi.object({
     email: Joi.string()
       .email({ tlds: { allow: true } }) //check tlds

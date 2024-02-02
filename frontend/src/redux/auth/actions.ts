@@ -15,7 +15,6 @@ export const login =
         isLoggedIn: true,
         isLoading: false,
         isSuccess: true,
-        token: data.token,
       };
       window.localStorage.setItem('auth', JSON.stringify(authState));
       // window.localStorage.removeItem('isLogout');

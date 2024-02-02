@@ -1,6 +1,7 @@
 import mongoose, { Document } from 'mongoose';
 import bcrypt from 'bcryptjs';
 import ShortUniqueId from 'short-unique-id';
+import crypto from 'crypto';
 const { randomUUID } = new ShortUniqueId({ length: 10 });
 
 interface UserDocument extends Document {
@@ -15,6 +16,9 @@ interface UserDocument extends Document {
   emailToken?: string;
   salt?: string;
   validPassword(password: string): Promise<boolean>;
+  createResetEmailToken(): void;
+  passwordResetToken: String;
+  passwordResetExpires: Date;
 }
 
 const userSchema = new mongoose.Schema({
@@ -50,7 +54,8 @@ const userSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
-  emailToken: String,
+  passwordResetToken: String,
+  passwordResetExpires: Date,
   loggedSession: {
     type: [String],
     default: [],
@@ -72,6 +77,17 @@ userSchema.pre('save', async function (next) {
 //checking if password is valid
 userSchema.methods.validPassword = function (userPassword: string) {
   return bcrypt.compareSync(userPassword + this.salt, this.password);
+};
+
+userSchema.methods.createResetEmailToken = function () {
+  const resetEmailToken = crypto.randomBytes(32).toString('hex');
+
+  this.passwordResetToken = crypto.createHash('sha256').update(resetEmailToken).digest('hex');
+
+  console.log({ resetEmailToken }, this.passwordResetToken);
+  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+
+  return resetEmailToken;
 };
 
 const User = mongoose.model<UserDocument>('User', userSchema);

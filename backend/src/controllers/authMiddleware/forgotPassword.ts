@@ -2,7 +2,7 @@ import { Response, Request, NextFunction } from 'express';
 import { catchErrors } from '../../handlers/catchError';
 import AppError from '../../handlers/appError';
 import User from '../../models/User';
-import { Resend } from 'resend';
+import sendMail from './sendEmail';
 export const forgotPassword = catchErrors(
   async (req: Request, res: Response, next: NextFunction) => {
     const user = await User.findOne({ email: req.body.email });
@@ -13,23 +13,21 @@ export const forgotPassword = catchErrors(
 
     await user.save({ validateBeforeSave: false });
 
-    const resetURL = `${req.protocol}://${req.get('host')}/api/v1/users/resetPassword/${resetToken}`;
+    const resetURL = `${req.protocol}://${req.get('host')}/api/resetPassword/${resetToken}`;
 
-    const message = `Forgot your password?. Submit a patch request with your new user password
-    and passwordConfirm to ${resetURL}.\n If you didn't forget your password please ignore this`;
-
-    const resend = new Resend(process.env.RESEND_API);
-
-    resend.emails.send({
-      from: 'onboarding@resend.dev',
-      to: user.email,
-      subject: 'Hello World',
-      html: message,
-    });
+    const emailOption = {
+      email: user.email,
+      name: user.name,
+      subject: 'Reset Password',
+      type: 'passwordVerification',
+      link: resetURL,
+    };
+    const data = await sendMail(emailOption);
 
     res.status(200).json({
       status: 'success',
       message: `An email has been sent to ${user.email} with further instructions`,
+      data,
     });
   },
 );

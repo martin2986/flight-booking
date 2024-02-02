@@ -2,11 +2,9 @@ import { Response, Request, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import Joi from 'joi';
-import ShortUniqueId from 'short-unique-id';
 import User from '../../models/User';
 import { catchErrors } from '../../handlers/catchError';
 import AppError from '../../handlers/appError';
-// const { randomUUID } = new ShortUniqueId({ length: 10 });
 
 type userType = {
   _id?: mongoose.Types.ObjectId;
@@ -34,7 +32,7 @@ const createAndSendToken = (user: userType, statusCode: number, res: Response) =
 
   return res.status(200).json({
     success: true,
-    // token,
+
     result: {
       _id: user._id,
       name: user.name,
@@ -44,21 +42,19 @@ const createAndSendToken = (user: userType, statusCode: number, res: Response) =
   });
 };
 
-/* REGISTER*/
+const objectSchema = Joi.object({
+  name: Joi.string().required(),
+  email: Joi.string()
+    .email({ tlds: { allow: true } })
+    .required(),
+  password: Joi.string().min(6).required(),
+  confirmPassword: Joi.valid(Joi.ref('password')).required(),
+});
+
 export const register = catchErrors(async (req: Request, res: Response, next: NextFunction) => {
   const { name, email, password, confirmPassword } = req.body;
 
-  //register Validation
-  const objectSchema = Joi.object({
-    name: Joi.string().required(),
-    email: Joi.string()
-      .email({ tlds: { allow: true } })
-      .required(),
-    password: Joi.string().min(6).required(),
-    confirmPassword: Joi.valid(Joi.ref('password')).required(),
-  });
-
-  const { error, value } = objectSchema.validate({ name, email, password, confirmPassword });
+  const { error } = objectSchema.validate({ name, email, password, confirmPassword });
   if (error) return next(new AppError('Invalid/Missing credentials.', 409));
 
   const existingUser = await User.findOne({ email: email, removed: false });
@@ -66,7 +62,6 @@ export const register = catchErrors(async (req: Request, res: Response, next: Ne
   if (existingUser)
     return next(new AppError('An account with this email has already been registered.', 409));
 
-  // const emailToken = randomUUID();
   const newUser = await User.create({ email, name, password, confirmPassword });
 
   createAndSendToken(newUser, 200, res);

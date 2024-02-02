@@ -1,4 +1,4 @@
-import { emailVerification, passwordVerification } from '../../../emailTemplate/EmailVerification';
+import { emailVerification, passwordVerification } from '../../emailTemplate/EmailVerification';
 
 import { Resend } from 'resend';
 

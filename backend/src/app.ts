@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 
 import { errorHandler } from './handlers/errorHandler';
 import AppError from './handlers/appError';
+
 const app = express();
 
 app.use(cors());

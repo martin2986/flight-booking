@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { FC } from 'react';
+import { logout } from '../auth/authRequest';
+type DashboardProps = {};
 
-type Props = {};
-
-const Dashboard = (props: Props) => {
-  return <div>Logged IN Dashboard</div>;
+const Dashboard: FC<DashboardProps> = () => {
+  return (
+    <div>
+      Logged IN Dashboard
+      <button onClick={() => logout()}>Logout</button>
+    </div>
+  );
 };
 
 export default Dashboard;

@@ -3,9 +3,9 @@ import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import Joi from 'joi';
 import ShortUniqueId from 'short-unique-id';
-import User from '../../../models/User';
-import { catchErrors } from '../../../handlers/catchError';
-import AppError from '../../../handlers/appError';
+import User from '../../models/User';
+import { catchErrors } from '../../handlers/catchError';
+import AppError from '../../handlers/appError';
 // const { randomUUID } = new ShortUniqueId({ length: 10 });
 
 type userType = {

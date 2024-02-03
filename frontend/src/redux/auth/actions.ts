@@ -2,7 +2,6 @@ import { Dispatch } from 'redux';
 import * as actionTypes from './types';
 import * as authService from '../../auth/authRequest';
 import { type ActionTypes } from './types';
-
 export const login =
   ({ loginData }: loginTypes) =>
   async (dispatch: Dispatch<LoginAuthActionTypes>) => {
@@ -11,13 +10,11 @@ export const login =
 
     if (data.success === true) {
       const authState = {
-        current: data.result,
+        current: data,
         isLoggedIn: true,
         isLoading: false,
         isSuccess: true,
       };
-      window.localStorage.setItem('auth', JSON.stringify(authState));
-      // window.localStorage.removeItem('isLogout');
       dispatch({ type: actionTypes.LOGIN_SUCCESS, payload: authState });
     } else {
       dispatch({ type: actionTypes.REQUEST_FAILED });

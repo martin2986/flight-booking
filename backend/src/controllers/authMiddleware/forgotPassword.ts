@@ -1,7 +1,7 @@
 import { Response, Request, NextFunction } from 'express';
 import { catchErrors } from '../../handlers/catchError';
 import AppError from '../../handlers/appError';
-import User from '../../models/User';
+import User from '../../models/UserModel';
 import sendMail from './sendEmail';
 export const forgotPassword = catchErrors(
   async (req: Request, res: Response, next: NextFunction) => {

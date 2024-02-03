@@ -2,7 +2,7 @@ import { Response, Request, NextFunction } from 'express';
 import mongoose from 'mongoose';
 import jwt from 'jsonwebtoken';
 import Joi from 'joi';
-import User from '../../models/User';
+import User from '../../models/UserModel';
 import { catchErrors } from '../../handlers/catchError';
 import AppError from '../../handlers/appError';
 

@@ -3,7 +3,7 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 import Joi from 'joi';
-import User from '../../models/User';
+import User from '../../models/UserModel';
 import { catchErrors } from '../../handlers/catchError';
 import AppError from '../../handlers/appError';
 
@@ -53,6 +53,7 @@ export const login = catchErrors(async (req: Request, res: Response, next: NextF
   if (process.env.NODE_ENV === 'production') cookieOption.secure = true;
   res.status(200).cookie('token', token, cookieOption).json({
     success: true,
+    token,
     message: 'Successfully login user',
   });
 });

@@ -11,5 +11,7 @@ authRouter.route('/register').post(register);
 authRouter.route('/login').post(login);
 authRouter.route('/forgotPassword').post(forgotPassword);
 authRouter.route('/resetPassword/:token').patch(resetPassword);
+
 authRouter.route('/logout').get(protectRoute, logout);
+
 export default authRouter;

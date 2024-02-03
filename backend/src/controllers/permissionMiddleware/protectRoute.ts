@@ -1,6 +1,6 @@
 import { catchErrors } from '../../handlers/catchError';
 import { Request, Response, NextFunction } from 'express';
-import User from '../../models/User';
+import User from '../../models/UserModel';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
 import { promisify } from 'util';

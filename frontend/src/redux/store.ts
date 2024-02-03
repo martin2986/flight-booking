@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import storePersist, { localStorageHealthCheck } from './storePersist';
-import rootReducer from './rootReducer';
-localStorageHealthCheck();
+import persistedReducer from './rootReducer';
+import persistStore from 'redux-persist/es/persistStore';
 
 const AUTH_INITIAL_STATE = {
   current: {},
@@ -10,13 +9,13 @@ const AUTH_INITIAL_STATE = {
   isSuccess: false,
 };
 
-const authState = storePersist.get('auth') ? storePersist.get('auth') : AUTH_INITIAL_STATE;
-
-const initialState = { translate: '', auth: authState };
-const store = configureStore({
-  reducer: rootReducer,
-  preloadedState: initialState,
-  devTools: import.meta.env.PROD === false,
+export const store = configureStore({
+  reducer: persistedReducer,
+  preloadedState: AUTH_INITIAL_STATE,
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
-export default store;
+export const persistor = persistStore(store);

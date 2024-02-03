@@ -1,5 +1,4 @@
 import * as actionTypes from './types';
-import { type AuthActionTypes, type PayLoadData } from './actions';
 const INITIAL_STATE = {
   current: {},
   isLoggedIn: false,
@@ -8,7 +7,7 @@ const INITIAL_STATE = {
   token: null,
 };
 
-const authReducer = (state = INITIAL_STATE, action: AuthActionTypes) => {
+const authReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case actionTypes.REQUEST_LOADING:
       return {

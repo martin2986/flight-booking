@@ -1,7 +1,7 @@
 import { Response, Request, NextFunction } from 'express';
 import { catchErrors } from '../../handlers/catchError';
 import jwt from 'jsonwebtoken';
-import User from '../../models/User';
+import User from '../../models/UserModel';
 import AppError from '../../handlers/appError';
 import crypto from 'crypto';
 
@@ -30,7 +30,6 @@ export const resetPassword = catchErrors(
     user.passwordResetToken = undefined;
     user.passwordResetExpires = undefined;
     await user.save();
-    //   createAndSendToken(user, 200, res);
 
     const token = generateJWT({ id: user._id }, { expiresIn: '1h' });
 

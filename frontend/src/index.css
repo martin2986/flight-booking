@@ -14,8 +14,8 @@
 
 body,
 html {
-  background-color: #242424;
-  /* background-color: #e1dfdd; */
+  /* background-color: #242424; */
+  background-color: #e1dfdd;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;

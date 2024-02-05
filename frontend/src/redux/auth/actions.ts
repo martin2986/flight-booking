@@ -2,6 +2,7 @@ import { Dispatch } from 'redux';
 import * as actionTypes from './types';
 import * as authService from '../../auth/authRequest';
 import { type ActionTypes } from './types';
+import axios from 'axios';
 export const login =
   ({ loginData }: loginTypes) =>
   async (dispatch: Dispatch<LoginAuthActionTypes>) => {
@@ -33,6 +34,23 @@ export const register =
       dispatch({ type: actionTypes.REQUEST_FAILED });
     }
   };
+
+export const logout = () => async (dispatch: Dispatch<any>) => {
+  dispatch({ type: actionTypes.REQUEST_LOADING });
+  try {
+    const response = await axios.get(`${import.meta.env.VITE_API}logout`);
+    if (!response) throw new Error('Ops there seems to be an error, Please try again');
+    const { data } = response;
+    console.log(data);
+    // if (data.success === true) {
+    dispatch({ type: actionTypes.LOGOUT_SUCCESS });
+    // } else {
+    //   dispatch({ type: actionTypes.REQUEST_FAILED });
+    // }
+  } catch (err) {
+    console.error('error', err);
+  }
+};
 
 export type PayLoadData = {
   data: {

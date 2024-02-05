@@ -18,13 +18,9 @@ export const register = async ({ registerData }: registerTypes) => {
 };
 
 export const logout = async () => {
-  try {
-    const response = await axios.get(`${import.meta.env.VITE_API}logout`);
-    if (!response) throw new Error('Error logging out, Please try again');
-    const { data } = response;
+  const response = await axios.get(`${import.meta.env.VITE_API}logout`);
+  if (!response) throw new Error('Ops there seems to be an error, Please try again');
+  const { data } = response;
 
-    return data;
-  } catch (err) {
-    console.error('Logout error', err);
-  }
+  return data;
 };

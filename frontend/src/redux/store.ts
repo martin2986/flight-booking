@@ -1,7 +1,7 @@
-import { configureStore } from '@reduxjs/toolkit';
+import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
 import persistedReducer from './rootReducer';
 import persistStore from 'redux-persist/es/persistStore';
-
+import thunk from 'redux-thunk';
 const AUTH_INITIAL_STATE = {
   current: {},
   isLoggedIn: false,
@@ -11,7 +11,7 @@ const AUTH_INITIAL_STATE = {
 
 export const store = configureStore({
   reducer: persistedReducer,
-  preloadedState: AUTH_INITIAL_STATE,
+
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,

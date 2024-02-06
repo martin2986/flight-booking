@@ -1,16 +1,14 @@
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { logout } from '../auth/authRequest';
+import { logout } from '../redux/auth/actions';
+
 import NavBar from '../components/NavBar';
 type DashboardProps = {};
 
 const Dashboard: FC<DashboardProps> = () => {
   const dispatch = useDispatch();
   const handleLogout = async () => {
-    // await dispatch(logout());
-    const data = await logout();
-    await dispatch(data);
-    console.log(data);
+    await dispatch(logout());
   };
 
   return (

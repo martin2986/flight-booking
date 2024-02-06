@@ -1,13 +1,4 @@
-export type ActionTypes = {
-  REQUEST_LOADING: string;
-  REQUEST_SUCCESS: string;
-  REQUEST_FAILED: string;
-  LOGIN_SUCCESS: string;
-  REGISTER_SUCCESS: string;
-  FAILED_REQUEST: string;
-  LOADING_REQUEST: string;
-  LOGOUT_SUCCESS: string;
-};
+
 
 export const FAILED_REQUEST = 'AUTH_FAILED_REQUEST';
 export const LOADING_REQUEST = 'AUTH_LOADING_REQUEST';

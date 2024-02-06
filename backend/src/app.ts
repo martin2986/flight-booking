@@ -10,7 +10,7 @@ import AppError from './handlers/appError';
 
 const app = express();
 
-app.use(cors());
+app.use(cors({ credentials: true }));
 app.use(compression());
 
 app.disable('x-powered-by');

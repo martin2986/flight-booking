@@ -43,7 +43,7 @@ const Index: FC<NavProps> = () => {
         </ul>
 
         <div className="hidden justify-end lg:flex lg:flex-1 ">
-          <Link to="login" className={buttonVariants({ variant: 'borderLess', size: 'sm' })}>
+          <Link to="login" className={buttonVariants({ variant: 'borderless', size: 'sm' })}>
             Register
           </Link>
           <Link to="login" className={buttonVariants({ size: 'sm' })}>

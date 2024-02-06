@@ -37,6 +37,7 @@ export const login =
         isLoggedIn: true,
         isLoading: false,
         isSuccess: true,
+        user: data.result,
       };
       dispatch({ type: actionTypes.LOGIN_SUCCESS, payload: authState });
     } else {

@@ -25,7 +25,7 @@ export const navLinks = [
     path: '/bookings',
   },
 ];
-export const mobileLinks = [
+export const mobileLinkAnimation = [
   {
     initial: {
       y: '300vh',
@@ -39,5 +39,43 @@ export const mobileLinks = [
         },
       },
     },
+  },
+];
+
+export const sideLinks = [
+  {
+    link: 'Update Profile',
+    path: '/updateProfile',
+  },
+  {
+    link: 'Manage Bookings',
+    path: '/bookings',
+  },
+  {
+    link: 'Settings',
+    path: '/settings',
+  },
+];
+
+export const mobileSide = [
+  {
+    link: ' All Flight',
+    path: '/',
+  },
+  {
+    link: 'Schedule',
+    path: 'schedules',
+  },
+  {
+    link: 'Manage Bookings',
+    path: '/bookings',
+  },
+  {
+    link: 'Update Profile',
+    path: '/updateProfile',
+  },
+  {
+    link: 'Settings',
+    path: '/settings',
   },
 ];

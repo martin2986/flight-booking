@@ -4,7 +4,7 @@ const INITIAL_STATE = {
   isLoggedIn: false,
   isLoading: false,
   isSuccess: false,
-  token: null,
+  user: {},
 };
 
 const authReducer = (state = INITIAL_STATE, action) => {
@@ -17,7 +17,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
       };
     case actionTypes.REQUEST_SUCCESS:
       return {
-        isLoggedIn: true,
+        isLoggedIn: false,
         isLoading: false,
         isSuccess: true,
         token: action.payload,
@@ -40,6 +40,7 @@ const authReducer = (state = INITIAL_STATE, action) => {
         isSuccess: true,
         current: action.payload.current,
         token: action.payload.token,
+        user: action.payload.user,
       };
     case actionTypes.LOGOUT_SUCCESS:
       return INITIAL_STATE;

@@ -51,9 +51,16 @@ export const login = catchErrors(async (req: Request, res: Response, next: NextF
     path: '/',
   };
   if (process.env.NODE_ENV === 'production') cookieOption.secure = true;
-  res.status(200).cookie('token', token, cookieOption).json({
-    success: true,
-    token,
-    message: 'Successfully login user',
-  });
+  res
+    .status(200)
+    .cookie('token', token, cookieOption)
+    .json({
+      success: true,
+      result: {
+        name: user.name,
+        email: user.email,
+      },
+      token,
+      message: 'Successfully login user',
+    });
 });

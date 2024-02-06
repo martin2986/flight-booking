@@ -6,8 +6,8 @@ import AuthRouter from '../router/AuthRouter';
 type FlightAirlineProps = {};
 
 const FlightAirline: FC<FlightAirlineProps> = () => {
-  const { isSuccess } = useSelector((state) => state.auth);
-  if (isSuccess) {
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  if (isLoggedIn) {
     return <AppRouter />;
   } else {
     return <AuthRouter />;

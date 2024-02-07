@@ -8,7 +8,7 @@ const Bookings = lazy(() => import('../pages/Bookings'));
 
 const AppRouter = () => {
   return (
-    <div>
+    <div className="app">
       <NavBar />
       <Routes>
         <Route element={<Dashboard />} path="/" />

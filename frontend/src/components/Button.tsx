@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, FC, forwardRef } from 'react';
+import { ButtonHTMLAttributes, FC } from 'react';
 import { VariantProps, cva } from 'class-variance-authority';
 import { cn } from '../utils/helperFn';
 
@@ -31,6 +31,7 @@ interface ButtonProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     VariantProps<typeof buttonVariants> {
   value?: string;
+  onClick?: () => void;
 }
 
 const Buttons: FC<ButtonProps> = ({
@@ -40,10 +41,16 @@ const Buttons: FC<ButtonProps> = ({
   title,
   children,
   value,
+  onClick,
   ...props
 }) => {
   return (
-    <button value={value} className={cn(buttonVariants({ variant, size, className }))} {...props}>
+    <button
+      value={value}
+      onClick={onClick}
+      className={cn(buttonVariants({ variant, size, className }))}
+      {...props}
+    >
       {title} {children}
     </button>
   );

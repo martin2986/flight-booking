@@ -1,6 +1,6 @@
-import { FC } from "react";
-import { UseFormRegister } from "react-hook-form";
-type InputsProps = {
+import { FC } from 'react';
+import { UseFormRegister } from 'react-hook-form';
+type InputsTypes = {
   label: string;
   type: string;
   error: string | undefined;
@@ -8,14 +8,7 @@ type InputsProps = {
   register: UseFormRegister<any>;
 };
 
-const Inputs: FC<InputsProps> = ({
-  label,
-  type,
-  error,
-  name,
-  register,
-  ...props
-}) => {
+const Inputs: FC<InputsTypes> = ({ label, type, error, name, register, ...props }) => {
   return (
     <>
       <label

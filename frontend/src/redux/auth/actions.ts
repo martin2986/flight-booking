@@ -1,7 +1,30 @@
 import { Dispatch } from 'redux';
 import * as actionTypes from './types';
 import * as authService from '../../auth/authRequest';
-import { type ActionTypes } from './types';
+import axios from 'axios';
+
+type loginTypes = {
+  loginData: {
+    email: string;
+    password: string;
+  };
+};
+
+export type loginPayLoad = {
+  current: {};
+  isLoggedIn: boolean;
+  isLoading: boolean;
+  isSuccess: boolean;
+};
+export type PayLoadData = {
+  data: {
+    result: {
+      _id: string;
+      name: string;
+      email: string;
+    };
+  };
+};
 export const login =
   ({ loginData }: loginTypes) =>
   async (dispatch: Dispatch<LoginAuthActionTypes>) => {
@@ -14,6 +37,7 @@ export const login =
         isLoggedIn: true,
         isLoading: false,
         isSuccess: true,
+        user: data.result,
       };
       dispatch({ type: actionTypes.LOGIN_SUCCESS, payload: authState });
     } else {
@@ -28,43 +52,55 @@ export const register =
     const data = await authService.register({ registerData });
 
     if (data.success === true) {
-      dispatch({ type: actionTypes.REGISTER_SUCCESS });
+      dispatch({ type: actionTypes.REGISTER_SUCCESS, payload: data });
     } else {
       dispatch({ type: actionTypes.REQUEST_FAILED });
     }
   };
 
-export type PayLoadData = {
-  data: {
-    result: {
-      _id: string;
-      name: string;
-      email: string;
+export const logout = () => {
+  return async (dispatch: Dispatch<LogoutActionTypes>) => {
+    dispatch({ type: actionTypes.REQUEST_LOADING });
+    const fetchLogout = async () => {
+      const response = await axios.get(`${import.meta.env.VITE_API}logout`);
+      if (!response) throw new Error('Ops there seems to be an error, Please try again');
+      const { data } = response;
+      if (data.success === true) {
+        dispatch({ type: actionTypes.LOGOUT_SUCCESS });
+      }
+      console.log('data response', data);
+      return data;
     };
+
+    try {
+      await fetchLogout();
+    } catch (err) {
+      console.error('error', err);
+    }
   };
 };
+
 interface RequestLoadingAction {
-  type: ActionTypes['REQUEST_LOADING'];
+  type: typeof actionTypes.REQUEST_LOADING;
 }
 interface RequestSuccessAction {
-  type: ActionTypes['REQUEST_SUCCESS'];
-  payload: PayLoadData;
+  type: typeof actionTypes.REQUEST_SUCCESS;
 }
 interface RequestFailedAction {
-  type: ActionTypes['REQUEST_FAILED'];
+  type: typeof actionTypes.REQUEST_FAILED;
 }
 interface LoginSuccessAction {
-  type: ActionTypes['LOGIN_SUCCESS'];
+  type: typeof actionTypes.LOGIN_SUCCESS;
+  payload: loginPayLoad;
 }
 interface RegisterSuccessAction {
-  type: ActionTypes['REGISTER_SUCCESS'];
+  type: typeof actionTypes.REGISTER_SUCCESS;
+  payload: PayLoadData;
 }
-export type loginTypes = {
-  loginData: {
-    email: string;
-    password: string;
-  };
-};
+export interface LogoutAction {
+  type: typeof actionTypes.LOGOUT_SUCCESS;
+}
+
 export type registerTypes = {
   registerData: {
     email: string;
@@ -85,3 +121,5 @@ export type LoginAuthActionTypes =
   | RequestFailedAction
   | RequestSuccessAction
   | RequestLoadingAction;
+
+export type LogoutActionTypes = LogoutAction | RequestLoadingAction;

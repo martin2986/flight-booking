@@ -60,7 +60,7 @@ const Login = () => {
           {isSubmitting ? 'Loading...' : 'Login'}
         </Buttons>
         <div className="flex flex-row items-center justify-between text-sm">
-          <a href="/" className="text-black">
+          <a href="/register" className="text-black">
             Register Now!
           </a>
           <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">

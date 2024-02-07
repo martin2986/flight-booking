@@ -15,3 +15,7 @@ export function scrollToTop() {
 export function cns(...classes: []) {
   return classes.filter(Boolean).join(' ');
 }
+
+export const selectTrip = ['Round Trip', 'One way'];
+export const selectFlightType = ['Economy', 'Premium', 'Business', 'First Class'];
+export const selectPassenger = ['Passenger', 1, 2, 3, 4, 5, 6];

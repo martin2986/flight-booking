@@ -5,7 +5,7 @@ import { Suspense, lazy } from 'react';
 import PageLoader from './components/PageLoader';
 import { persistor, store } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
-const FlightAirline = lazy(() => import('./app/FlightAirline'));
+import AppRouter from './router/AppRouter';
 
 type RootAppProps = {};
 const RootApp: FC<RootAppProps> = () => {
@@ -14,7 +14,7 @@ const RootApp: FC<RootAppProps> = () => {
       <Provider store={store}>
         <PersistGate persistor={persistor} loading={null}>
           <Suspense fallback={<PageLoader />}>
-            <FlightAirline />
+            <AppRouter />
           </Suspense>
         </PersistGate>
       </Provider>

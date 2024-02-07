@@ -60,7 +60,6 @@ export const login = catchErrors(async (req: Request, res: Response, next: NextF
         name: user.name,
         email: user.email,
       },
-      token,
       message: 'Successfully login user',
     });
 });

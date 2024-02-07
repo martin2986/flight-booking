@@ -1,5 +1,5 @@
-import { FC, lazy } from 'react';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { lazy } from 'react';
+import { Routes, Route } from 'react-router-dom';
 import NotFound from '../components/NotFound';
 import VerifyAccount from '../components/VerifyAccount';
 import LoginForm from '../pages/Login';

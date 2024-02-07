@@ -1,13 +1,6 @@
-import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
+import { configureStore } from '@reduxjs/toolkit';
 import persistedReducer from './rootReducer';
-import persistStore from 'redux-persist/es/persistStore';
-import thunk from 'redux-thunk';
-const AUTH_INITIAL_STATE = {
-  current: {},
-  isLoggedIn: false,
-  isLoading: false,
-  isSuccess: false,
-};
+import { persistStore } from 'redux-persist';
 
 export const store = configureStore({
   reducer: persistedReducer,
@@ -17,5 +10,6 @@ export const store = configureStore({
       serializableCheck: false,
     }),
 });
-
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 export const persistor = persistStore(store);

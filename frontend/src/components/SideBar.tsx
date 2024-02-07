@@ -35,13 +35,10 @@ const SideBar: FC<SideBarProps<T>> = ({ setIsOpen, type, listItems }) => {
           <div className="flex flex-row  items-center justify-between">
             <div className=" flex flex-row items-center justify-between">
               {isLoggedIn ? (
-                <UserIcon userName="Jason Smith" id="wew" />
+                <UserIcon userName={user.name} id="wew" />
               ) : (
                 <h3 className="text-base font-semibold leading-7 ">Flight</h3>
               )}
-              <div>
-                <h1>{user.name}</h1>
-              </div>
             </div>
             <div className=" cursor-pointer" onClick={() => setIsOpen((prev: boolean) => !prev)}>
               <MdOutlineClose />

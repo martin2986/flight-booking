@@ -1,5 +1,6 @@
 import * as actionTypes from './types';
-const INITIAL_STATE = {
+import { PayloadAction } from '@reduxjs/toolkit';
+const INITIAL_STATE: actionTypes.AuthState = {
   current: {},
   isLoggedIn: false,
   isLoading: false,
@@ -7,7 +8,15 @@ const INITIAL_STATE = {
   user: {},
 };
 
-const authReducer = (state = INITIAL_STATE, action) => {
+type PayLoadTypes = {
+  current: {};
+  user: {};
+};
+
+const authReducer = (
+  state: actionTypes.AuthState = INITIAL_STATE,
+  action: PayloadAction<PayLoadTypes>,
+) => {
   switch (action.type) {
     case actionTypes.REQUEST_LOADING:
       return {
@@ -20,8 +29,6 @@ const authReducer = (state = INITIAL_STATE, action) => {
         isLoggedIn: false,
         isLoading: false,
         isSuccess: true,
-        token: action.payload,
-        current: action.payload,
       };
     case actionTypes.REQUEST_FAILED:
       return INITIAL_STATE;
@@ -39,7 +46,6 @@ const authReducer = (state = INITIAL_STATE, action) => {
         isLoading: false,
         isSuccess: true,
         current: action.payload.current,
-        token: action.payload.token,
         user: action.payload.user,
       };
     case actionTypes.LOGOUT_SUCCESS:

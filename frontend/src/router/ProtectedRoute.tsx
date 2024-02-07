@@ -1,8 +1,6 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
-import UserProfile from '../pages/UserProfile';
-import NavBar from '../components/NavBar';
 type ProtectedRouteProps = {
   redirectPath: string;
 };

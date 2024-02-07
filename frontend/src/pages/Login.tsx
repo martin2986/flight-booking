@@ -1,6 +1,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { useDisPatch } from '../redux/hooks';
 import { useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { Buttons } from '../components/Button';
@@ -14,7 +15,7 @@ const schema = z.object({
 type formFields = z.infer<typeof schema>;
 const Login = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+  const dispatch = useDisPatch();
   const {
     register,
     handleSubmit,
@@ -60,12 +61,12 @@ const Login = () => {
           {isSubmitting ? 'Loading...' : 'Login'}
         </Buttons>
         <div className="flex flex-row items-center justify-between text-sm">
-          <a href="/register" className="text-black">
+          <Link to="/register" className="text-black">
             Register Now!
-          </a>
-          <a href="#" className="font-semibold text-indigo-600 hover:text-indigo-500">
+          </Link>
+          <Link to="/" className="font-semibold text-indigo-600 hover:text-indigo-500">
             Forgot password?
-          </a>
+          </Link>
         </div>
       </form>
     </AuthLayout>

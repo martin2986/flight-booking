@@ -1,6 +1,6 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useDispatch } from 'react-redux';
+import { useDisPatch } from '../redux/hooks';
 import { z } from 'zod';
 import { Buttons } from '../components/Button';
 import AuthLayout from '../layout/AuthLayout';
@@ -8,10 +8,11 @@ import { registerFormSchema } from '../utils/formSchema';
 import { register as registerAuth } from '../redux/auth/actions';
 import Inputs from '../components/Inputs';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 type formFields = z.infer<typeof registerFormSchema>;
 
 const Register = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDisPatch();
   const navigate = useNavigate();
   const {
     register,
@@ -70,9 +71,9 @@ const Register = () => {
         <Buttons className="w-full mt-5" disabled={isSubmitting}>
           {isSubmitting ? 'Loading...' : 'Sign Up'}
         </Buttons>
-        <a href="/login" className="text-black text-sm">
+        <Link to="/login" className="text-black text-sm">
           Login Now!
-        </a>
+        </Link>
       </form>
     </AuthLayout>
   );

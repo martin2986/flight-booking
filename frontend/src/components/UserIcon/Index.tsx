@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { FC, ComponentPropsWithoutRef } from 'react';
 
-type UserIconProps = {
+interface UserIconProps extends ComponentPropsWithoutRef<'div'> {
   userName: string;
   id: string;
-};
+}
 
 const Index: FC<UserIconProps> = ({ userName = '', id = '', ...props }) => {
   const user = userName.split(' ');

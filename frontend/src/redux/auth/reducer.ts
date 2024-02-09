@@ -1,6 +1,6 @@
 import * as actionTypes from './types';
 import { PayloadAction } from '@reduxjs/toolkit';
-const INITIAL_STATE: actionTypes.AuthState = {
+const INITIAL_STATE = {
   current: {},
   isLoggedIn: false,
   isLoading: false,
@@ -14,7 +14,7 @@ type PayLoadTypes = {
 };
 
 const authReducer = (
-  state: actionTypes.AuthState = INITIAL_STATE,
+  state: actionTypes.INITIAL_STATE_TYPES = INITIAL_STATE,
   action: PayloadAction<PayLoadTypes>,
 ) => {
   switch (action.type) {

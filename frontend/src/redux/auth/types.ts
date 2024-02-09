@@ -1,6 +1,3 @@
-export const FAILED_REQUEST = 'AUTH_FAILED_REQUEST';
-// export const LOADING_REQUEST = 'AUTH_LOADING_REQUEST';
-
 export const LOGIN_SUCCESS = 'AUTH_LOGIN_SUCCESS';
 export const REGISTER_SUCCESS = 'AUTH_REGISTER_SUCCESS';
 export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
@@ -21,13 +18,6 @@ export type registerTypes = {
   name: string;
 };
 
-export type loginDataTypes = {
-  loginData: loginTypes;
-};
-export type registerDataTypes = {
-  registerData: registerTypes;
-};
-
 export type INITIAL_STATE_TYPES = {
   current: {};
   isLoggedIn: boolean;
@@ -36,40 +26,35 @@ export type INITIAL_STATE_TYPES = {
   user: {};
 };
 
-export interface UserDetails {
-  // Define the structure of user details
+interface RequestLoadingAction {
+  type: typeof REQUEST_LOADING;
+}
+interface RequestSuccessAction {
+  type: typeof REQUEST_SUCCESS;
+}
+interface RequestFailedAction {
+  type: typeof REQUEST_FAILED;
+}
+interface LoginSuccessAction {
+  type: typeof LOGIN_SUCCESS;
+  payload: any;
+}
+interface RegisterSuccessAction {
+  type: typeof REGISTER_SUCCESS;
+  payload: any;
+}
+export interface LogoutAction {
+  type: typeof LOGOUT_SUCCESS;
 }
 
-export interface AuthState {
-  isLoggedIn: boolean;
-  isLoading: boolean;
-  isSuccess: boolean;
-  current: UserDetails | null;
-  user: UserDetails | null;
-}
+export type ReducerActionTypes =
+  | RequestLoadingAction
+  | RequestSuccessAction
+  | RequestFailedAction
+  | LoginSuccessAction
+  | RegisterSuccessAction;
 
-export type RequestLoadingAction = {
-  type: 'REQUEST_LOADING';
-};
-type RequestSuccessAction = {
-  type: 'REQUEST_SUCCESS';
-};
-type RequestFailedAction = {
-  type: 'REQUEST_FAILED';
-};
-type LoginSuccessAction = {
-  type: 'LOGIN_SUCCESS';
-  payload: AuthState;
-};
-type RegisterSuccessAction = {
-  type: 'REGISTER_SUCCESS';
-  payload: AuthState;
-};
-export type LogoutAction = {
-  type: 'LOGOUT_SUCCESS';
-};
-
-export type RegisterAuthType =
+export type RegisterAuthActionType =
   | RequestLoadingAction
   | RequestSuccessAction
   | RequestFailedAction

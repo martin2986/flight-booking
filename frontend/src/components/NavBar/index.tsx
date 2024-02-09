@@ -6,7 +6,7 @@ import { buttonVariants } from '../Button';
 import SideBar from '../SideBar';
 import UserIcon from '../UserIcon';
 import { navLinks, sideLinks, mobileSide } from './navUtil';
-import { useAppSelector } from '../../redux/hooks';
+import { useSelector } from 'react-redux';
 type NavProps = {};
 
 const Index: FC<NavProps> = () => {
@@ -14,7 +14,7 @@ const Index: FC<NavProps> = () => {
   const [userNavIsOpen, setUserNavIsOpen] = useState<boolean>(false);
   const [isActive, setIsActive] = useState(navLinks[0].link);
   const location = useLocation();
-  const { isLoggedIn, user } = useAppSelector((state) => state.auth);
+  const { isLoggedIn, user } = useSelector((state) => state.auth);
 
   let navBg;
   if (location?.pathname !== '/') {

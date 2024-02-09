@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import HeroHeader from '../components/HeroHeader';
-type DashboardProps = {};
 
+type DashboardProps = {};
 const Dashboard: FC<DashboardProps> = () => {
   return (
     <div className="">

@@ -31,7 +31,7 @@ const Login = () => {
       await dispatch(loginAuth({ loginData: data }));
       reset();
       navigate('/');
-    } catch (err) {
+    } catch (err: any) {
       setError('root', {
         message: err?.response?.data?.message || 'An error occurred during login.',
       });

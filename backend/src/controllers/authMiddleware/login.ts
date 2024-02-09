@@ -56,6 +56,7 @@ export const login = catchErrors(async (req: Request, res: Response, next: NextF
     .cookie('token', token, cookieOption)
     .json({
       success: true,
+      token,
       result: {
         name: user.name,
         email: user.email,

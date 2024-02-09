@@ -1,6 +1,11 @@
-import apiClient from './apiClient';
-import { type loginDataTypes, type registerDataTypes } from '../redux/auth/types';
-
+import { apiClient } from './apiClient';
+import { type loginTypes, type registerTypes } from '../redux/auth/types';
+interface loginDataTypes {
+  loginData: loginTypes;
+}
+interface registerDataTypes {
+  registerData: registerTypes;
+}
 export const login = async ({ loginData }: loginDataTypes) => {
   const response = await apiClient.post('/login', loginData);
   if (!response) throw new Error('Error logging  in, Please try again');

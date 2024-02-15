@@ -3,7 +3,7 @@ import { UseFormRegister } from 'react-hook-form';
 type InputsTypes = {
   label: string;
   type: string;
-  error: string | undefined;
+  error?: string | undefined;
   name: string;
   register: UseFormRegister<any>;
 };

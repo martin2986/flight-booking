@@ -4,7 +4,7 @@
   "description": "",
   "main": "dist/app.js",
   "scripts": {
-    "build": "tsc ",
+    "build": "tsc",
     "start": "tsc && node dist/app.js",
     "dev": "nodemon ",
     "debug": "ndb server.ts",
@@ -46,6 +46,7 @@
     "@types/morgan": "^1.9.9",
     "@types/node": "^20.11.8",
     "@types/nodemailer": "^6.4.14",
+    "@types/react": "^18.2.55",
     "@types/supertest": "^6.0.2",
     "@types/validator": "^13.11.8",
     "eslint": "^8.56.0",

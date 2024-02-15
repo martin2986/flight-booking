@@ -4,7 +4,7 @@ import HeroHeader from '../components/HeroHeader';
 type DashboardProps = {};
 const Dashboard: FC<DashboardProps> = () => {
   return (
-    <div className="">
+    <div className="app">
       <HeroHeader />
     </div>
   );

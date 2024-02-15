@@ -6,13 +6,14 @@ import { protectRoute } from '../controllers/permissionMiddleware/protectRoute';
 import { forgotPassword } from '../controllers/authMiddleware/forgotPassword';
 import { resetPassword } from '../controllers/authMiddleware/resetPassword';
 import { getAllUser, getUser, updateUser, deleteUser } from '../controllers/UserController/Index';
+import { getCity } from '../controllers/cityInfo/Index';
 const authRouter = express.Router();
 
 authRouter.route('/register').post(register);
 authRouter.route('/login').post(login);
 authRouter.route('/forgotPassword').post(forgotPassword);
 authRouter.route('/resetPassword/:token').patch(resetPassword);
-
+authRouter.route('/city').get(getCity);
 authRouter.use(protectRoute);
 
 authRouter.route('/').get(protectRoute, getAllUser);

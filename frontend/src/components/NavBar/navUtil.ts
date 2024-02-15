@@ -45,7 +45,7 @@ export const mobileLinkAnimation = [
 export const sideLinks = [
   {
     link: 'Update Profile',
-    path: '/updateProfile',
+    path: '/profile',
   },
   {
     link: 'Manage Bookings',
@@ -72,7 +72,7 @@ export const mobileSide = [
   },
   {
     link: 'Update Profile',
-    path: '/updateProfile',
+    path: '/profile',
   },
   {
     link: 'Settings',

@@ -1,10 +1,13 @@
-import { FC } from 'react';
+import debounce from 'lodash.debounce';
+import { FC, useEffect, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { flightClient } from '../auth/apiClient';
+import { IOTA } from '../utils/util';
 import { Buttons } from './Button';
 import PageLoader from './PageLoader';
 import SearchInput from './SearchInput';
+import { Card } from './UI/Card';
 export type InputStateTypes = {
   departure: string;
   arrival: string;
@@ -21,11 +24,29 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
     setError,
     formState: { errors, isSubmitting },
   } = useForm<InputStateTypes>();
-  const onSubmit: SubmitHandler<InputStateTypes> = async (data) => {
-    console.log('submitting', data);
-    const params = {
-      params: data,
+
+  const [testInput, setTestInput] = useState<string>('');
+  const [isEmpty, setIsEmpty] = useState<boolean>(true);
+
+  const handleInputChange = (e: any) => {
+    setTestInput(e.target.value);
+    e.target.value !== '' ? setIsEmpty(false) : setIsEmpty(true);
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await flightClient.get('cities.json');
+      console.log(response);
     };
+    fetchData();
+  }, []);
+
+  // const testHandler = debounce(handleInputChange, 2000);
+  const filterData = IOTA.filter((item) => item.code.toLowerCase().includes(testInput));
+  // console.log(filterData);
+
+  const onSubmit: SubmitHandler<InputStateTypes> = async (data) => {
+    const params = { params: data };
     try {
       const response = await flightClient.request(params);
       console.log(response.data);
@@ -48,7 +69,9 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
             topLabel="From"
             placeholder="Departure"
             register={register}
+            onChange={handleInputChange}
           />
+
           <SearchInput
             name="arrival"
             type="text"
@@ -67,6 +90,15 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
           <HiOutlineArrowNarrowRight />
         </Buttons>
       </div>
+      {!isEmpty && (
+        <Card>
+          {filterData.map((item, id) => (
+            <h3 className="underline" key={id}>
+              {item.code}
+            </h3>
+          ))}
+        </Card>
+      )}
     </form>
   );
 };

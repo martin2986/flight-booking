@@ -21,6 +21,6 @@
     "noFallthroughCasesInSwitch": true,
   },
 
-  "include": ["src"],
+  "include": ["src", "../backend/src/utils/formSchema.ts"],
   "references": [{ "path": "./tsconfig.node.json" }],
 }

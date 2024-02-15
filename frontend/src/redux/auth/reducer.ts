@@ -14,7 +14,7 @@ type PayLoadTypes = {
 };
 
 const authReducer = (
-  state: actionTypes.INITIAL_STATE_TYPES = INITIAL_STATE,
+  state: typeof INITIAL_STATE = INITIAL_STATE,
   action: PayloadAction<PayLoadTypes>,
 ) => {
   switch (action.type) {

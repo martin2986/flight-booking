@@ -13,7 +13,7 @@ const UserProfile = lazy(() => import('../pages/UserProfile'));
 
 const AppRouter = () => {
   return (
-    <div className="app">
+    <div className="">
       <NavBar />
       <Routes>
         <Route element={<LoginForm />} path="/login" />

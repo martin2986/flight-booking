@@ -1,14 +1,16 @@
 import { FC, ComponentPropsWithoutRef } from 'react';
+import { useSelector } from 'react-redux';
 
 interface UserIconProps extends ComponentPropsWithoutRef<'div'> {
-  userName: string;
-  id: string;
+  userName?: string;
+  id?: string;
 }
 
-const Index: FC<UserIconProps> = ({ userName = '', id = '', ...props }) => {
-  const user = userName.split(' ');
-  const firstName = user[0].at(0);
-  const lastName = user[user.length - 1].at(0);
+const Index: FC<UserIconProps> = ({ ...props }) => {
+  const { user } = useSelector((state) => state.auth);
+  const UserName = user?.name.split(' ');
+  const firstName = UserName[0].at(0)?.toLocaleUpperCase();
+  const lastName = UserName[UserName.length - 1].at(0)?.toLocaleUpperCase();
   return (
     <div className="flex flex-row items-center justify-center cursor-pointer" {...props}>
       <div>

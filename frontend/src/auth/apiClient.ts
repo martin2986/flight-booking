@@ -1,6 +1,10 @@
 import axios from 'axios';
 
-export const apiClient = axios.create({
+export const authApi = axios.create({
+  baseURL: `${import.meta.env.VITE_AUTH}`,
+  withCredentials: true,
+});
+export const appApi = axios.create({
   baseURL: `${import.meta.env.VITE_API}`,
   withCredentials: true,
 });
@@ -16,7 +20,7 @@ export const flightClient = axios.create({
   },
 });
 export const cityClient = axios.create({
-  baseURL: `${import.meta.env.VITE_HOST_CITIES}`,
+  baseURL: `${import.meta.env.VITE_BACKEND_SERVER}`,
   withCredentials: true,
   headers: {
     'X-Access-Token': import.meta.env.VITE_AVIA_SALES,

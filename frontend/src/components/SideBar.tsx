@@ -33,14 +33,23 @@ const SideBar: FC<SideBarProps<T>> = ({ setIsOpen, type, listItems }) => {
       <div className="flex flex-col justify-between h-full">
         <div>
           {/* top */}
-          <div className="flex flex-row  items-center justify-between">
-            <div className=" flex flex-row items-center justify-between">
+          <div className="flex flex-row  items-center justify-between pb-3 border-b">
+            <div className=" flex flex-row items-center justify-between ">
               {isLoggedIn ? (
                 <UserIcon />
               ) : (
                 <h3 className="text-base font-semibold leading-7 ">Flight</h3>
               )}
-              {isLoggedIn && <h3>{user.name}</h3>}
+              {isLoggedIn && (
+                <Link
+                  to="profile"
+                  onClick={() => setIsOpen((prev: boolean) => !prev)}
+                  className=" cursor-pointer hover:text-gray-600"
+                >
+                  <h3>{user.name}</h3>
+                  <h3 className="text-sm hover:text-gray-600">{user.email}</h3>
+                </Link>
+              )}
             </div>
             <div className=" cursor-pointer" onClick={() => setIsOpen((prev: boolean) => !prev)}>
               <MdOutlineClose />

@@ -1,10 +1,5 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-declare global {
-  interface Array<T> {
-    capitalizeFirstLetter(): T | null;
-  }
-}
 
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));

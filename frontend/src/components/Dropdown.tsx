@@ -27,17 +27,14 @@ const Dropdown: FC<DropdownTypes<string | number>> = ({ options = '', title = ''
       <Buttons
         variant="borderless"
         className=" no-underline"
-        title={dropdownValue.toString()}
+        title={dropdownValue}
         size="sm"
         onClick={() => setIsOpen((prev) => !prev)}
       >
         {icon}
       </Buttons>
       {isOpen && (
-        <ul
-          onMouseLeave={() => setIsOpen((prev) => !prev)}
-          className="absolute shadow-lg z-10 rounded cursor-pointer  w-full bg-white text-xs md:text-sm min-h-5 flex flex-col items-start"
-        >
+        <ul className="absolute shadow-lg z-10 rounded cursor-pointer  w-full bg-white text-xs md:text-sm min-h-5 flex flex-col items-start">
           {options.map(
             (item) =>
               dropdownValue !== item && (

@@ -9,9 +9,10 @@ export type HeaderTypes = {};
 
 const Index: FC<HeaderTypes> = () => {
   return (
-    <div className=" h-screen container mx-auto">
+    // h-screen container mx-auto
+    <div className="h-screen container mx-auto">
       <div className=" top-24 mb-8">
-        <h1 className="text-xl w-2/4 mb-6 md:text-4xl mt-14">
+        <h1 className="text-xl w-2/4 mb-6 md:text-4xl pt-14">
           Hey Buddy! where are you <strong>Flying</strong> to?
         </h1>
         <Buttons variant="borderless" title="Explore">

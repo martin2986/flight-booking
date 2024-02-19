@@ -14,7 +14,7 @@ const Index: FC<NavProps> = () => {
   const [userNavIsOpen, setUserNavIsOpen] = useState<boolean>(false);
   const [isActive, setIsActive] = useState(navLinks[0].link);
   const location = useLocation();
-  const { isLoggedIn, user } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
   let navBg;
   if (location?.pathname !== '/') {
@@ -58,11 +58,7 @@ const Index: FC<NavProps> = () => {
               </Link>
             </>
           ) : (
-            <UserIcon
-              userName={user.name}
-              id="wew"
-              onClick={() => setUserNavIsOpen((prev) => !prev)}
-            />
+            <UserIcon onMouseEnter={() => setUserNavIsOpen((prev) => !prev)} />
           )}
         </div>
       </nav>

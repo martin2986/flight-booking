@@ -13,8 +13,8 @@ const SearchInput: FC<SearchInputProps> = ({ topLabel, name, register, ...props 
       <p className=" text-xxs md:text-xs px-1">{topLabel}</p>
       <input
         className="text-xs md:text-sm px-1 py-1 outline-0 h-12 w-14 md:w-24 lg:w-40"
-        {...props}
         {...register(name)}
+        {...props}
       />
     </Card>
   );

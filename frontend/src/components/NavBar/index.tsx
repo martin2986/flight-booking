@@ -14,7 +14,7 @@ const Index: FC<NavProps> = () => {
   const [userNavIsOpen, setUserNavIsOpen] = useState<boolean>(false);
   const [isActive, setIsActive] = useState(navLinks[0].link);
   const location = useLocation();
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn, isLoading } = useSelector((state) => state.auth);
 
   let navBg;
   if (location?.pathname !== '/') {

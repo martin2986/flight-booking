@@ -1,20 +1,9 @@
-import { Response, Request, NextFunction } from 'express';
-import mongoose from 'mongoose';
-import bcrypt from 'bcryptjs';
-import jwt from 'jsonwebtoken';
+import { NextFunction, Request, Response } from 'express';
 import Joi from 'joi';
-import User from '../../models/UserModel';
-import { catchErrors } from '../../handlers/catchError';
 import AppError from '../../handlers/appError';
-
-const generateJWT = function (payload: { id: string }, options: object = {}): string {
-  const privateKey: any = process.env.JWT_SECRET;
-  const defaultOptions: object = {
-    expiresIn: '1h',
-  };
-  return jwt.sign(payload, privateKey, Object.assign(defaultOptions, options));
-};
-
+import { catchErrors } from '../../handlers/catchError';
+import User from '../../models/UserModel';
+import { generateJWT } from './authUtil';
 const objectSchema = Joi.object({
   email: Joi.string()
     .email({ tlds: { allow: true } }) //check tlds
@@ -33,7 +22,7 @@ export const login = catchErrors(async (req: Request, res: Response, next: NextF
 
   if (error) return next(new AppError('Invalid/Missing credentials.', 409));
 
-  const user = await User.findOne({ email, removed: false }).select('+password');
+  const user = await await User.findOne({ email, removed: false }).select('+password +salt');
 
   if (!user) return next(new AppError('No account with this email has been registered.', 404));
 
@@ -41,7 +30,7 @@ export const login = catchErrors(async (req: Request, res: Response, next: NextF
 
   if (!isMatch) return next(new AppError('Invalid/Missing credentials.', 403));
 
-  const token = generateJWT({ id: user._id }, { expiresIn: '1h' });
+  const token = generateJWT({ id: user._id });
 
   const cookieOption = {
     maxAge: 1000 * 60 * 60,

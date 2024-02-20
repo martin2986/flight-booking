@@ -2,6 +2,7 @@ import { SubmitHandler, useForm } from 'react-hook-form';
 import { useSelector } from 'react-redux';
 import { Buttons } from '../components/Button';
 import Inputs from '../components/Inputs';
+import PageLoader from '../components/PageLoader';
 import UserIcon from '../components/UserIcon';
 import UserLayout from '../layout/UserLayout';
 import { updateMe } from '../redux/auth/actions';
@@ -12,7 +13,8 @@ type formFields = {
 };
 
 const UserProfile = () => {
-  const { user } = useSelector((state) => state.auth);
+  const { user, isLoading } = useSelector((state) => state.auth);
+  // console.log(isLoading);
   const dispatch = useDisPatch();
   const {
     register,
@@ -36,6 +38,10 @@ const UserProfile = () => {
       });
     }
   };
+  if (isLoading) {
+    console.log('Loading');
+    return <PageLoader />;
+  }
   return (
     <UserLayout>
       {errors.root && <div className="text-red-500 text-sm mb-4">{errors.root.message}</div>}

@@ -4,6 +4,7 @@ export const LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
 export const REQUEST_LOADING = 'AUTH_REQUEST_LOADING';
 export const REQUEST_SUCCESS = 'AUTH_REQUEST_SUCCESS';
 export const REQUEST_FAILED = 'AUTH_REQUEST_FAILED';
+export const UPDATE_ME_SUCCESS = 'UPDATE_ME_SUCCESS';
 
 export type loginTypes = {
   email: string;
@@ -42,6 +43,10 @@ interface LoginSuccessAction {
   type: typeof LOGIN_SUCCESS;
   payload: any;
 }
+interface UpdateMeSuccessAction {
+  type: typeof UPDATE_ME_SUCCESS;
+  payload: any;
+}
 interface RegisterSuccessAction {
   type: typeof REGISTER_SUCCESS;
   payload: any;
@@ -49,7 +54,11 @@ interface RegisterSuccessAction {
 export interface LogoutAction {
   type: typeof LOGOUT_SUCCESS;
 }
-
+export type UpdateMeActionTypes =
+  | UpdateMeSuccessAction
+  | RequestLoadingAction
+  | RequestSuccessAction
+  | RequestFailedAction;
 export type ReducerActionTypes =
   | RequestLoadingAction
   | RequestSuccessAction

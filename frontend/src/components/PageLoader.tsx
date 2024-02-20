@@ -1,9 +1,9 @@
-import { FC } from "react";
+import { FC } from 'react';
 
 type PageLoaderProps = {};
 
 const PageLoader: FC<PageLoaderProps> = () => {
-  return <div>PageLoader Loading....</div>;
+  return <div className="w-screen h-screen">PageLoader Loading....</div>;
 };
 
 export default PageLoader;

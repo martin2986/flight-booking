@@ -10,6 +10,5 @@ export const store = configureStore({
     }),
 });
 
-// export type RootState = ReturnType<typeof store.subscribe>;
 export type AppDispatch = typeof store.dispatch;
 export const persistor = persistStore(store);

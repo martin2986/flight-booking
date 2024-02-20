@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { appApi, authApi } from '../../auth/apiClient';
+import { authApi } from '../../auth/apiClient';
 import * as authService from '../../auth/authRequest';
 import * as actionTypes from './types';
 interface loginDataTypes {
@@ -9,7 +9,6 @@ interface registerDataTypes {
   registerData: actionTypes.registerTypes;
 }
 
-// interface updateDataProps {}
 interface updateMeDataTypes {
   updateMeData: actionTypes.updateMeTypes;
 }
@@ -19,11 +18,9 @@ export const login =
   async (dispatch: Dispatch<actionTypes.LoginAuthActionTypes>) => {
     dispatch({ type: actionTypes.REQUEST_LOADING });
     const data = await authService.login({ loginData });
-    console.log(data);
 
     if (data.success === true) {
       const authState = {
-        current: data,
         isLoggedIn: true,
         isLoading: false,
         isSuccess: true,
@@ -43,7 +40,6 @@ export const register =
 
     if (data.success === true) {
       const authState = {
-        current: data,
         isLoggedIn: false,
         isLoading: false,
         isSuccess: true,
@@ -77,12 +73,16 @@ export const logout = () => {
   };
 };
 export const updateMe = ({ updateMeData }: updateMeDataTypes) => {
-  return async (dispatch: Dispatch<T>) => {
-    dispatch({ type: actionTypes.REQUEST_LOADING });
+  return async (dispatch: Dispatch<actionTypes.UpdateMeActionTypes>) => {
     const data = await authService.updateMe({ updateMeData });
-    console.log(data);
     if (data.success === true) {
-      dispatch({ type: actionTypes.REQUEST_SUCCESS });
+      const updatedState = {
+        isLoggedIn: true,
+        isLoading: false,
+        isSuccess: true,
+        user: data.result,
+      };
+      dispatch({ type: actionTypes.UPDATE_ME_SUCCESS, payload: updatedState });
     } else {
       dispatch({ type: actionTypes.REQUEST_FAILED });
     }

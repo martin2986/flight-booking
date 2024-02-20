@@ -3,7 +3,6 @@ import { Request, Response, NextFunction } from 'express';
 import User from '../../models/UserModel';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
-import { promisify } from 'util';
 import AppError from '../../handlers/appError';
 export const protectRoute = catchErrors(async (req: Request, res: Response, next: NextFunction) => {
   const token = req.cookies.token;
@@ -17,6 +16,7 @@ export const protectRoute = catchErrors(async (req: Request, res: Response, next
   if (!currentUser) {
     return next(new AppError('The user belonging to this token no longer exist', 401));
   }
+  req.query.id = currentUser._id;
 
   next();
 });

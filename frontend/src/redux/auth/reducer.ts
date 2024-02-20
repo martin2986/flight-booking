@@ -21,8 +21,10 @@ const authReducer = (
     case actionTypes.REQUEST_LOADING:
       return {
         ...state,
-        isLoading: true,
         isLoggedIn: false,
+
+        isSuccess: false,
+        isLoading: true,
       };
     case actionTypes.REQUEST_SUCCESS:
       return {
@@ -38,18 +40,24 @@ const authReducer = (
         isLoggedIn: false,
         isLoading: false,
         isSuccess: true,
-        current: null,
+        user: null,
       };
     case actionTypes.LOGIN_SUCCESS:
       return {
         isLoggedIn: true,
         isLoading: false,
         isSuccess: true,
-        current: action.payload.current,
         user: action.payload.user,
       };
     case actionTypes.LOGOUT_SUCCESS:
       return INITIAL_STATE;
+    case actionTypes.UPDATE_ME_SUCCESS:
+      return {
+        isLoggedIn: true,
+        isLoading: false,
+        isSuccess: true,
+        user: action.payload.user,
+      };
     default:
       return state;
   }

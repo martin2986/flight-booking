@@ -7,13 +7,14 @@ import bodyParser from 'body-parser';
 
 import { errorHandler } from './handlers/errorHandler';
 import AppError from './handlers/appError';
+import userRouter from './routes/userRoute';
 
 const app = express();
 
+app.disable('x-powered-by');
 app.use(cors({ credentials: true }));
 app.use(compression());
 
-app.disable('x-powered-by');
 app.use(bodyParser.json());
 
 app.use(cookieParser());
@@ -21,7 +22,8 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/users', authRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/users', userRouter);
 
 app.all('*', (req, res, next) => {
   next(new AppError(`Api url ${req.originalUrl} does not exist`, 404));

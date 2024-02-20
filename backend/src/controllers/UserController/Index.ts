@@ -2,6 +2,7 @@ import { Request, Response, NextFunction } from 'express';
 import { catchErrors } from '../../handlers/catchError';
 import User from '../../models/UserModel';
 import AppError from '../../handlers/appError';
+import { capitalize } from '../authMiddleware/authUtil';
 
 export const getAllUser = catchErrors(async (req: Request, res: Response, next: NextFunction) => {
   const users = await User.find({ removed: false });
@@ -24,6 +25,7 @@ export const getUser = catchErrors(async (req: Request, res: Response, next: Nex
 });
 
 export const updateUser = catchErrors(async (req: Request, res: Response, next: NextFunction) => {
+  req.body.name = capitalize(req.body.name);
   const user = await User.findByIdAndUpdate(req.query.id, req.body, {
     new: true,
     runValidators: true,

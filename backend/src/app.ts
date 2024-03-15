@@ -8,6 +8,7 @@ import bodyParser from 'body-parser';
 import { errorHandler } from './handlers/errorHandler';
 import AppError from './handlers/appError';
 import userRouter from './routes/userRoute';
+import appRouter from './routes/appRoute';
 
 const app = express();
 
@@ -22,9 +23,9 @@ app.use(express.json());
 
 app.use(express.urlencoded({ extended: true }));
 
-app.use('/api/auth', authRouter);
-app.use('/api/users', userRouter);
-
+app.use('/api/auth/v1', authRouter);
+app.use('/api/users/v1', userRouter);
+app.use('/api/v1', appRouter);
 app.all('*', (req, res, next) => {
   next(new AppError(`Api url ${req.originalUrl} does not exist`, 404));
 });

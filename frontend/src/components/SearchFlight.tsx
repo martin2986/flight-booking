@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { flightClient } from '../auth/apiClient';
 import AutoCompleteInput from './AutoCompleteInput';
 import { Buttons } from './Button';
 import PageLoader from './PageLoader';
@@ -35,19 +36,27 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
     const { origin, destination, departureDate, arrivalDate } = data;
     console.log(origin?.code);
     console.log(destination?.code);
-    reset();
+    console.log(departureDate);
+    console.log(arrivalDate);
 
     //
-    // const params = { params: data };
-    // try {
-    //   const response = await flightClient.request(params);
-    //   console.log(response.data);
-    //   reset();
-    // } catch (err: any) {
-    //   setError('root', {
-    //     message: err.response.data.message,
-    //   });
-    // }
+    const params = {
+      params: {
+        origin: origin?.code,
+        destination: destination?.code,
+        depart_date: departureDate,
+        return_date: arrivalDate,
+      },
+    };
+    try {
+      const response = await flightClient.request(params);
+      console.log(response.data);
+      reset();
+    } catch (err: any) {
+      setError('root', {
+        message: err.response.data.message,
+      });
+    }
   };
 
   if (isSubmitting) return <PageLoader />;

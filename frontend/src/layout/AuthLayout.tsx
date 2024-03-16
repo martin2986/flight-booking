@@ -15,13 +15,14 @@ const AuthLayout: FC<AuthLayoutProps> = ({ children, AUTH_TITLE = '' }) => {
             src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600"
             alt="Your Company"
           />
-
-          <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
-            {AUTH_TITLE}
-          </h2>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">{children}</div>
+        <div className="mt-10 pb-10 mx-auto w-full sm:max-w-sm bg-white p-3 rounded-md shadow-md md:w-72">
+          <h2 className=" my-7 text-center text-base  leading-9 tracking-tight text-gray-900">
+            {AUTH_TITLE}
+          </h2>
+          {children}
+        </div>
       </div>
     </div>
   );

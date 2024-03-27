@@ -5,7 +5,7 @@ type NotificationProps = {
   type: 'error' | 'success';
 };
 
-const Notification: FC<NotificationProps> = ({ message = '', type }) => {
+const Notification: FC<NotificationProps> = ({ message = '', type = '' }) => {
   let color;
   if (type === 'error') {
     color = 'red';
@@ -14,10 +14,12 @@ const Notification: FC<NotificationProps> = ({ message = '', type }) => {
   }
 
   return (
-    <div
-      className={`text-sm border border-${color}-400 text-center py-2 rounded-sm bg-${color}-50 text-${color}-700`}
-    >
-      {message}
+    <div className="w-fit mx-auto">
+      <div
+        className={`text-sm border border-${color}-400 mb-5  text-center py-2 px-4  rounded-sm bg-${color}-50 text-${color}-700`}
+      >
+        {message}
+      </div>
     </div>
   );
 };

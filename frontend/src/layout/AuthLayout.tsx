@@ -2,7 +2,7 @@ import { FC } from 'react';
 
 type AuthLayoutProps = {
   children: React.ReactNode;
-  AUTH_TITLE: 'Sign In' | 'Sign Up' | 'Verify Account';
+  AUTH_TITLE: 'Log in to your account' | 'Create an account' | 'Verify Account';
 };
 
 const AuthLayout: FC<AuthLayoutProps> = ({ children, AUTH_TITLE = '' }) => {

@@ -6,9 +6,9 @@ const userRouter = express.Router();
 
 userRouter.use(protectRoute);
 userRouter.route('/').get(getAllUser);
+userRouter.route('/logout').get(logout);
 userRouter.route('/:id').get(getUser);
 userRouter.route('/updateMe').patch(updateUser);
 userRouter.route('/deleteMe').delete(deleteUser);
-userRouter.route('/logout').get(logout);
 
 export default userRouter;

@@ -1,12 +1,12 @@
 import { FC } from 'react';
-import { useSelector } from 'react-redux';
 import { Navigate, Outlet } from 'react-router-dom';
+import { useAppSelector } from '../redux/hooks';
 type ProtectedRouteProps = {
   redirectPath: string;
 };
 
 const ProtectedRoute: FC<ProtectedRouteProps> = ({ redirectPath = '/' }) => {
-  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
   if (isLoggedIn) {
     return (
       <div>

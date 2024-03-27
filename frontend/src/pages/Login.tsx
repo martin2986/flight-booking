@@ -1,14 +1,13 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
-import { useDisPatch } from '../redux/hooks';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { z } from 'zod';
 import { Buttons } from '../components/Button';
 import Inputs from '../components/Inputs';
-import AuthLayout from '../layout/AuthLayout';
-import { login as loginAuth } from '../redux/auth/actions';
 import Notification from '../components/UI/Notification';
+import AuthLayout from '../layout/AuthLayout';
+import { login as authLogin } from '../redux/auth/AuthAction';
+import { useDisPatch } from '../redux/hooks';
 const schema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
@@ -33,7 +32,7 @@ const Login = () => {
 
   const onSubmit: SubmitHandler<formFields> = async (data) => {
     try {
-      await dispatch(loginAuth({ loginData: data }));
+      await dispatch(authLogin(data));
       reset();
       navigate('/');
     } catch (err: any) {

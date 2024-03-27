@@ -2,11 +2,11 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { FC, useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link, useLocation } from 'react-router-dom';
+import { useAppSelector } from '../../redux/hooks';
 import { buttonVariants } from '../Button';
 import SideBar from '../SideBar';
 import UserIcon from '../UserIcon';
-import { navLinks, sideLinks, mobileSide } from './navUtil';
-import { useSelector } from 'react-redux';
+import { mobileSide, navLinks, sideLinks } from './navUtil';
 type NavProps = {};
 
 const Index: FC<NavProps> = () => {
@@ -14,7 +14,7 @@ const Index: FC<NavProps> = () => {
   const [userNavIsOpen, setUserNavIsOpen] = useState<boolean>(false);
   const [isActive, setIsActive] = useState(navLinks[0].link);
   const location = useLocation();
-  const { isLoggedIn, isLoading } = useSelector((state) => state.auth);
+  const { isLoggedIn } = useAppSelector((state) => state.auth);
 
   let navBg;
   if (location?.pathname !== '/') {

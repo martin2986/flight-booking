@@ -9,6 +9,10 @@ export const appApi = axios.create({
   baseURL: `${import.meta.env.VITE_APP_API}`,
   withCredentials: true,
 });
+export const userApi = axios.create({
+  baseURL: `${import.meta.env.VITE_API}`,
+  withCredentials: true,
+});
 
 export const flightClient = axios.create({
   baseURL: `${import.meta.env.VITE_HOST_BASE_URL}`,

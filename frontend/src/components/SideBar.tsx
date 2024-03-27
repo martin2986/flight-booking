@@ -1,10 +1,9 @@
 import { motion } from 'framer-motion';
 import { FC } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logout } from '../redux/auth/actions';
-import { useDisPatch } from '../redux/hooks';
+import { logout } from '../redux/auth/AuthAction';
+import { useAppSelector, useDisPatch } from '../redux/hooks';
 import { buttonVariants } from './Button';
 import { menuVar, mobileLinkAnimation } from './NavBar/navUtil';
 import UserIcon from './UserIcon';
@@ -15,11 +14,11 @@ type SideBarProps<T> = {
 };
 
 const SideBar: FC<SideBarProps<T>> = ({ setIsOpen, type, listItems }) => {
-  const { isLoggedIn, user } = useSelector((state) => state.auth);
+  const { user, isLoggedIn } = useAppSelector((state) => state.auth);
 
   const dispatch = useDisPatch();
-  const handleLogout = async () => {
-    await dispatch(logout());
+  const handleLogout = () => {
+    dispatch(logout());
   };
   return (
     <motion.div
@@ -32,7 +31,6 @@ const SideBar: FC<SideBarProps<T>> = ({ setIsOpen, type, listItems }) => {
     >
       <div className="flex flex-col justify-between h-full">
         <div>
-          {/* top */}
           <div className="flex flex-row  items-center justify-between pb-3 border-b">
             <div className=" flex flex-row items-center justify-between ">
               {isLoggedIn ? (

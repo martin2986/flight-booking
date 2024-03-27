@@ -1,7 +1,11 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { useNavigate } from 'react-router-dom';
 import { flightClient } from '../auth/apiClient';
+import { returnSelectedObject } from '../utils/helperFn';
+import { flightTestData } from '../utils/testCode';
 import AutoCompleteInput from './AutoCompleteInput';
 import { Buttons } from './Button';
 import PageLoader from './PageLoader';
@@ -16,6 +20,8 @@ export type InputStateTypes = {
 
 interface SearchFlightTypes {}
 const SearchFlight: FC<SearchFlightTypes> = () => {
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const {
     register,
     handleSubmit,
@@ -39,19 +45,22 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
     console.log(departureDate);
     console.log(arrivalDate);
 
-    //
     const params = {
       params: {
         origin: origin?.code,
         destination: destination?.code,
         depart_date: departureDate,
-        return_date: arrivalDate,
+        // return_date: arrivalDate,
+        currency: 'USD',
       },
     };
     try {
-      const response = await flightClient.request(params);
-      console.log(response.data);
+      const response = await flightClient.get('calendar', params);
+      const { data } = response.data;
+      const searchedFlight = returnSelectedObject(data, departureDate);
+      queryClient.setQueryData(['flights'], searchedFlight);
       reset();
+      navigate('/schedules');
     } catch (err: any) {
       setError('root', {
         message: err.response.data.message,
@@ -74,7 +83,7 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
         </div>
         <div className="flex gap-2 w-1/2">
           <SearchInput name="departureDate" topLabel="From" register={register} type="date" />
-          <SearchInput name="arrivalDate" topLabel="To" register={register} type="date" />
+          {/* <SearchInput name="arrivalDate" topLabel="To" register={register} type="date" /> */}
         </div>
       </div>
       <div className="absolute right-0 -bottom-4 md:-right-4 ">

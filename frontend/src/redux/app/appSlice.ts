@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-interface PayLoadTypes {
+interface setFlightDataPayLoadTypes {
   itineraries: any[];
   token: string;
   context: {
@@ -10,8 +10,15 @@ interface PayLoadTypes {
   };
 }
 
+interface selectedFlightPayloadTypes {
+  price: string;
+  date: string;
+  originCode: string;
+  destinationCode: string;
+}
 interface FlightState {
-  flightData: PayLoadTypes;
+  flightData: setFlightDataPayLoadTypes;
+  selectedFlight: selectedFlightPayloadTypes;
 }
 const initialState: FlightState = {
   flightData: {
@@ -23,14 +30,23 @@ const initialState: FlightState = {
       totalResults: 0,
     },
   },
+  selectedFlight: {
+    price: '',
+    date: '',
+    originCode: '',
+    destinationCode: '',
+  },
 };
 
 const appSlice = createSlice({
   name: 'flight',
   initialState,
   reducers: {
-    setFlightData: (state, action: PayloadAction<PayLoadTypes>) => {
+    setFlightData: (state, action: PayloadAction<setFlightDataPayLoadTypes>) => {
       state.flightData = action.payload;
+    },
+    selectedFLight: (state, action: PayloadAction<selectedFlightPayloadTypes>) => {
+      state.selectedFlight = action.payload;
     },
   },
 });

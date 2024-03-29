@@ -1,7 +1,7 @@
 import { Autocomplete, TextField } from '@mui/material';
 import { useState } from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
-import { appApi } from '../auth/apiClient';
+import { flightClient } from '../auth/apiClient';
 
 type AutoCompleteInputProps<T, TField extends FieldValues> = {
   control: Control<TField>;
@@ -17,8 +17,8 @@ const AutoCompleteInput = <T, TField extends FieldValues>({
   const [fetchedData, setFetchedData] = useState<any>();
   const handleInputChange = async (e: any) => {
     const query = e.target.value;
-    const response = await appApi.get(`/city?city=${query}`);
-    setFetchedData(response.data.result);
+    const response = await flightClient.get(`/auto-complete?query=${query}`);
+    setFetchedData(response.data);
   };
   return (
     <Controller
@@ -26,6 +26,7 @@ const AutoCompleteInput = <T, TField extends FieldValues>({
       control={control}
       render={({ field, fieldState: { error } }) => {
         const { onChange, value, ref } = field;
+        // console.log(value);
         return (
           <Autocomplete
             value={value ? value ?? null : null}
@@ -35,9 +36,9 @@ const AutoCompleteInput = <T, TField extends FieldValues>({
             }}
             onInputChange={handleInputChange}
             id="controllable-states-demo"
-            getOptionLabel={(option: any) => option.name || null}
+            getOptionLabel={(option: any) => option?.navigation.localizedName || null}
             options={fetchedData?.data.map((item: any) => item) || []}
-            isOptionEqualToValue={(option, value) => option.code === value.code}
+            isOptionEqualToValue={(option, value) => option?.id === value?.id}
             sx={{ width: 200 }}
             renderInput={(params) => {
               return <TextField {...params} label={label} variant="standard" inputRef={ref} />;

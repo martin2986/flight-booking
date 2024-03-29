@@ -58,7 +58,7 @@ const Index: FC<NavProps> = () => {
               </Link>
             </>
           ) : (
-            <UserIcon onMouseEnter={() => setUserNavIsOpen((prev) => !prev)} />
+            <UserIcon onClick={() => setUserNavIsOpen((prev) => !prev)} />
           )}
         </div>
       </nav>

@@ -1,17 +1,16 @@
 import { FC } from 'react';
+import ScheduleItem from '../components/FlightSchedule/ScheduleItem';
 import AppLayout from '../layout/AppLayout';
-import FlightSchedule from '../components/FlightSchedule';
-import { useQuery } from '@tanstack/react-query';
+import { useAppSelector } from '../redux/hooks';
 type SchedulesProps = {};
 
 const Schedules: FC<SchedulesProps> = () => {
-  const { data } = useQuery({
-    queryKey: ['flights'],
-  });
-  console.log(data);
+  const { flightData } = useAppSelector((state) => state.app);
   return (
     <AppLayout>
-      <FlightSchedule />
+      <div className="mx-2 md:w-2/3">
+        {flightData?.itineraries.map((item: any) => <ScheduleItem key={item.id} {...item} />)}
+      </div>
     </AppLayout>
   );
 };

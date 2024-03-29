@@ -29,7 +29,10 @@ const authSlice = createSlice({
     logout(state) {
       state.isSuccess = true;
       state.isLoggedIn = false;
-      state.user = {};
+      state.user = {
+        name: '',
+        email: '',
+      };
     },
     updateMe(state, action: PayloadAction<PayLoadTypes>) {
       state.isLoggedIn = true;

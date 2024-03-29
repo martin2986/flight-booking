@@ -1,16 +1,33 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-const INITIAL_STATE = {
-  flightData: {},
-};
+interface PayLoadTypes {
+  itineraries: any[];
+  token: string;
+  context: {
+    status: string;
+    sessionId: string;
+    totalResults: number;
+  };
+}
 
-type PayLoadTypes = {
-  flightData: {};
+interface FlightState {
+  flightData: PayLoadTypes;
+}
+const initialState: FlightState = {
+  flightData: {
+    itineraries: [],
+    token: '',
+    context: {
+      status: '',
+      sessionId: '',
+      totalResults: 0,
+    },
+  },
 };
 
 const appSlice = createSlice({
   name: 'flight',
-  initialState: INITIAL_STATE,
+  initialState,
   reducers: {
     setFlightData: (state, action: PayloadAction<PayLoadTypes>) => {
       state.flightData = action.payload;

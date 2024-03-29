@@ -1,11 +1,10 @@
-import { useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 import { flightClient } from '../auth/apiClient';
-import { returnSelectedObject } from '../utils/helperFn';
-import { flightTestData } from '../utils/testCode';
+import { appAction } from '../redux/app/appSlice';
+import { useDisPatch } from '../redux/hooks';
 import AutoCompleteInput from './AutoCompleteInput';
 import { Buttons } from './Button';
 import PageLoader from './PageLoader';
@@ -21,7 +20,7 @@ export type InputStateTypes = {
 interface SearchFlightTypes {}
 const SearchFlight: FC<SearchFlightTypes> = () => {
   const navigate = useNavigate();
-  const queryClient = useQueryClient();
+  const dispatch = useDisPatch();
   const {
     register,
     handleSubmit,
@@ -40,25 +39,28 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
 
   const onSubmit: SubmitHandler<InputStateTypes> = async (data: any) => {
     const { origin, destination, departureDate, arrivalDate } = data;
-    console.log(origin?.code);
-    console.log(destination?.code);
+    console.log(origin?.navigation.entityId);
+    console.log(destination?.navigation.entityId);
     console.log(departureDate);
-    console.log(arrivalDate);
+    // console.log(arrivalDate);
 
     const params = {
       params: {
-        origin: origin?.code,
-        destination: destination?.code,
-        depart_date: departureDate,
+        fromId: origin?.id,
+        toId: destination?.id,
+        departDate: departureDate,
         // return_date: arrivalDate,
+        adults: '1',
         currency: 'USD',
+        market: 'US',
+        locale: 'en-US',
       },
     };
     try {
-      const response = await flightClient.get('calendar', params);
-      const { data } = response.data;
-      const searchedFlight = returnSelectedObject(data, departureDate);
-      queryClient.setQueryData(['flights'], searchedFlight);
+      const response = await flightClient.get('/search-one-way', params);
+      const { data } = response;
+      if (!response) throw new Error(`Error occurred while fetching data Data`);
+      dispatch(appAction.setFlightData(data?.data));
       reset();
       navigate('/schedules');
     } catch (err: any) {

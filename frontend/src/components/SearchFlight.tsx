@@ -84,8 +84,8 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
           </Card>
         </div>
         <div className="flex gap-2 w-1/2">
-          <SearchInput name="departureDate" topLabel="From" register={register} type="date" />
-          {/* <SearchInput name="arrivalDate" topLabel="To" register={register} type="date" /> */}
+          <SearchInput name="departureDate" topLabel="Outbound" register={register} type="date" />
+          <SearchInput name="arrivalDate" topLabel="Return" register={register} type="date" />
         </div>
       </div>
       <div className="absolute right-0 -bottom-4 md:-right-4 ">

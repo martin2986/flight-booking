@@ -1,25 +1,29 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
+import DetailModal from '../components/FlightSchedule/DetailModal';
 import ScheduleItem from '../components/FlightSchedule/ScheduleItem';
-import moment from 'moment';
+import SelectedFlight from '../components/FlightSchedule/SelectedFlight';
+import { Card } from '../components/UI/Card';
 import AppLayout from '../layout/AppLayout';
 import { useAppSelector } from '../redux/hooks';
-import { Card } from '../components/UI/Card';
-import SelectedFlight from '../components/FlightSchedule/SelectedFlight';
-import DetailModal from '../components/FlightSchedule/DetailModal';
+import { formatTime } from '../utils/helperFn';
 type SchedulesProps = {};
 
 const Schedules: FC<SchedulesProps> = () => {
-  const { flightData, selectedFlight } = useAppSelector((state) => state.app);
+  const { flightData, selectedFlight, toggleFlightDetail } = useAppSelector((state) => state.app);
   const { destinationCode, date, price, originCode } = selectedFlight;
-  const [datePart, timePart] = date.split('T');
-  const formattedTime = moment(timePart, 'HH:mm:ss').format('HH:mm');
-  const formattedDate = moment(datePart).format('DD MMM YYYY');
+  const [modalInfo, setModalInfo] = useState<any>();
+
+  const showID = (data: any) => {
+    setModalInfo(data);
+  };
   return (
     <AppLayout>
+      {toggleFlightDetail && modalInfo && <DetailModal {...modalInfo} />}
       <div className="flex gap-10">
-        {/* <DetailModal origin={originCode} destination={destinationCode} /> */}
         <div className="mx-auto md:w-2/3 ">
-          {flightData?.itineraries.map((item: any) => <ScheduleItem key={item.id} {...item} />)}
+          {flightData?.itineraries.map((item: any) => (
+            <ScheduleItem key={item.id} {...item} onClick={() => showID(item)} />
+          ))}
         </div>
         {originCode !== '' && (
           <div className="hidden md:block md:w-1/3">
@@ -33,8 +37,8 @@ const Schedules: FC<SchedulesProps> = () => {
                 </div>
                 <div className="bg-gray-100 mt-3 py-4 px-3">
                   <SelectedFlight
-                    date={formattedDate}
-                    time={formattedTime}
+                    date={formatTime(date).formattedFullDate}
+                    time={formatTime(date).formattedTime}
                     origin={originCode}
                     destination={destinationCode}
                   />

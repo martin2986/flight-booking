@@ -15,10 +15,13 @@ interface selectedFlightPayloadTypes {
   date: string;
   originCode: string;
   destinationCode: string;
+  origin: string;
+  destination: string;
 }
 interface FlightState {
   flightData: setFlightDataPayLoadTypes;
   selectedFlight: selectedFlightPayloadTypes;
+  toggleFlightDetail: boolean;
 }
 const initialState: FlightState = {
   flightData: {
@@ -35,7 +38,10 @@ const initialState: FlightState = {
     date: '',
     originCode: '',
     destinationCode: '',
+    origin: '',
+    destination: '',
   },
+  toggleFlightDetail: false,
 };
 
 const appSlice = createSlice({
@@ -47,6 +53,9 @@ const appSlice = createSlice({
     },
     selectedFLight: (state, action: PayloadAction<selectedFlightPayloadTypes>) => {
       state.selectedFlight = action.payload;
+    },
+    toggleFlightDetail: (state, action: PayloadAction<boolean>) => {
+      state.toggleFlightDetail = action.payload;
     },
   },
 });

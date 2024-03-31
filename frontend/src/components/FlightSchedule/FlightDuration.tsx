@@ -28,7 +28,10 @@ const FlightDuration: FC<FlightDurationProps> = ({ time = 65, stopCount = 1 }) =
         <div className="flex-grow border-t border-gray-400 border-dotted"></div>
       </div>
       <p className=" w-full text-center text-xs md:text-sm mt-1">{stop}</p>
-      <div onClick={toggleDetailHandler} className=" w-full text-center text-xs md:text-sm pt-2">
+      <div
+        onClick={toggleDetailHandler}
+        className=" w-full text-center text-xs md:text-sm pt-2 cursor-pointer"
+      >
         Flight details
       </div>
     </div>

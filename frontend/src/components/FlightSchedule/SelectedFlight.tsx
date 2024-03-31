@@ -19,9 +19,9 @@ const SelectedFlight: FC<SelectedFlightProps> = ({
       {origin ? (
         <>
           <div className="flex flex-row items-center ">
-            <h4>{origin}</h4>
+            <h4 className="text-sm">{origin}</h4>
             <RiGitCommitFill />
-            <h4>{destination}</h4>
+            <h4 className="text-sm">{destination}</h4>
           </div>
           <div>
             <div className="flex flex-row gap-2">

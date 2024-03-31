@@ -8,6 +8,9 @@ interface setFlightDataPayLoadTypes {
     sessionId: string;
     totalResults: number;
   };
+  filterStats: {
+    airports: { city: string }[];
+  };
 }
 
 interface selectedFlightPayloadTypes {
@@ -22,6 +25,8 @@ interface FlightState {
   flightData: setFlightDataPayLoadTypes;
   selectedFlight: selectedFlightPayloadTypes;
   toggleFlightDetail: boolean;
+  oneWay: boolean;
+  roundTrip: boolean;
 }
 const initialState: FlightState = {
   flightData: {
@@ -31,6 +36,9 @@ const initialState: FlightState = {
       status: '',
       sessionId: '',
       totalResults: 0,
+    },
+    filterStats: {
+      airports: [],
     },
   },
   selectedFlight: {
@@ -42,6 +50,8 @@ const initialState: FlightState = {
     destination: '',
   },
   toggleFlightDetail: false,
+  oneWay: false,
+  roundTrip: true,
 };
 
 const appSlice = createSlice({

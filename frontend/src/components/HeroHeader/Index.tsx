@@ -18,7 +18,7 @@ const Index: FC<HeaderTypes> = () => {
           <HiOutlineArrowNarrowRight />
         </Buttons>
       </div>
-      <Card className="bg-white">
+      <Card className="bg-white ">
         <div className="flex gap-2 md:gap-5 items-center mb-3">
           <h1 className=" text-sm  md:text-base">Search Flight</h1>
           <Dropdown options={selectTrip} />

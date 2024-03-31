@@ -42,7 +42,7 @@ const FlightDetailItem: FC<FlightDetailItemProps> = ({
         </time>
         <h3 className="flex items-start  mb-3  text-sm font-semibold text-gray-900 dark:text-black">
           {durationInHour(duration)} {operatingCarrier.name}
-          {operatingCarrier.alternateId + flightNumber}
+          <span className="ml-1">{operatingCarrier.alternateId + flightNumber}</span>
         </h3>
         <span className="absolute flex items-center justify-center w-6 h-6 bg-gray-700 rounded-full -start-3.5  ">
           <IoAirplane className="text-sm text-white" />

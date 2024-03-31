@@ -41,3 +41,8 @@ export const formatTime = (data: string) => {
   const fullDateWithDay = moment().format('ddd, MMMM Do YYYY');
   return { formattedTime, formattedDate, formattedFullDate, fullDateWithDay };
 };
+
+export const modifiedAirlineName = (data: string) => {
+  const cleanedData = data.replace('Airways', '').replace('(UK)', '').replace('Airlines', '');
+  return cleanedData;
+};

@@ -74,7 +74,7 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {errors.root && <div className="text-red-500 text-sm mb-4">{errors.root.message}</div>}
-      <div className="flex gap-1 w-full mb-3">
+      <div className="flex gap-1  mb-3">
         <div className="flex gap-2 w-1/2">
           <Card className=" w-fit">
             <AutoCompleteInput control={control} name="origin" label="Departure" />

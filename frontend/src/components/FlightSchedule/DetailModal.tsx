@@ -12,6 +12,14 @@ type DetailModalProps = {
     departure: string;
     stopCount: number;
     durationInMinutes: number;
+    segments: any[];
+    carriers: {
+      marketing: {
+        logoUrl: string;
+        name: string;
+        id: number;
+      }[];
+    };
     origin: {
       displayCode: string;
       name: string;
@@ -22,7 +30,6 @@ type DetailModalProps = {
       name: string;
       city: string;
     };
-    segments: any[];
   }[];
   price: {
     formatted: string;

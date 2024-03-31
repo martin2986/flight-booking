@@ -17,6 +17,7 @@ const AutoCompleteInput = <T, TField extends FieldValues>({
   const [fetchedData, setFetchedData] = useState<any>();
   const handleInputChange = async (e: any) => {
     const query = e.target.value;
+    if (query === '') return;
     const response = await flightClient.get(`/auto-complete?query=${query}`);
     setFetchedData(response.data);
   };

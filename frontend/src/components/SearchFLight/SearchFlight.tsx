@@ -2,14 +2,14 @@ import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
-import { flightClient } from '../auth/apiClient';
-import { appAction } from '../redux/app/appSlice';
-import { useDisPatch } from '../redux/hooks';
+import { flightClient } from '../../auth/apiClient';
+import { appAction } from '../../redux/app/appSlice';
+import { useAppSelector, useDisPatch } from '../../redux/hooks';
 import AutoCompleteInput from './AutoCompleteInput';
-import { Buttons } from './Button';
-import PageLoader from './PageLoader';
+import { Buttons } from '../Button';
+import PageLoader from '../PageLoader';
 import SearchInput from './SearchInput';
-import { Card } from './UI/Card';
+import { Card } from '../UI/Card';
 export type InputStateTypes = {
   origin: string;
   destination: string;
@@ -19,6 +19,8 @@ export type InputStateTypes = {
 
 interface SearchFlightTypes {}
 const SearchFlight: FC<SearchFlightTypes> = () => {
+  const { flightData } = useAppSelector((state) => state.app);
+  const { filterStats } = flightData;
   const navigate = useNavigate();
   const dispatch = useDisPatch();
   const {
@@ -74,13 +76,23 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       {errors.root && <div className="text-red-500 text-sm mb-4">{errors.root.message}</div>}
-      <div className="flex gap-1  mb-3">
+      <div className="flex gap-1">
         <div className="flex gap-2 w-1/2">
           <Card className=" w-fit">
-            <AutoCompleteInput control={control} name="origin" label="Departure" />
+            <AutoCompleteInput
+              control={control}
+              name="origin"
+              label="Departure"
+              inputValue={filterStats?.airports[1]?.city}
+            />
           </Card>
           <Card className=" w-fit">
-            <AutoCompleteInput control={control} name="destination" label="Arrival" />
+            <AutoCompleteInput
+              control={control}
+              name="destination"
+              label="Arrival"
+              inputValue={filterStats?.airports[0]?.city}
+            />
           </Card>
         </div>
         <div className="flex gap-2 w-1/2">

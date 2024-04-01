@@ -1,18 +1,20 @@
 import { Autocomplete, TextField } from '@mui/material';
 import { useState } from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
-import { flightClient } from '../auth/apiClient';
+import { flightClient } from '../../auth/apiClient';
 
 type AutoCompleteInputProps<T, TField extends FieldValues> = {
   control: Control<TField>;
   name: Path<TField>;
   label: string;
+  inputValue: string;
 };
 
 const AutoCompleteInput = <T, TField extends FieldValues>({
   control,
   name,
   label,
+  inputValue,
 }: AutoCompleteInputProps<any, TField>) => {
   const [fetchedData, setFetchedData] = useState<any>();
   const handleInputChange = async (e: any) => {
@@ -27,7 +29,6 @@ const AutoCompleteInput = <T, TField extends FieldValues>({
       control={control}
       render={({ field, fieldState: { error } }) => {
         const { onChange, value, ref } = field;
-        // console.log(value);
         return (
           <Autocomplete
             value={value ? value ?? null : null}

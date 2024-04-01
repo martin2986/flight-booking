@@ -3,7 +3,7 @@ import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { selectFlightType, selectPassenger, selectTrip } from '../../utils/helperFn';
 import { Buttons } from '../Button';
 import Dropdown from '../Dropdown';
-import SearchFlight from '../SearchFlight';
+import SearchFlight from '../SearchFLight/SearchFlight';
 import { Card } from '../UI/Card';
 export type HeaderTypes = {};
 

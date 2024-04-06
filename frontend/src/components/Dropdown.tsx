@@ -1,15 +1,19 @@
 import { FC, useState } from 'react';
-import { Buttons } from './Button';
 import { AiOutlineCaretDown, AiOutlineCaretUp } from 'react-icons/ai';
+import { appAction } from '../redux/app/appSlice';
+import { useDisPatch } from '../redux/hooks';
+import { Buttons } from './Button';
 
 interface DropdownTypes<T> {
   options: T[];
   title?: string;
+  type: 'tripType' | 'passengers' | 'cabinClass';
 }
 
-const Dropdown: FC<DropdownTypes<string | number>> = ({ options = '', title = '' }) => {
+const Dropdown: FC<DropdownTypes<string | number>> = ({ options = '', title = '', type }) => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [dropdownValue, setDropDownValue] = useState(options[0]);
+  const dispatch = useDisPatch();
 
   let icon;
   if (isOpen) {
@@ -17,9 +21,11 @@ const Dropdown: FC<DropdownTypes<string | number>> = ({ options = '', title = ''
   } else {
     icon = <AiOutlineCaretDown />;
   }
-
   const handleClick = (value: string) => {
     setDropDownValue(value);
+    if (type === 'passengers') dispatch(appAction.selectPassenger(value));
+    if (type === 'cabinClass') dispatch(appAction.selectCabinClass(value));
+    if (type === 'tripType') dispatch(appAction.selectTripType(value));
     setIsOpen((prev) => !prev);
   };
   return (

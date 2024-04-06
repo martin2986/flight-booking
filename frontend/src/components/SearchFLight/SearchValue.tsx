@@ -2,7 +2,7 @@ import { FC, ReactNode } from 'react';
 
 type SearchValueProps = {
   type?: string;
-  name: string | number;
+  name: string | Date | any;
   title: string;
   icon: ReactNode;
 };

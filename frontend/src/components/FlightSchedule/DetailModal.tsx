@@ -80,7 +80,7 @@ const DetailModal: FC<DetailModalProps> = ({ legs }) => {
                     originCode={origin.displayCode}
                     origin={origin.name}
                     originTime={formatTime(departure).formattedTime}
-                    date={formatTime(departure).formattedDate}
+                    date={formatTime(departure).formattedDateShort}
                     destination={destination.name}
                     destinationCode={destination.displayCode}
                     destinationTime={formatTime(arrival).formattedTime}

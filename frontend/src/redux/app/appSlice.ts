@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-
 interface setFlightDataPayLoadTypes {
   itineraries: any[];
   token: string;
@@ -25,7 +24,12 @@ interface FlightState {
   flightData: setFlightDataPayLoadTypes;
   selectedFlight: selectedFlightPayloadTypes;
   toggleFlightDetail: boolean;
-  oneWay: boolean;
+  departureDate: string;
+  date: { id: string; date: Date };
+  returnDate?: string;
+  cabinClass: string;
+  passengers: string;
+  tripType: string;
   roundTrip: boolean;
 }
 const initialState: FlightState = {
@@ -50,8 +54,16 @@ const initialState: FlightState = {
     destination: '',
   },
   toggleFlightDetail: false,
-  oneWay: false,
+  departureDate: '',
+  returnDate: '',
+  cabinClass: '',
+  passengers: '',
+  tripType: '',
   roundTrip: true,
+  date: {
+    id: '',
+    date: new Date(),
+  },
 };
 
 const appSlice = createSlice({
@@ -66,6 +78,21 @@ const appSlice = createSlice({
     },
     toggleFlightDetail: (state, action: PayloadAction<boolean>) => {
       state.toggleFlightDetail = action.payload;
+    },
+    selectDepartureDate: (state, action) => {
+      state.departureDate = action.payload;
+    },
+    selectArrivalDate: (state, action) => {
+      state.returnDate = action.payload;
+    },
+    selectPassenger: (state, action) => {
+      state.passengers = action.payload;
+    },
+    selectCabinClass: (state, action) => {
+      state.cabinClass = action.payload;
+    },
+    selectTripType: (state, action) => {
+      state.roundTrip = action.payload;
     },
   },
 });

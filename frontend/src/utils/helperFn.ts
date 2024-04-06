@@ -34,12 +34,14 @@ export const durationInHour = (data: number) => {
 };
 
 export const formatTime = (data: string) => {
-  const [datePart, timePart] = data.split('T');
+  if (!data) return;
+  const [datePart, timePart] = data?.split('T');
   const formattedTime = moment(timePart, 'HH:mm:ss').format('HH:mm');
-  const formattedDate = moment(datePart).format('DD MMM');
+  const formattedDateShort = moment(datePart).format('DD MMM');
+  const formattedDate = moment(datePart).format('YYYY-MM-DD');
   const formattedFullDate = moment(datePart).format('DD MMM YYYY');
   const fullDateWithDay = moment().format('ddd, MMMM Do YYYY');
-  return { formattedTime, formattedDate, formattedFullDate, fullDateWithDay };
+  return { formattedTime, formattedDate, formattedFullDate, fullDateWithDay, formattedDateShort };
 };
 
 export const modifiedAirlineName = (data: string) => {

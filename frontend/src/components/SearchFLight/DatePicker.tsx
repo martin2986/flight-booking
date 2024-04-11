@@ -1,4 +1,5 @@
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import { SyntheticEvent } from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { appAction } from '../../redux/app/appSlice';
 import { useDisPatch } from '../../redux/hooks';

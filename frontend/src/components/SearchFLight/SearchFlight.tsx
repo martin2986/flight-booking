@@ -8,6 +8,8 @@ import { appAction } from '../../redux/app/appSlice';
 import { useAppSelector, useDisPatch } from '../../redux/hooks';
 import { Buttons } from '../Button';
 import PageLoader from '../PageLoader';
+import Notification from '../UI/Notification';
+import ToastNotification from '../UI/ToastNotification';
 import AutoCompleteInput from './AutoCompleteInput';
 import Date from './DatePicker';
 export type InputStateTypes = {
@@ -20,7 +22,7 @@ export type InputStateTypes = {
 interface SearchFlightTypes {}
 const SearchFlight: FC<SearchFlightTypes> = () => {
   const { flightData, roundTrip } = useAppSelector((state) => state.app);
-  const { filterStats } = flightData;
+  // const { filterStats } = flightData;
   const navigate = useNavigate();
   const dispatch = useDisPatch();
   const {
@@ -46,8 +48,8 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
   }
   const onSubmit: SubmitHandler<InputStateTypes> = async (data: any) => {
     const { origin, destination, departureDate, arrivalDate } = data;
-    console.log(origin);
-    console.log(destination);
+    console.log(origin?.id);
+    console.log(destination?.id);
     console.log(departureDate);
     console.log(arrivalDate);
 
@@ -106,7 +108,6 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
       </div>
 
       <form onSubmit={handleSubmit(onSubmit)} className="flex flex-row items-center gap-4">
-        {errors.root && <div className="text-red-500 text-sm mb-4">{errors.root.message}</div>}
         <div className="flex w-full gap-1">
           <div className="flex gap-2 w-1/2">
             <AutoCompleteInput control={control} name="origin" label="Departure" />
@@ -123,6 +124,9 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
           </span>
         </Buttons>
       </form>
+      {errors.root && (
+        <ToastNotification message={errors.root.message || 'Ops an Error Occur'} type="error" />
+      )}
     </>
   );
 };

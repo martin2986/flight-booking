@@ -43,7 +43,7 @@ const DetailModal: FC<DetailModalProps> = ({ legs }) => {
     dispatch(appAction.toggleFlightDetail(false));
   };
 
-  console.log();
+  console.log(departure);
   return (
     <Modal onHideCart={handleHideModal}>
       <div className="  fixed items-center z-20 top-24 left-0 right-0 justify-center w-2/3 mx-auto  max-h-full">

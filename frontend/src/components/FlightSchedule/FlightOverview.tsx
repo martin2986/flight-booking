@@ -8,7 +8,8 @@ type FlightOverviewProps = {};
 const FlightOverview: FC<FlightOverviewProps> = () => {
   const { selectedFlight, flightData } = useAppSelector((state) => state.app);
   const { destinationCode, date, price, originCode } = selectedFlight;
-  const { filterStats } = flightData;
+  // const { filterStats } = flightData;
+  console.log(flightData);
   return (
     <div className="hidden md:block md:w-1/3 mx-auto">
       <h1 className="font-bold text-xl mb-3">Overview</h1>
@@ -32,9 +33,9 @@ const FlightOverview: FC<FlightOverviewProps> = () => {
             ) : (
               <div>
                 <p className="text-sm">From</p>
-                <h3 className="text-sm font-semibold">{filterStats.airports[0]?.city}</h3>
+                {/* <h3 className="text-sm font-semibold">{filterStats?.airports[0]?.city}</h3> */}
                 <p className="text-sm mt-3">To</p>
-                <h3 className="text-sm font-semibold">{filterStats.airports[1]?.city}</h3>
+                {/* <h3 className="text-sm font-semibold">{filterStats?.airports[1]?.city}</h3> */}
               </div>
             )}
             {/* <SelectedFlight date="13 Apr 2024" time="13:00" origin="LXD" destination="DXB" /> */}

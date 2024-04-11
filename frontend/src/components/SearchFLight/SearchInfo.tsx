@@ -39,17 +39,17 @@ const SearchInfo: FC<SearchInfoProps> = () => {
           <div className="flex flex-row justify-between  items-center  ">
             <div className="flex flex-row  items-center gap-8 ">
               <SearchValue
-                name={filterStats.airports[1]?.city}
+                name={filterStats?.airports[1]?.city}
                 title="From"
                 icon={<LuPlaneTakeoff />}
               />
               <SearchValue
-                name={filterStats.airports[0]?.city}
+                name={filterStats?.airports[0]?.city}
                 title="to"
                 icon={<LuPlaneLanding />}
               />
               <SearchValue
-                name={formatTime(departureDate).formattedDateShort}
+                name={formatTime(departureDate || 'vc').formattedDateShort}
                 title="When"
                 icon={<FaRegCalendarAlt />}
               />

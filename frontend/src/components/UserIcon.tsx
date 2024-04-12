@@ -1,12 +1,12 @@
 import { ComponentPropsWithoutRef, FC } from 'react';
-import { useAppSelector } from '../../redux/hooks';
+import { useAppSelector } from '../redux/hooks';
 
 interface UserIconProps extends ComponentPropsWithoutRef<'div'> {
   userName?: string;
   id?: string;
 }
 
-const Index: FC<UserIconProps> = ({ ...props }) => {
+const UserIcon: FC<UserIconProps> = ({ ...props }) => {
   const { user } = useAppSelector((state) => state.auth);
   const UserName = user?.name.split(' ');
   const firstName = UserName[0].at(0)?.toLocaleUpperCase();
@@ -22,4 +22,4 @@ const Index: FC<UserIconProps> = ({ ...props }) => {
     </div>
   );
 };
-export default Index;
+export default UserIcon;

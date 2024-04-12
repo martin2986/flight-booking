@@ -9,7 +9,8 @@ type FlightDetailItemProps = {
   destinationTime: string;
   destinationCode: string;
   originTime: string;
-  date: string;
+  departureDate: string;
+  returnDate: string;
   duration: number;
   operatingCarrier: any;
   flightNumber: string;
@@ -19,7 +20,8 @@ const FlightDetailItem: FC<FlightDetailItemProps> = ({
   originCode = '',
   origin = '',
   originTime = '',
-  date = '',
+  departureDate = '',
+  returnDate = '',
   destinationCode = '',
   destination = '',
   destinationTime = '',
@@ -38,7 +40,7 @@ const FlightDetailItem: FC<FlightDetailItemProps> = ({
           {origin} ({originCode})
         </h3>
         <time className="block mb-3   text-sm font-normal leading-none text-gray-500 dark:text-gray-400">
-          {date}, {originTime}
+          {departureDate}, {originTime}
         </time>
         <h3 className="flex items-start  mb-3  text-sm font-semibold text-gray-900 dark:text-black">
           {durationInHour(duration)} {operatingCarrier.name}
@@ -51,7 +53,7 @@ const FlightDetailItem: FC<FlightDetailItemProps> = ({
           {destination} ({destinationCode})
         </h3>
         <time className="block mb-3   text-sm font-normal leading-none text-gray-500 dark:text-gray-400">
-          {date}, {destinationTime}
+          {returnDate}, {destinationTime}
         </time>
       </div>
     </div>

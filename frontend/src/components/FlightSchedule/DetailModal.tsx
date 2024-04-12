@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { IoIosClose } from 'react-icons/io';
 import { appAction } from '../../redux/app/appSlice';
-import { useDisPatch } from '../../redux/hooks';
+import { useAppSelector, useDisPatch } from '../../redux/hooks';
 import Modal from '../../UI/Modal';
 import { Buttons } from '../Button';
 import FlightDetailItem from './FlightDetailItem';
-import { durationInHour, formatTime } from '../../utils/helperFn';
+import { durationInHour, formattedDate, formatTime } from '../../utils/helperFn';
 type DetailModalProps = {
   legs: {
     arrival: string;
@@ -38,12 +38,13 @@ type DetailModalProps = {
 
 const DetailModal: FC<DetailModalProps> = ({ legs }) => {
   const { durationInMinutes, segments, departure } = legs[0];
+  // const { durationInMinutes:returnDurationMin, segments, departure } = legs[1];
+  const { departureDate, returnDate } = useAppSelector((state) => state.app);
   const dispatch = useDisPatch();
   const handleHideModal = () => {
     dispatch(appAction.toggleFlightDetail(false));
   };
 
-  console.log(departure);
   return (
     <Modal onHideCart={handleHideModal}>
       <div className="  fixed items-center z-20 top-24 left-0 right-0 justify-center w-2/3 mx-auto  max-h-full">
@@ -60,7 +61,7 @@ const DetailModal: FC<DetailModalProps> = ({ legs }) => {
             <div className="p-4 md:p-5">
               <div className="mb-3">
                 <h3 className="flex items-start mb-1 text-sm font-bold text-gray-900 dark:text-black">
-                  Depart - {formatTime(departure).fullDateWithDay}
+                  Depart - {formatTime(departureDate).fullDateWithDay}
                 </h3>
                 <p className="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">
                   Journey duration: {durationInHour(durationInMinutes)}
@@ -79,11 +80,12 @@ const DetailModal: FC<DetailModalProps> = ({ legs }) => {
                   <FlightDetailItem
                     originCode={origin.displayCode}
                     origin={origin.name}
-                    originTime={formatTime(departure).formattedTime}
-                    date={formatTime(departure).formattedDateShort}
+                    originTime={formattedDate(departure).formattedTime}
+                    departureDate={formattedDate(departure).formattedDateShort}
                     destination={destination.name}
                     destinationCode={destination.displayCode}
-                    destinationTime={formatTime(arrival).formattedTime}
+                    returnDate={formattedDate(arrival).formattedDateShort}
+                    destinationTime={formattedDate(arrival).formattedTime}
                     duration={durationInMinutes}
                     flightNumber={flightNumber}
                     operatingCarrier={operatingCarrier}
@@ -107,3 +109,14 @@ const DetailModal: FC<DetailModalProps> = ({ legs }) => {
 };
 
 export default DetailModal;
+
+// const testData = [
+//   {
+//     id: 0,
+//     name: 'test 1',
+//   },
+//   {
+//     id: 1,
+//     name: 'test 2',
+//   },
+// ];

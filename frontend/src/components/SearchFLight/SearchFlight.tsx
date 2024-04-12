@@ -48,20 +48,13 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
   }
   const onSubmit: SubmitHandler<InputStateTypes> = async (data: any) => {
     const { origin, destination, departureDate, arrivalDate } = data;
-    console.log(origin?.id);
-    console.log(destination?.id);
-    console.log(departureDate);
-    console.log(arrivalDate);
-
-    console.log(url);
 
     const params = {
       params: {
         fromId: origin?.id,
         toId: destination?.id,
-        departDate: moment(departureDate).format('YYYY-MM-DD'),
-        returnDate: arrivalDate,
-        // returnDate: '',
+        departDate: moment(departureDate.$d).format('YYYY-MM-DD'),
+        returnDate: moment(arrivalDate.$d).format('YYYY-MM-DD'),
         adults: '1',
         currency: 'USD',
         market: 'US',
@@ -69,10 +62,8 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
       },
     };
     if (roundTrip) {
-      params.params.returnDate = arrivalDate;
+      params.params.returnDate = moment(arrivalDate.$d).format('YYYY-MM-DD');
     }
-
-    console.log(params);
     try {
       const response = await flightClient.get(url, params);
       const { data } = response;
@@ -114,8 +105,8 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
             <AutoCompleteInput control={control} name="destination" label="Arrival" />
           </div>
           <div className="flex gap-2 w-1/2">
-            <Date control={control} name="departureDate" label="Date" />
-            {roundTrip && <Date control={control} name="arrivalDate" label="Date" />}
+            <Date control={control} name="departureDate" />
+            {roundTrip && <Date control={control} name="arrivalDate" />}
           </div>
         </div>
         <Buttons title="Search" className="bg-gray-700 px-5 py-2" variant="default" type="submit">

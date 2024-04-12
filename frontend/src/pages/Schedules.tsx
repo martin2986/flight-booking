@@ -11,7 +11,7 @@ type SchedulesProps = {};
 const Schedules: FC<SchedulesProps> = () => {
   const { flightData, toggleFlightDetail } = useAppSelector((state) => state.app);
   const [modalInfo, setModalInfo] = useState<any>();
-  // const { filterStats } = flightData;
+  const { filterStats } = flightData;
   const showID = (data: any) => {
     setModalInfo(data);
   };
@@ -23,7 +23,7 @@ const Schedules: FC<SchedulesProps> = () => {
         <div>
           <h1 className="font-semibold mb-2">Outbound</h1>
           <p className=" inline-flex items-center gap-3 text-base font-light mb-3">
-            {/* {filterStats?.airports[1].city} <RiGitCommitFill /> {filterStats?.airports[0]?.city} */}
+            {filterStats?.airports[0]?.city} <RiGitCommitFill /> {filterStats?.airports[1]?.city}
           </p>
         </div>
         <div className="flex gap-3">

@@ -49,7 +49,7 @@ const SearchInfo: FC<SearchInfoProps> = () => {
                 icon={<LuPlaneLanding />}
               />
               <SearchValue
-                name={formatTime(departureDate || 'vc').formattedDateShort}
+                name={formatTime(departureDate).formattedDateShort}
                 title="When"
                 icon={<FaRegCalendarAlt />}
               />

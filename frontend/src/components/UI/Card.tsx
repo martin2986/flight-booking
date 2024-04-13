@@ -2,24 +2,21 @@ import { FC, ReactNode } from 'react';
 import { VariantProps, cva } from 'class-variance-authority';
 import { cn } from '../../utils/helperFn';
 
-const cardVariants = cva(
-  'relative border border-gray-300 p-2 rounded-lg mb-3  md:py-3 md:px-3 w-full',
-  {
-    variants: {
-      variant: {
-        default: 'relative border border-gray-300 rounded-lg   w-full',
-      },
-      size: {
-        default: 'md:py-3 p-1  md:px-3 ',
-        md: 'w-1/2 ',
-      },
+const cardVariants = cva('relative border border-gray-300 rounded-lg mb-3 w-full', {
+  variants: {
+    variant: {
+      default: 'relative border border-gray-300 rounded-lg w-full',
     },
-    defaultVariants: {
-      size: 'default',
-      variant: 'default',
+    size: {
+      default: 'md:p-3 p-1',
+      md: 'w-1/2',
     },
   },
-);
+  defaultVariants: {
+    size: 'default',
+    variant: 'default',
+  },
+});
 
 interface CardTypes extends VariantProps<typeof cardVariants> {
   children: ReactNode;

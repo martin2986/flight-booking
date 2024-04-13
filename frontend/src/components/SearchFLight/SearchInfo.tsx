@@ -14,9 +14,11 @@ type SearchInfoProps = {};
 
 const SearchInfo: FC<SearchInfoProps> = () => {
   const [toggleSearch, setToggleSearch] = useState<boolean>(false);
-  const { flightData, departureDate, passengers } = useAppSelector((state) => state.app);
+  const { flightData, departureDate, adultCount, childrenCount, infantCount } = useAppSelector(
+    (state) => state.app,
+  );
   const { filterStats } = flightData;
-
+  const passengers = adultCount + childrenCount + infantCount;
   return (
     <>
       {toggleSearch && (

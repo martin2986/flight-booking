@@ -1,16 +1,19 @@
 import { FC } from 'react';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
+import { useAppSelector } from '../../redux/hooks';
 import { Buttons } from '../Button';
 import SearchFlight from '../SearchFLight/SearchFlight';
 import { Card } from '../UI/Card';
-import ToastNotification from '../UI/ToastNotification';
+import PageLoader from '../UI/PageLoader';
 
 export type HeaderTypes = {};
 
 const Index: FC<HeaderTypes> = () => {
+  const { isLoading } = useAppSelector((state) => state.app);
+  if (isLoading) return <PageLoader />;
+
   return (
     <div className="h-screen container mx-auto">
-      <ToastNotification message="Hell" type="warning" />
       <div className=" top-24 mb-8">
         <h1 className="text-xl w-2/4 mb-6 md:text-4xl pt-14">
           Hey Buddy! where are you <strong>Flying</strong> to?

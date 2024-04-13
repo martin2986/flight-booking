@@ -1,7 +1,7 @@
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Suspense } from 'react';
-import PageLoader from './components/PageLoader';
+import PageLoader from './components/UI/PageLoader';
 import { persistor, store } from './redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import AppRouter from './router/AppRouter';

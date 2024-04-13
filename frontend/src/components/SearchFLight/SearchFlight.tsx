@@ -7,8 +7,7 @@ import { flightClient } from '../../auth/apiClient';
 import { appAction } from '../../redux/app/appSlice';
 import { useAppSelector, useDisPatch } from '../../redux/hooks';
 import { Buttons } from '../Button';
-import PageLoader from '../PageLoader';
-import Notification from '../UI/Notification';
+import Passengers from '../Passengers/Index';
 import ToastNotification from '../UI/ToastNotification';
 import AutoCompleteInput from './AutoCompleteInput';
 import Date from './DatePicker';
@@ -21,12 +20,12 @@ export type InputStateTypes = {
 
 interface SearchFlightTypes {}
 const SearchFlight: FC<SearchFlightTypes> = () => {
-  const { flightData, roundTrip } = useAppSelector((state) => state.app);
-  // const { filterStats } = flightData;
+  const { roundTrip, adultCount, childrenCount, infantCount } = useAppSelector(
+    (state) => state.app,
+  );
   const navigate = useNavigate();
   const dispatch = useDisPatch();
   const {
-    register,
     handleSubmit,
     reset,
     setError,
@@ -40,12 +39,14 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
       arrivalDate: '',
     },
   });
+  const passenger = adultCount + childrenCount + infantCount;
   let url: string;
   if (roundTrip) {
     url = '/search-roundtrip';
   } else {
     url = '/search-one-way';
   }
+  if (isSubmitting) dispatch(appAction.setIsLoading(true));
   const onSubmit: SubmitHandler<InputStateTypes> = async (data: any) => {
     const { origin, destination, departureDate, arrivalDate } = data;
 
@@ -55,7 +56,7 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
         toId: destination?.id,
         departDate: moment(departureDate.$d).format('YYYY-MM-DD'),
         returnDate: moment(arrivalDate.$d).format('YYYY-MM-DD'),
-        adults: '1',
+        adults: `${passenger}`,
         currency: 'USD',
         market: 'US',
         locale: 'en-US',
@@ -66,6 +67,7 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
     }
     try {
       const response = await flightClient.get(url, params);
+      if (response) dispatch(appAction.setIsLoading(false));
       const { data } = response;
       if (!response) throw new Error(`Error occurred while fetching data Data`);
       dispatch(appAction.setFlightData(data?.data));
@@ -78,7 +80,6 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
     }
   };
 
-  if (isSubmitting) return <PageLoader />;
   return (
     <>
       <div className="mb-2">
@@ -108,6 +109,7 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
             <Date control={control} name="departureDate" />
             {roundTrip && <Date control={control} name="arrivalDate" />}
           </div>
+          <Passengers />
         </div>
         <Buttons title="Search" className="bg-gray-700 px-5 py-2" variant="default" type="submit">
           <span className="incline-flex items-center ml-1">
@@ -115,6 +117,7 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
           </span>
         </Buttons>
       </form>
+
       {errors.root && (
         <ToastNotification message={errors.root.message || 'Ops an Error Occur'} type="error" />
       )}

@@ -32,9 +32,9 @@ const FlightOverview: FC<FlightOverviewProps> = () => {
             ) : (
               <div>
                 <p className="text-sm">From</p>
-                <h3 className="text-sm font-semibold">{filterStats?.airports[0]?.city}</h3>
-                <p className="text-sm mt-3">To</p>
                 <h3 className="text-sm font-semibold">{filterStats?.airports[1]?.city}</h3>
+                <p className="text-sm mt-3">To</p>
+                <h3 className="text-sm font-semibold">{filterStats?.airports[0]?.city}</h3>
               </div>
             )}
             {/* this goes for return flights */}

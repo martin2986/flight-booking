@@ -25,12 +25,15 @@ interface FlightState {
   selectedFlight: selectedFlightPayloadTypes;
   toggleFlightDetail: boolean;
   departureDate: string;
-  date: { id: string; date: Date };
   returnDate?: string;
   cabinClass: string;
   passengers: string;
   tripType: string;
   roundTrip: boolean;
+  isLoading: boolean;
+  adultCount: number;
+  childrenCount: number;
+  infantCount: number;
 }
 const initialState: FlightState = {
   flightData: {
@@ -60,10 +63,10 @@ const initialState: FlightState = {
   passengers: '',
   tripType: '',
   roundTrip: true,
-  date: {
-    id: '',
-    date: new Date(),
-  },
+  isLoading: false,
+  adultCount: 1,
+  childrenCount: 0,
+  infantCount: 0,
 };
 
 const appSlice = createSlice({
@@ -93,6 +96,27 @@ const appSlice = createSlice({
     },
     selectTripType: (state, action) => {
       state.roundTrip = action.payload;
+    },
+    setIsLoading: (state, action) => {
+      state.isLoading = action.payload;
+    },
+    incrementAdult: (state) => {
+      state.adultCount++;
+    },
+    decrementAdult: (state) => {
+      state.adultCount--;
+    },
+    incrementChildren: (state) => {
+      state.childrenCount++;
+    },
+    decrementChildren: (state) => {
+      state.childrenCount--;
+    },
+    incrementInfant: (state) => {
+      state.infantCount++;
+    },
+    decrementInfant: (state) => {
+      state.infantCount--;
     },
   },
 });

@@ -23,7 +23,7 @@ const Schedules: FC<SchedulesProps> = () => {
         <div>
           <h1 className="font-semibold mb-2">Outbound</h1>
           <p className=" inline-flex items-center gap-3 text-base font-light mb-3">
-            {filterStats?.airports[0]?.city} <RiGitCommitFill /> {filterStats?.airports[1]?.city}
+            {filterStats?.airports[1]?.city} <RiGitCommitFill /> {filterStats?.airports[0]?.city}
           </p>
         </div>
         <div className="flex gap-3">
@@ -32,7 +32,6 @@ const Schedules: FC<SchedulesProps> = () => {
               <ScheduleItem key={item.id} {...item} onClick={() => showID(item)} />
             ))}
           </div>
-
           <FlightOverview />
         </div>
       </AppLayout>

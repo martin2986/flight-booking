@@ -13,7 +13,7 @@ const Index: FC<HeaderTypes> = () => {
   if (isLoading) return <PageLoader />;
 
   return (
-    <div className="h-screen container mx-auto">
+    <div className=" container mx-auto">
       <div className=" top-24 mb-8">
         <h1 className="text-xl w-2/4 mb-6 md:text-4xl pt-14">
           Hey Buddy! where are you <strong>Flying</strong> to?
@@ -24,7 +24,7 @@ const Index: FC<HeaderTypes> = () => {
           </span>
         </Buttons>
       </div>
-      <Card className="bg-white ">
+      <Card className="bg-white mt-28">
         <div className="flex gap-2 md:gap-5 items-center mb-3">
           <Buttons
             className="text-xs no-underline hover:text-indigo-500 hover:bg-transparent"

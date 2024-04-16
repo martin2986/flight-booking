@@ -1,9 +1,12 @@
 import { lazy } from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Route, Routes } from 'react-router-dom';
+import Footer from '../components/Footer/Footer';
 import NotFound from '../components/NotFound';
 import VerifyAccount from '../components/VerifyAccount';
+import AppLayout from '../layout/AppLayout';
 import LoginForm from '../pages/Login';
 import RegisterForm from '../pages/Register';
+import SelectedFlight from '../pages/SelectedFlight';
 import ProtectedRoute from './ProtectedRoute';
 const Dashboard = lazy(() => import('../pages/Dashboard'));
 const Schedules = lazy(() => import('../pages/Schedules'));
@@ -14,7 +17,7 @@ const UpdatePassword = lazy(() => import('../components/UpdatePassword'));
 
 const AppRouter = () => {
   return (
-    <div>
+    <AppLayout>
       <NavBar />
       <Routes>
         <Route element={<LoginForm />} path="/login" />
@@ -23,13 +26,15 @@ const AppRouter = () => {
         <Route element={<Dashboard />} path="/" />
         <Route element={<Schedules />} path="/schedules" />
         <Route element={<Bookings />} path="/bookings" />
+        <Route element={<SelectedFlight />} path="/selectedFlight" />
         <Route element={<ProtectedRoute redirectPath="/" />}>
           <Route element={<UserProfile />} path="/profile" />
           <Route element={<UpdatePassword />} path="/edit-account" />
         </Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
-    </div>
+      <Footer />
+    </AppLayout>
   );
 };
 

@@ -44,11 +44,14 @@ const ScheduleItem: FC<FlightListInfoProps> = ({ legs, price, ...rest }) => {
     dispatch(
       appAction.selectedFLight({
         destinationCode: destination?.displayCode,
-        date: departure,
+        departureTime: departure,
         price: price?.formatted,
         originCode: origin?.displayCode,
         origin: origin?.name,
+        originTime: arrival,
         destination: destination?.name,
+        durationInMinutes,
+        stopCount,
       }),
     );
   };

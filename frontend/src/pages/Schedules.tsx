@@ -4,7 +4,6 @@ import DetailModal from '../components/FlightSchedule/DetailModal';
 import FlightOverview from '../components/FlightSchedule/FlightOverview';
 import ScheduleItem from '../components/FlightSchedule/ScheduleItem';
 import SearchInfo from '../components/SearchFLight/SearchInfo';
-import AppLayout from '../layout/AppLayout';
 import { useAppSelector } from '../redux/hooks';
 type SchedulesProps = {};
 
@@ -18,7 +17,7 @@ const Schedules: FC<SchedulesProps> = () => {
   return (
     <>
       <SearchInfo />
-      <AppLayout>
+      <>
         {toggleFlightDetail && modalInfo && <DetailModal {...modalInfo} />}
         <div>
           <h1 className="font-semibold mb-2">Outbound</h1>
@@ -34,7 +33,7 @@ const Schedules: FC<SchedulesProps> = () => {
           </div>
           <FlightOverview />
         </div>
-      </AppLayout>
+      </>
     </>
   );
 };

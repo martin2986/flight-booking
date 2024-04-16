@@ -76,11 +76,13 @@ const SideBar: FC<SideBarProps<T>> = ({ setIsOpen, type, listItems }) => {
               </div>
             </div>
             {!isLoggedIn && (
-              <div className="flex items-center">
+              <div className="flex items-center gap-2 mt-3">
                 <Link
                   to="login"
+                  style={{ color: 'black' }}
                   className={buttonVariants({
-                    variant: 'borderless',
+                    variant: 'outline',
+                    size: 'sm',
                   })}
                 >
                   Register

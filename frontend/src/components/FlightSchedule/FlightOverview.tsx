@@ -7,15 +7,30 @@ type FlightOverviewProps = {};
 
 const FlightOverview: FC<FlightOverviewProps> = () => {
   const { selectedFlight, flightData, roundTrip } = useAppSelector((state) => state.app);
-  const { destinationCode, date, price, originCode } = selectedFlight;
+  const { destinationCode, originTime, price, originCode } = selectedFlight;
   const { filterStats } = flightData;
   return (
     <div className="hidden md:block md:w-1/3 mx-auto">
       <h1 className="font-bold text-xl mb-3">Overview</h1>
 
-      <Card>
+      <Card className=" shadow-md">
         <div>
           <p className="text-sm mb-3">Please select an inbound flight</p>
+          <div
+            className="flex flex-row  items-center justify-between mb-2
+          "
+          >
+            <p className="text-sm md:text-base font-light">2 passengers</p>
+            <p className="text-sm md:text-base font-bold">Eur 945.98</p>
+          </div>
+          <div
+            className="flex flex-row  items-center justify-between mb-2
+          "
+          >
+            <p className="text-sm md:text-base font-light">Connection Service</p>
+            <p className="text-sm md:text-base font-bold">Eur 100.98</p>
+          </div>
+
           <div className="flex flex-row justify-between text-base font-semibold pb-3 border-b-2">
             <p>Total:</p>
             <p>{!price ? '$0.00' : price}</p>
@@ -24,8 +39,8 @@ const FlightOverview: FC<FlightOverviewProps> = () => {
           <div className="bg-gray-100 mt-3 py-4 px-3 ">
             {originCode ? (
               <SelectedFlight
-                date={formattedDate(date).formattedFullDate}
-                time={formattedDate(date).formattedTime}
+                date={formattedDate(originTime).formattedFullDate}
+                time={formattedDate(originTime).formattedTime}
                 origin={originCode}
                 destination={destinationCode}
               />

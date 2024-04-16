@@ -14,11 +14,15 @@ interface setFlightDataPayLoadTypes {
 
 interface selectedFlightPayloadTypes {
   price: string;
-  date: string;
+  // date: string;
   originCode: string;
   destinationCode: string;
   origin: string;
   destination: string;
+  durationInMinutes: number;
+  stopCount: number;
+  departureTime: string;
+  originTime: string;
 }
 interface FlightState {
   flightData: setFlightDataPayLoadTypes;
@@ -50,11 +54,14 @@ const initialState: FlightState = {
   },
   selectedFlight: {
     price: '',
-    date: '',
     originCode: '',
     destinationCode: '',
     origin: '',
     destination: '',
+    durationInMinutes: 0,
+    stopCount: 0,
+    departureTime: '',
+    originTime: '',
   },
   toggleFlightDetail: false,
   departureDate: '',

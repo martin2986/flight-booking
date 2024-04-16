@@ -36,7 +36,7 @@ const SearchInfo: FC<SearchInfoProps> = () => {
           </Buttons>
         </div>
       )}
-      <div className="w-full shadow-md px-5	py-4 rounded ">
+      <div className="w-full shadow-md px-5	py-2 rounded ">
         {!toggleSearch ? (
           <div className="flex flex-row justify-between  items-center  ">
             <div className="flex flex-row  items-center gap-8 ">

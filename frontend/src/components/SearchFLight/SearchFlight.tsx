@@ -99,19 +99,27 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
         </Buttons>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-row items-center gap-4">
-        <div className="flex w-full gap-1">
-          <div className="flex gap-2 w-1/2">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex flex-col md:flex-row items-center gap-4"
+      >
+        <div className="flex flex-col md:flex-row w-full gap-1">
+          <div className="flex flex-col md:flex-row gap-2 md:w-1/2">
             <AutoCompleteInput control={control} name="origin" label="Departure" />
             <AutoCompleteInput control={control} name="destination" label="Arrival" />
           </div>
-          <div className="flex gap-2 w-1/2">
+          <div className="flex flex-col md:flex-row gap-2 md:w-1/2">
             <Date control={control} name="departureDate" />
             {roundTrip && <Date control={control} name="arrivalDate" />}
           </div>
           <Passengers />
         </div>
-        <Buttons title="Search" className="bg-gray-700 px-5 py-2" variant="default" type="submit">
+        <Buttons
+          title="Search"
+          className="bg-gray-700 px-5 py-2 w-full md:w-fit"
+          variant="default"
+          type="submit"
+        >
           <span className="incline-flex items-center ml-1">
             <HiOutlineArrowNarrowRight />
           </span>

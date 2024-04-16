@@ -1,6 +1,7 @@
 import { FC } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { appAction } from '../../redux/app/appSlice';
-import { useDisPatch } from '../../redux/hooks';
+import { useAppSelector, useDisPatch } from '../../redux/hooks';
 import { Buttons } from '../Button';
 import { Card } from '../UI/Card';
 import FlightDuration from './FlightDuration';
@@ -39,7 +40,9 @@ const ScheduleItem: FC<FlightListInfoProps> = ({ legs, price, ...rest }) => {
   const { arrival, departure, stopCount, durationInMinutes, origin, destination, carriers } =
     legs[0];
   const { marketing } = carriers;
+  const { roundTrip } = useAppSelector((state) => state.app);
   const dispatch = useDisPatch();
+  const navigate = useNavigate();
   const selectHandler = () => {
     dispatch(
       appAction.selectedFLight({
@@ -54,6 +57,7 @@ const ScheduleItem: FC<FlightListInfoProps> = ({ legs, price, ...rest }) => {
         stopCount,
       }),
     );
+    if (!roundTrip) navigate('/selectedFlight');
   };
 
   return (

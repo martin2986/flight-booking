@@ -1,11 +1,11 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 
 type FooterItemProps<T> = {
   title: string;
   items: T[];
 };
 
-const FooterItem: FC<FooterItemProps<T>> = ({ title, items }) => {
+const FooterItem: FC<FooterItemProps<string>> = ({ title, items }) => {
   return (
     <div>
       <h6 className="mb-4 flex justify-center font-semibold uppercase md:justify-start text-sm">

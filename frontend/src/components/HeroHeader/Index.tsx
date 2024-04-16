@@ -1,17 +1,12 @@
 import { FC } from 'react';
 import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
-import { useAppSelector } from '../../redux/hooks';
 import { Buttons } from '../Button';
 import SearchFlight from '../SearchFLight/SearchFlight';
 import { Card } from '../UI/Card';
-import PageLoader from '../UI/PageLoader';
 
 export type HeaderTypes = {};
 
 const Index: FC<HeaderTypes> = () => {
-  const { isLoading } = useAppSelector((state) => state.app);
-  if (isLoading) return <PageLoader />;
-
   return (
     <div className=" container mx-auto">
       <div className=" top-24 mb-8">

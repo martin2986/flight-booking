@@ -14,10 +14,8 @@ type SearchInfoProps = {};
 
 const SearchInfo: FC<SearchInfoProps> = () => {
   const [toggleSearch, setToggleSearch] = useState<boolean>(false);
-  const { flightData, departureDate, adultCount, childrenCount, infantCount } = useAppSelector(
-    (state) => state.app,
-  );
-  const { filterStats } = flightData;
+  const { departureDate, adultCount, childrenCount, infantCount, origin, destination } =
+    useAppSelector((state) => state.app);
   const passengers = adultCount + childrenCount + infantCount;
   return (
     <>
@@ -40,16 +38,8 @@ const SearchInfo: FC<SearchInfoProps> = () => {
         {!toggleSearch ? (
           <div className="flex flex-row justify-between  items-center  ">
             <div className="flex flex-row  items-center gap-8 ">
-              <SearchValue
-                name={filterStats?.airports[1]?.city}
-                title="From"
-                icon={<LuPlaneTakeoff />}
-              />
-              <SearchValue
-                name={filterStats?.airports[0]?.city}
-                title="to"
-                icon={<LuPlaneLanding />}
-              />
+              <SearchValue name={origin} title="From" icon={<LuPlaneTakeoff />} />
+              <SearchValue name={destination} title="to" icon={<LuPlaneLanding />} />
               <SearchValue
                 name={formatTime(departureDate).formattedDateShort}
                 title="When"

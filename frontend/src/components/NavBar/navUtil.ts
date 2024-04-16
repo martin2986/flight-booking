@@ -18,7 +18,7 @@ export const navLinks = [
   },
   {
     link: 'Schedule',
-    path: 'schedules',
+    path: '/schedule',
   },
   {
     link: 'Manage Bookings',
@@ -64,7 +64,7 @@ export const mobileSide = [
   },
   {
     link: 'Schedule',
-    path: 'schedules',
+    path: 'schedule',
   },
   {
     link: 'Manage Bookings',

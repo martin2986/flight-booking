@@ -72,7 +72,7 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
       if (!response) throw new Error(`Error occurred while fetching data Data`);
       dispatch(appAction.setFlightData(data?.data));
       reset();
-      navigate('/schedules');
+      navigate('/schedule');
     } catch (err: any) {
       setError('root', {
         message: err.response.data.message,
@@ -98,7 +98,6 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
           One way
         </Buttons>
       </div>
-
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col md:flex-row items-center gap-4"

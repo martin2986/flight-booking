@@ -1,7 +1,7 @@
 import { AnimatePresence, motion } from 'framer-motion';
 import { FC, useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
 import { buttonVariants } from '../Button';
 import SideBar from '../SideBar';
@@ -12,12 +12,10 @@ type NavProps = {};
 const Index: FC<NavProps> = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [userNavIsOpen, setUserNavIsOpen] = useState<boolean>(false);
-  const [isActive, setIsActive] = useState(navLinks[0].link);
   const { isLoggedIn } = useAppSelector((state) => state.auth);
 
-  const handleNavigation = (selected: string) => {
-    setIsActive(selected);
-  };
+  const location = useLocation();
+  const isPageActive = location.pathname;
   return (
     <div className={`bg-transparent text-black `}>
       <nav className="container mx-auto flex justify-between p-1 items-center ">
@@ -30,9 +28,9 @@ const Index: FC<NavProps> = () => {
 
         <ul className=" hidden  lg:flex flex-row lg:gap-x-8 text-sm">
           {navLinks.map(({ link, path }) => (
-            <li key={link} onClick={() => handleNavigation(link)}>
+            <li key={link}>
               <Link to={path}>{link}</Link>
-              {isActive === link && (
+              {isPageActive === path && (
                 <motion.div
                   layoutId="active-nav"
                   className="border-b-2 border-transparent border-b-black"

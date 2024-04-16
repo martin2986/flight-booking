@@ -38,6 +38,8 @@ interface FlightState {
   adultCount: number;
   childrenCount: number;
   infantCount: number;
+  origin: string;
+  destination: string;
 }
 const initialState: FlightState = {
   flightData: {
@@ -64,6 +66,8 @@ const initialState: FlightState = {
     originTime: '',
   },
   toggleFlightDetail: false,
+  origin: '',
+  destination: '',
   departureDate: '',
   returnDate: '',
   cabinClass: '',
@@ -124,6 +128,12 @@ const appSlice = createSlice({
     },
     decrementInfant: (state) => {
       state.infantCount--;
+    },
+    setOrigin: (state, action) => {
+      state.origin = action.payload;
+    },
+    setDestination: (state, action) => {
+      state.destination = action.payload;
     },
   },
 });

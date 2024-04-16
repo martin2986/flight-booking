@@ -1,10 +1,10 @@
 import { FC } from 'react';
+import img2 from '../assets/airplane.png';
+import img1 from '../assets/ticket-flight.png';
+import img3 from '../assets/travel.png';
 import HeroHeader from '../components/HeroHeader/Index';
 import PopularDestination from '../components/PopularDestination/Index';
 import TextInfo from '../components/TextInfo';
-import img1 from '../assets/ticket-flight.png';
-import img2 from '../assets/airplane.png';
-import img3 from '../assets/travel.png';
 import Accordion from '../components/UI/Accordion';
 type DashboardProps = {};
 const Dashboard: FC<DashboardProps> = () => {

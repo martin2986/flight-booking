@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { Buttons } from '../Button';
 import SearchFlight from '../SearchFLight/SearchFlight';
 import { Card } from '../UI/Card';
@@ -13,10 +12,8 @@ const Index: FC<HeaderTypes> = () => {
         <h1 className="text-xl w-2/4 mb-6 md:text-4xl pt-14">
           Hey Buddy! where are you <strong>Flying</strong> to?
         </h1>
-        <Buttons variant="borderless" title="Explore" className="hover:scale-125">
-          <span className="ml-1">
-            <HiOutlineArrowNarrowRight />
-          </span>
+        <Buttons variant="borderless" className="hover:scale-125">
+          Explore &rarr;
         </Buttons>
       </div>
       <Card className="bg-white mt-28">

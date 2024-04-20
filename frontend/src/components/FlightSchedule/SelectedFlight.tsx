@@ -18,8 +18,8 @@ const SelectedFlight: FC<SelectedFlightProps> = ({
     <div className="flex flex-row items-center justify-between py-4  border-b-2">
       {origin ? (
         <>
-          <div className="flex flex-row items-center ">
-            <h4 className="text-sm">{origin}</h4>
+          <div className="flex flex-row items-center justify-between">
+            <h4 className="text-sm w-fit border-2">{origin}</h4>
             <RiGitCommitFill />
             <h4 className="text-sm">{destination}</h4>
           </div>

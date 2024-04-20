@@ -1,7 +1,6 @@
 import moment from 'moment';
 import { FC } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { HiOutlineArrowNarrowRight } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 import { flightClient } from '../../auth/apiClient';
 import { appAction } from '../../redux/app/appSlice';
@@ -67,12 +66,12 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
     }
     try {
       const response = await flightClient.get(url, params);
-      if (response) dispatch(appAction.setIsLoading(false));
-      const { data } = response;
       if (!response) throw new Error(`Error occurred while fetching data Data`);
-      dispatch(appAction.setFlightData(data?.data));
-      reset();
-      navigate('/schedule');
+      const { data } = response;
+      dispatch(appAction.clearSelectedFlight());
+      if (data) dispatch(appAction.setIsLoading(false));
+      // reset();
+      navigate('/schedule', { state: data });
     } catch (err: any) {
       setError('root', {
         message: err.response.data.message,
@@ -114,14 +113,11 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
           <Passengers />
         </div>
         <Buttons
-          title="Search"
-          className="bg-gray-700 px-5 py-2 w-full md:w-fit"
+          className="bg-gray-700 px-5 py-2 w-full md:w-fit text-nowrap"
           variant="default"
           type="submit"
         >
-          <span className="incline-flex items-center ml-1">
-            <HiOutlineArrowNarrowRight />
-          </span>
+          Search &rarr;
         </Buttons>
       </form>
 

@@ -1,68 +1,58 @@
-import { FC, useState } from 'react';
-import SearchValue from './SearchValue';
-import { LuPlaneTakeoff } from 'react-icons/lu';
-import { LuPlaneLanding } from 'react-icons/lu';
+import { FC } from 'react';
+import { CiEdit } from 'react-icons/ci';
 import { FaRegCalendarAlt } from 'react-icons/fa';
 import { IoPerson } from 'react-icons/io5';
-import { Buttons } from '../Button';
-import { AiOutlineEdit } from 'react-icons/ai';
+import { LuPlaneLanding, LuPlaneTakeoff } from 'react-icons/lu';
+import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
-import SearchFlight from './SearchFlight';
-import { IoCloseOutline } from 'react-icons/io5';
 import { formatTime } from '../../utils/helperFn';
+import SearchValue from '../SearchValue';
 type SearchInfoProps = {};
 
 const SearchInfo: FC<SearchInfoProps> = () => {
-  const [toggleSearch, setToggleSearch] = useState<boolean>(false);
-  const { departureDate, adultCount, childrenCount, infantCount, origin, destination } =
-    useAppSelector((state) => state.app);
+  const {
+    departureDate,
+    returnDate,
+    adultCount,
+    childrenCount,
+    infantCount,
+    origin,
+    destination,
+    selectedFlight,
+    roundTrip,
+  } = useAppSelector((state) => state.app);
   const passengers = adultCount + childrenCount + infantCount;
+  const { isSelected } = selectedFlight || {};
   return (
     <>
-      {toggleSearch && (
-        <div className="flex flex-row justify-between px-5 pt-1">
-          <div></div>
-          <Buttons
-            variant="outline"
-            className="hover:bg-gray-100 hover:text-black"
-            onClick={() => setToggleSearch((prev) => !prev)}
-          >
-            <span className="mr-1">
-              <IoCloseOutline className="w-4 h-4" />
-            </span>
-            Cancel
-          </Buttons>
-        </div>
-      )}
-      <div className="w-full shadow-md px-5	py-2 rounded ">
-        {!toggleSearch ? (
-          <div className="flex flex-row justify-between  items-center  ">
-            <div className="flex flex-row  items-center gap-8 ">
-              <SearchValue name={origin} title="From" icon={<LuPlaneTakeoff />} />
-              <SearchValue name={destination} title="to" icon={<LuPlaneLanding />} />
-              <SearchValue
-                name={formatTime(departureDate).formattedDateShort}
-                title="When"
-                icon={<FaRegCalendarAlt />}
-              />
-              <SearchValue name={`${passengers} passenger`} title="Who" icon={<IoPerson />} />
-            </div>
-            {!toggleSearch && (
-              <Buttons
-                variant="outline"
-                className="hover:bg-gray-100 hover:text-black"
-                onClick={() => setToggleSearch((prev) => !prev)}
-              >
-                <span className="mr-1">
-                  <AiOutlineEdit className="w-4 h-4" />
-                </span>
-                Edit your search
-              </Buttons>
-            )}
+      <div className="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] px-5	py-2 rounded ">
+        <div className="flex flex-row items-center justify-between ">
+          <div className="flex flex-row flex-wrap items-center md:gap-8">
+            <SearchValue
+              name={isSelected && roundTrip ? destination : origin}
+              title="From"
+              icon={<LuPlaneTakeoff />}
+            />
+            <SearchValue
+              name={isSelected && roundTrip ? origin : destination}
+              title="to"
+              icon={<LuPlaneLanding />}
+            />
+            <SearchValue
+              name={
+                isSelected && roundTrip
+                  ? formatTime(returnDate)?.formattedDateShort
+                  : formatTime(departureDate)?.formattedDateShort
+              }
+              title="When"
+              icon={<FaRegCalendarAlt />}
+            />
+            <SearchValue name={`${passengers} passenger`} title="Who" icon={<IoPerson />} />
           </div>
-        ) : (
-          <SearchFlight />
-        )}
+          <Link to="/" className=" items-end">
+            <CiEdit className=" cursor-pointer" />
+          </Link>
+        </div>
       </div>
     </>
   );

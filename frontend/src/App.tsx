@@ -12,17 +12,17 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 const RootApp = () => {
   return (
     <BrowserRouter>
-      <QueryClientProvider client={queryClient}>
-        <Provider store={store}>
-          <PersistGate persistor={persistor} loading={null}>
+      <Provider store={store}>
+        <PersistGate persistor={persistor} loading={null}>
+          <QueryClientProvider client={queryClient}>
             <LocalizationProvider dateAdapter={AdapterDayjs}>
               <Suspense fallback={<PageLoader />}>
                 <AppRouter />
               </Suspense>
             </LocalizationProvider>
-          </PersistGate>
-        </Provider>
-      </QueryClientProvider>
+          </QueryClientProvider>
+        </PersistGate>
+      </Provider>
     </BrowserRouter>
   );
 };

@@ -1,35 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-interface setFlightDataPayLoadTypes {
-  itineraries: any[];
-  token: string;
-  context: {
-    status: string;
-    sessionId: string;
-    totalResults: number;
-  };
-  filterStats: {
-    airports: { city: string }[];
-  };
-}
-
 interface selectedFlightPayloadTypes {
-  price: string;
-  // date: string;
-  originCode: string;
-  destinationCode: string;
-  origin: string;
-  destination: string;
+  segments: any[];
   durationInMinutes: number;
   stopCount: number;
-  departureTime: string;
-  originTime: string;
+  price: {
+    formatted: string;
+  };
+  isSelected: boolean;
 }
 interface FlightState {
-  flightData: setFlightDataPayLoadTypes;
   selectedFlight: selectedFlightPayloadTypes;
   toggleFlightDetail: boolean;
   departureDate: string;
-  returnDate?: string;
+  returnDate: string;
   cabinClass: string;
   passengers: string;
   tripType: string;
@@ -40,30 +23,27 @@ interface FlightState {
   infantCount: number;
   origin: string;
   destination: string;
+  selectedReturnFlight: any;
+  // tripMode: 'flights' | 'hotels';
 }
 const initialState: FlightState = {
-  flightData: {
-    itineraries: [],
-    token: '',
-    context: {
-      status: '',
-      sessionId: '',
-      totalResults: 0,
-    },
-    filterStats: {
-      airports: [],
-    },
-  },
   selectedFlight: {
-    price: '',
-    originCode: '',
-    destinationCode: '',
-    origin: '',
-    destination: '',
+    segments: [],
     durationInMinutes: 0,
     stopCount: 0,
-    departureTime: '',
-    originTime: '',
+    price: {
+      formatted: '',
+    },
+    isSelected: false,
+  },
+  selectedReturnFlight: {
+    segments: [],
+    durationInMinutes: 0,
+    stopCount: 0,
+    price: {
+      formatted: '',
+    },
+    isSelected: false,
   },
   toggleFlightDetail: false,
   origin: '',
@@ -84,11 +64,11 @@ const appSlice = createSlice({
   name: 'flight',
   initialState,
   reducers: {
-    setFlightData: (state, action: PayloadAction<setFlightDataPayLoadTypes>) => {
-      state.flightData = action.payload;
-    },
     selectedFLight: (state, action: PayloadAction<selectedFlightPayloadTypes>) => {
       state.selectedFlight = action.payload;
+    },
+    setSelectedReturnFLight: (state, action: PayloadAction<any>) => {
+      state.selectedReturnFlight = action.payload;
     },
     toggleFlightDetail: (state, action: PayloadAction<boolean>) => {
       state.toggleFlightDetail = action.payload;
@@ -134,6 +114,10 @@ const appSlice = createSlice({
     },
     setDestination: (state, action) => {
       state.destination = action.payload;
+    },
+    clearSelectedFlight: (state) => {
+      state.selectedFlight = initialState.selectedFlight;
+      state.selectedReturnFlight = initialState.selectedReturnFlight;
     },
   },
 });

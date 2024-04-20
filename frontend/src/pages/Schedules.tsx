@@ -1,41 +1,61 @@
 import { FC, useState } from 'react';
 import { RiGitCommitFill } from 'react-icons/ri';
+import { useLocation } from 'react-router-dom';
 import DetailModal from '../components/FlightSchedule/DetailModal';
-import FlightOverview from '../components/FlightSchedule/FlightOverview';
 import ScheduleItem from '../components/FlightSchedule/ScheduleItem';
-import SearchInfo from '../components/SearchFLight/SearchInfo';
+import AppLayout from '../layout/AppLayout';
+import OverviewLayout from '../layout/OverviewLayout';
 import { useAppSelector } from '../redux/hooks';
+import SelectedFlight from './SelectedFlight';
 type SchedulesProps = {};
 
 const Schedules: FC<SchedulesProps> = () => {
-  const { flightData, toggleFlightDetail, origin, destination } = useAppSelector(
+  const [modalInfo, setModalInfo] = useState<any>();
+  const location = useLocation();
+  const { toggleFlightDetail, origin, destination, selectedFlight, roundTrip } = useAppSelector(
     (state) => state.app,
   );
-  const [modalInfo, setModalInfo] = useState<any>();
+  const { isSelected } = selectedFlight;
+  const { data } = location.state;
+
   const showID = (data: any) => {
     setModalInfo(data);
   };
+  if (!data) return <h3>No selected flight </h3>;
   return (
-    <>
-      <SearchInfo />
-      <>
+    <AppLayout>
+      <OverviewLayout>
         {toggleFlightDetail && modalInfo && <DetailModal {...modalInfo} />}
-        <div>
-          <h1 className="font-semibold mb-2">Outbound</h1>
-          <p className=" inline-flex items-center gap-3 text-base font-light mb-3">
-            {origin} <RiGitCommitFill /> {destination}
-          </p>
-        </div>
-        <div className="flex gap-3">
-          <div className="w-full md:w-2/3">
-            {flightData?.itineraries.map((item: any) => (
-              <ScheduleItem key={item.id} {...item} onClick={() => showID(item)} />
-            ))}
+        {roundTrip && isSelected && (
+          <div>
+            <h1 className="font-semibold mb-2">Outbound</h1>
+            <p className=" inline-flex items-center gap-3 text-base font-light mb-3">
+              {origin} <RiGitCommitFill /> {destination}
+            </p>
           </div>
-          <FlightOverview />
+        )}
+        {roundTrip && isSelected && <SelectedFlight />}
+
+        {data && !isSelected ? (
+          <div>
+            <h1 className="font-semibold mb-2">Outbound</h1>
+            <p className=" inline-flex items-center gap-3 text-base font-light mb-3">
+              {origin} <RiGitCommitFill /> {destination}
+            </p>
+          </div>
+        ) : (
+          <div>
+            <h1 className="font-semibold mb-2">Inbound</h1>
+            <p className=" inline-flex items-center gap-3 text-base font-light mb-3">
+              {destination} <RiGitCommitFill /> {origin}
+            </p>
+          </div>
+        )}
+        <div>
+          <ScheduleItem flightData={data?.itineraries} onSelectFlight={showID} />
         </div>
-      </>
-    </>
+      </OverviewLayout>
+    </AppLayout>
   );
 };
 

@@ -1,45 +1,34 @@
 import { FC } from 'react';
-import { IoIosClose } from 'react-icons/io';
 import { appAction } from '../../redux/app/appSlice';
 import { useAppSelector, useDisPatch } from '../../redux/hooks';
 import Modal from '../../UI/Modal';
+import { durationInHour, formattedDate, formatTime } from '../../utils/helperFn';
 import { Buttons } from '../Button';
 import FlightDetailItem from './FlightDetailItem';
-import { durationInHour, formattedDate, formatTime } from '../../utils/helperFn';
-type DetailModalProps = {
-  legs: {
-    arrival: string;
-    departure: string;
-    stopCount: number;
-    durationInMinutes: number;
-    segments: any[];
-    carriers: {
-      marketing: {
-        logoUrl: string;
-        name: string;
-        id: number;
-      }[];
-    };
-    origin: {
-      displayCode: string;
-      name: string;
-      city: string;
-    };
-    destination: {
-      displayCode: string;
-      name: string;
-      city: string;
-    };
-  }[];
-  price: {
-    formatted: string;
+
+type SegmentsProps = {
+  origin: {
+    name: string;
+    displayCode: string;
   };
+  destination: {
+    name: string;
+    displayCode: string;
+  };
+  departure: string;
+  arrival: string;
+  durationInMinutes: number;
+  operatingCarrier: string;
+  flightNumber: string;
 };
 
-const DetailModal: FC<DetailModalProps> = ({ legs }) => {
-  const { durationInMinutes, segments, departure } = legs[0];
-  // const { durationInMinutes:returnDurationMin, segments, departure } = legs[1];
-  const { departureDate, returnDate } = useAppSelector((state) => state.app);
+type DetailModalProps = {
+  segments: SegmentsProps[];
+  durationInMinutes: number;
+};
+
+const DetailModal: FC<DetailModalProps> = ({ durationInMinutes, segments }) => {
+  const { departureDate } = useAppSelector((state) => state.app);
   const dispatch = useDisPatch();
   const handleHideModal = () => {
     dispatch(appAction.toggleFlightDetail(false));
@@ -47,15 +36,17 @@ const DetailModal: FC<DetailModalProps> = ({ legs }) => {
 
   return (
     <Modal onHideCart={handleHideModal}>
-      <div className="  fixed items-center z-20 top-24 left-0 right-0 justify-center w-2/3 mx-auto  max-h-full">
+      <div className="  fixed items-center z-20 top-24 left-0 right-0 justify-center md:w-2/3 mx-auto  max-h-full">
         <div className="relative p-4  max-h-full mx-auto">
           <div className="relative bg-white rounded-lg shadow b">
             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-black">Your Journey</h3>
-              <IoIosClose
-                className="text-3xl cursor-pointer hover:bg-gray-300 rounded-full"
+              <span
                 onClick={() => dispatch(appAction.toggleFlightDetail(false))}
-              />
+                className="text-3xl cursor-pointer hover:bg-gray-300 rounded-full w-9 h-9 inline-flex items-center justify-center"
+              >
+                &times;
+              </span>
             </div>
 
             <div className="p-4 md:p-5">
@@ -78,6 +69,7 @@ const DetailModal: FC<DetailModalProps> = ({ legs }) => {
                   flightNumber,
                 }) => (
                   <FlightDetailItem
+                    key={flightNumber}
                     originCode={origin.displayCode}
                     origin={origin.name}
                     originTime={formattedDate(departure).formattedTime}
@@ -109,14 +101,3 @@ const DetailModal: FC<DetailModalProps> = ({ legs }) => {
 };
 
 export default DetailModal;
-
-// const testData = [
-//   {
-//     id: 0,
-//     name: 'test 1',
-//   },
-//   {
-//     id: 1,
-//     name: 'test 2',
-//   },
-// ];

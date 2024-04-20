@@ -6,6 +6,7 @@ type FooterProps = {};
 const Footer: FC<FooterProps> = () => {
   const productList = ['Angular', 'React', 'Vue', 'Laravel'];
   const usefulLinks = ['Pricing', 'Settings', 'Orders', 'Help'];
+
   return (
     <footer className="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left md:-mx-5 md:px-5 text-sm">
       <div className="mx-6 py-10 text-center md:text-left">
@@ -92,13 +93,7 @@ const Footer: FC<FooterProps> = () => {
       </div>
 
       <div className="bg-neutral-200 p-6 text-center dark:bg-neutral-700 md:-mx-5 md:px-5">
-        <span>© 2024 Copyright: </span>
-        <a
-          className="font-semibold text-neutral-600 dark:text-neutral-400"
-          href="https://tw-elements.com/"
-        >
-          Eazy-Jet
-        </a>
+        &copy; Copyright {new Date().getFullYear()} by Eazy-Jet Inc
       </div>
     </footer>
   );

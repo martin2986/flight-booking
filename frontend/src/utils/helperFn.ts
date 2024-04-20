@@ -35,8 +35,6 @@ export const durationInHour = (data: number) => {
 
 export const formatTime = (data: string) => {
   if (!data) return;
-  // const [data, timePart] = data?.split('T');
-  // const formattedTime = moment(timePart, 'HH:mm:ss').format('HH:mm');
   const formattedDateShort = moment(data).format('DD MMM');
   const formattedDate = moment(data).format('YYYY-MM-DD');
   const formattedFullDate = moment(data).format('DD MMM YYYY');

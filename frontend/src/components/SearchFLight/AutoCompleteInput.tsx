@@ -23,7 +23,7 @@ const AutoCompleteInput = <T, TField extends FieldValues>({
     if (!value.length) return;
     const response = await flightClient.get(`/auto-complete?query=${value}`);
     if (!response) throw new Error('Could not fetch query data');
-    setFetchedData(response.data);
+    setFetchedData(response?.data);
   };
   return (
     <Controller
@@ -42,7 +42,7 @@ const AutoCompleteInput = <T, TField extends FieldValues>({
                 dispatch(appAction.setDestination(newValue?.presentation.suggestionTitle));
             }}
             getOptionLabel={(option: any) => option?.navigation.localizedName || null}
-            options={fetchedData?.data.map((item: any) => item) || []}
+            options={fetchedData ? fetchedData?.data?.map((item: any) => item) : []}
             isOptionEqualToValue={(option, value) => option?.id === value?.id}
             onInputChange={handleInputChange}
             freeSolo

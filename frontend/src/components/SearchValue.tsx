@@ -9,11 +9,11 @@ type SearchValueProps = {
 
 const SearchValue: FC<SearchValueProps> = ({ name, title, icon }) => {
   return (
-    <div className="flex items-center gap-3">
-      {icon}
+    <div className="flex items-center gap-3 mr-4 md:mr-0">
+      <span className=" text-sm md:text-base ">{icon}</span>
       <div>
-        <p className=" text-xs font-semibold">{title}</p>
-        <p className="text-sm tracking-wider font-light">{name}</p>
+        <p className=" text-xs hidden md:block font-semibold">{title}</p>
+        <p className="text-sm tracking-wider font-light text-nowrap">{name}</p>
       </div>
     </div>
   );

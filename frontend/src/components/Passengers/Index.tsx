@@ -39,7 +39,7 @@ const Index: FC<PassengersProps> = () => {
         </div>
       </div>
       {show && (
-        <div className="absolute right-0 top-16 w-fit p-0 border shadow-md bg-white ">
+        <div className="absolute right-0 top-16 w-fit p-0 border shadow-md bg-white z-50">
           <PassengersList
             title="Adults"
             detail="16+"

@@ -17,7 +17,6 @@ const FlightOverview = () => {
   const {
     price: returnPrice,
     segments: returnSegment,
-    durationInMinutes: returnDuration,
     isSelected: returnIsSelected,
   } = selectedReturnFlight || {};
   const totalPassenger = adultCount + infantCount + childrenCount;

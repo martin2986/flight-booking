@@ -34,7 +34,6 @@ export const durationInHour = (data: number) => {
 };
 
 export const formatTime = (data: string) => {
-  if (!data) return;
   const formattedDateShort = moment(data).format('DD MMM');
   const formattedDate = moment(data).format('YYYY-MM-DD');
   const formattedFullDate = moment(data).format('DD MMM YYYY');
@@ -47,10 +46,12 @@ export const formattedDate = (data: string) => {
   const formattedTime = moment(time, 'HH:mm:ss').format('HH:mm');
   const formattedDateShort = moment(date).format('DD MMM');
   const formattedFullDate = moment(data).format('DD MMM YYYY');
+  const fullDateWithDay = moment(data).format('ddd, MMMM Do YYYY');
   return {
     formattedDateShort,
     formattedTime,
     formattedFullDate,
+    fullDateWithDay,
   };
 };
 export const modifiedAirlineName = (data: string) => {

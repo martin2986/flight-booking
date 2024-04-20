@@ -23,7 +23,7 @@ interface FlightState {
   infantCount: number;
   origin: string;
   destination: string;
-  selectedReturnFlight: any;
+  selectedReturnFlight: selectedFlightPayloadTypes;
   // tripMode: 'flights' | 'hotels';
 }
 const initialState: FlightState = {
@@ -67,7 +67,7 @@ const appSlice = createSlice({
     selectedFLight: (state, action: PayloadAction<selectedFlightPayloadTypes>) => {
       state.selectedFlight = action.payload;
     },
-    setSelectedReturnFLight: (state, action: PayloadAction<any>) => {
+    setSelectedReturnFLight: (state, action: PayloadAction<selectedFlightPayloadTypes>) => {
       state.selectedReturnFlight = action.payload;
     },
     toggleFlightDetail: (state, action: PayloadAction<boolean>) => {

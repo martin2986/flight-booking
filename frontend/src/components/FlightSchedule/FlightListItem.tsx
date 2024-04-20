@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { formatTime } from '../../utils/helperFn';
+import { formattedDate } from '../../utils/helperFn';
 type FlightListItemProps = {
   time: string;
   city: string;
@@ -19,7 +19,7 @@ const FlightListItem: FC<FlightListItemProps> = ({
       <p
         className={`text-sm md:text-base text-center lg:text-xl font-semibold tracking-wider leading-6 ${type === 'destination' ? ' md:text-right' : ''}`}
       >
-        {formatTime(time).formattedTime}
+        {formattedDate(time).formattedTime}
       </p>
       <p className="text-gray-500 text-center">
         {city} <span className="font-medium tracking-wider">({countryCode})</span>

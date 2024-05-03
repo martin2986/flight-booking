@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { Buttons } from '../components/Button';
 import AuthLayout from '../layout/AuthLayout';
 import { registerFormSchema } from '../utils/formSchema';
-import { register as registerAuth } from '../redux/auth/actions';
+import { register as registerAuth } from '../redux/auth/AuthAction';
 import Inputs from '../components/Inputs';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
@@ -26,17 +26,17 @@ const Register = () => {
 
   const onSubmit: SubmitHandler<formFields> = async (data) => {
     try {
-      await dispatch(registerAuth({ registerData: data }));
+      await dispatch(registerAuth(data));
       reset();
       navigate('/verify');
-    } catch (err) {
+    } catch (err: any) {
       setError('root', {
         message: err.response.data.message || 'An error occurred during login.',
       });
     }
   };
   return (
-    <AuthLayout AUTH_TITLE="Sign Up">
+    <AuthLayout AUTH_TITLE="Create an account">
       {errors.root && <div className="text-red-500 text-sm mb-4">{errors.root.message}</div>}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Inputs

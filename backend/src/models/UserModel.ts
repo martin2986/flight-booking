@@ -25,7 +25,6 @@ const userSchema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    lowercase: true,
   },
   email: {
     type: String,
@@ -45,6 +44,7 @@ const userSchema = new mongoose.Schema({
   },
   salt: {
     type: String,
+    select: false,
   },
   removed: {
     type: Boolean,
@@ -65,6 +65,10 @@ const userSchema = new mongoose.Schema({
     default: 'user',
     enum: ['user', 'admin'],
   },
+});
+
+userSchema.pre('save', function () {
+  this.name = this.name.replace(/\b\w/g, (char) => char.toUpperCase());
 });
 
 userSchema.pre('save', async function (next) {

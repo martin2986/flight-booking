@@ -1,5 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Fira+Sans:wght@100;200;300;400;600;700;800;900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
 *,
 *::before,
 *::after {
@@ -15,7 +14,7 @@
 body,
 html {
   /* background-color: #242424; */
-  background-color: #e1dfdd;
+  background-color: #fff;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -24,16 +23,13 @@ html {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
-  /* color: rgba(255, 255, 255, 0.87); */
-  font-family: 'Fira Sans', sans-serif;
-  /* font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif; */
+  font-family: 'Nunito Sans', sans-serif;
   line-height: 1.5;
 }
 
 .app {
   width: 100%;
-  /* height: 100%; */
-  height: 70vh;
+  height: 60vh;
   background-image: url('./assets/hero.jpg');
   background-size: cover;
   background-repeat: no-repeat;

@@ -1,28 +1,27 @@
 import { motion } from 'framer-motion';
 import { FC } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
-import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { logout } from '../redux/auth/actions';
-import { useDisPatch } from '../redux/hooks';
+import { logout } from '../redux/auth/AuthAction';
+import { useAppSelector, useDisPatch } from '../redux/hooks';
 import { buttonVariants } from './Button';
-import { menuVar, mobileLinkAnimation } from './NavBar/navUtil';
 import UserIcon from './UserIcon';
-type SideBarProps<T> = {
-  setIsOpen: T;
+import { sideLinks } from './NavBar/navUtil';
+import { menuVar, mobileLinkAnimation } from './NavBar/navUtil';
+type SideBarProps = {
+  setIsOpen: () => void;
   type: 'side' | 'nav';
-  listItems: T[];
 };
 
-const SideBar: FC<SideBarProps<T>> = ({ setIsOpen, type, listItems }) => {
-  const { isLoggedIn, user } = useSelector((state) => state.auth);
+const SideBar: FC<SideBarProps> = ({ setIsOpen, type }) => {
+  const { user, isLoggedIn } = useAppSelector((state) => state.auth);
 
   const dispatch = useDisPatch();
-  const handleLogout = async () => {
-    await dispatch(logout());
+  const handleLogout = () => {
+    dispatch(logout());
   };
   return (
-    <motion.div
+    <motion.nav
       variants={menuVar}
       initial="initial"
       animate="animate"
@@ -32,7 +31,6 @@ const SideBar: FC<SideBarProps<T>> = ({ setIsOpen, type, listItems }) => {
     >
       <div className="flex flex-col justify-between h-full">
         <div>
-          {/* top */}
           <div className="flex flex-row  items-center justify-between pb-3 border-b">
             <div className=" flex flex-row items-center justify-between ">
               {isLoggedIn ? (
@@ -43,7 +41,7 @@ const SideBar: FC<SideBarProps<T>> = ({ setIsOpen, type, listItems }) => {
               {isLoggedIn && (
                 <Link
                   to="profile"
-                  onClick={() => setIsOpen((prev: boolean) => !prev)}
+                  onClick={setIsOpen}
                   className=" cursor-pointer hover:text-gray-600"
                 >
                   <h3>{user.name}</h3>
@@ -51,38 +49,43 @@ const SideBar: FC<SideBarProps<T>> = ({ setIsOpen, type, listItems }) => {
                 </Link>
               )}
             </div>
-            <div className=" cursor-pointer" onClick={() => setIsOpen((prev: boolean) => !prev)}>
+            <div className=" cursor-pointer" onClick={setIsOpen}>
               <MdOutlineClose />
             </div>
           </div>
-
-          <div className="mt-6  flow-root ">
-            <div className="-my-6 divide-y divide-gray-500/10">
-              <div className="space-y-2 py-6">
-                {listItems.map(({ link, path }) => (
-                  <motion.div
-                    key={link}
-                    variants={mobileLinkAnimation}
-                    initial="initial"
-                    animate="animate"
-                  >
-                    <Link
-                      className="-mx-3 px-3 block text-sm font-semibold leading-7 py-2  hover:bg-gray-100"
-                      to={path}
-                      onClick={() => setIsOpen((prev: boolean) => !prev)}
+          {isLoggedIn && (
+            <div className="mt-6  flow-root ">
+              <div className="-my-6 divide-y divide-gray-500/10">
+                <div className="space-y-2 py-6">
+                  {sideLinks.map(({ link, path }) => (
+                    <motion.div
+                      key={link}
+                      variants={mobileLinkAnimation}
+                      initial="initial"
+                      animate="animate"
                     >
-                      {link}
-                    </Link>
-                  </motion.div>
-                ))}
+                      <Link
+                        className="-mx-3 px-3 block text-sm font-semibold leading-7 py-2  hover:bg-gray-100"
+                        to={path}
+                        onClick={setIsOpen}
+                      >
+                        {link}
+                      </Link>
+                    </motion.div>
+                  ))}
+                </div>
               </div>
             </div>
+          )}
+          <div className="mt-6  flow-root ">
             {!isLoggedIn && (
-              <div className="flex items-center">
+              <div className="flex items-center gap-2 mt-3">
                 <Link
                   to="login"
+                  style={{ color: 'black' }}
                   className={buttonVariants({
-                    variant: 'borderless',
+                    variant: 'outline',
+                    size: 'sm',
                   })}
                 >
                   Register
@@ -100,7 +103,7 @@ const SideBar: FC<SideBarProps<T>> = ({ setIsOpen, type, listItems }) => {
           </div>
         )}
       </div>
-    </motion.div>
+    </motion.nav>
   );
 };
 

@@ -36,10 +36,7 @@ const UserProfile = () => {
       });
     }
   };
-  // if (isLoading) {
-  //   console.log('Loading');
-  //   return <PageLoader />;
-  // }
+
   return (
     <UserLayout>
       <div className="w-full px-4 mx-auto ">

@@ -7,36 +7,9 @@ import { Card } from '../UI/Card';
 import FlightDuration from './FlightDuration';
 import FlightListItem from './FlightListItem';
 import ImageList from './ImageList';
-type FlightListInfoProps = {
-  legs: {
-    arrival: string;
-    departure: string;
-    stopCount: number;
-    durationInMinutes: number;
-    carriers: {
-      marketing: {
-        logoUrl: string;
-        name: string;
-        id: number;
-      }[];
-    };
-    origin: {
-      displayCode: string;
-      name: string;
-      city: string;
-    };
-    destination: {
-      displayCode: string;
-      name: string;
-      city: string;
-    };
-  }[];
-  price: {
-    formatted: string;
-  };
-};
+import { FlightListInfoProps } from './types';
 
-const ScheduleItem: FC<any> = ({ flightData, onSelectFlight, ...rest }) => {
+const ScheduleItem: FC<FlightListInfoProps> = ({ flightData, onSelectFlight, ...rest }) => {
   const navigate = useNavigate();
   const dispatch = useDisPatch();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -58,7 +31,7 @@ const ScheduleItem: FC<any> = ({ flightData, onSelectFlight, ...rest }) => {
   return (
     <>
       {flightData ? (
-        flightData?.map(({ legs, price, id }: { legs: any; price: any; id: any }) => {
+        flightData?.map(({ legs, price, id }) => {
           const {
             arrival,
             departure,

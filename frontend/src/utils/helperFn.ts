@@ -33,7 +33,7 @@ export const durationInHour = (data: number) => {
   return `${hours}hr ${mins}min`;
 };
 
-export const formatTime = (data: string) => {
+export const formatTime = (data: string | null) => {
   const formattedDateShort = moment(data).format('DD MMM');
   const formattedDate = moment(data).format('YYYY-MM-DD');
   const formattedFullDate = moment(data).format('DD MMM YYYY');
@@ -57,4 +57,48 @@ export const formattedDate = (data: string) => {
 export const modifiedAirlineName = (data: string) => {
   const cleanedData = data.replace('Airways', '').replace('(UK)', '').replace('Airlines', '');
   return cleanedData;
+};
+
+export function getYear() {
+  const yearsFrom1950To2024 = [];
+  for (let year = 1950; year <= 2024; year++) {
+    yearsFrom1950To2024.push(year);
+  }
+  return yearsFrom1950To2024;
+}
+export const monthsOfYear = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+export const numbersFrom1To31 = Array.from({ length: 31 }, (_, index) => index + 1);
+
+export const filterList = (data: any[]) => {
+  let returnData: any = [];
+  if (data.length > 1) {
+    data.map(({ origin, departure, flightNumber }, index) => {
+      if (index === 0)
+        returnData = [
+          {
+            origin,
+            arrival: data[data.length - 1].arrival,
+            destination: data[data.length - 1].destination,
+            departure,
+            flightNumber,
+          },
+        ];
+    });
+  } else {
+    returnData = data;
+  }
+  return returnData;
 };

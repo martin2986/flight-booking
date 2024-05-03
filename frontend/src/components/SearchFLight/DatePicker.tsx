@@ -13,7 +13,7 @@ const Date = <TField extends FieldValues>({ control, name }: DatePickerProps<TFi
     <Controller
       name={name}
       control={control}
-      render={({ field, fieldState: { error } }) => {
+      render={({ field }) => {
         const { onChange, value } = field;
         return (
           <DatePicker

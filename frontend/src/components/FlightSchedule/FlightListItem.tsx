@@ -9,10 +9,10 @@ type FlightListItemProps = {
 };
 
 const FlightListItem: FC<FlightListItemProps> = ({
-  time = '20:30',
-  city = 'Lusaka',
-  countryCode = 'LUN',
-  type = 'origin',
+  time = '',
+  city = '',
+  countryCode = '',
+  type = '',
 }) => {
   return (
     <div className="flex flex-col flex-wrap text-xs md:text-sm w-fit ">

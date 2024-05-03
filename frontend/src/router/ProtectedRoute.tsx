@@ -14,7 +14,7 @@ const ProtectedRoute: FC<ProtectedRouteProps> = ({ redirectPath = '/' }) => {
       </div>
     );
   } else {
-    return <Navigate to={redirectPath} />;
+    return <Navigate to={redirectPath} replace />;
   }
 };
 

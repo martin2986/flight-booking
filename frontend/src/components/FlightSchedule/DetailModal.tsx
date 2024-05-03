@@ -1,34 +1,14 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { appAction } from '../../redux/app/appSlice';
-import { useAppSelector, useDisPatch } from '../../redux/hooks';
+import { useDisPatch } from '../../redux/hooks';
 import Modal from '../../UI/Modal';
-import { durationInHour, formattedDate, formatTime } from '../../utils/helperFn';
 import { Buttons } from '../Button';
-import FlightDetailItem from './FlightDetailItem';
-
-type SegmentsProps = {
-  origin: {
-    name: string;
-    displayCode: string;
-  };
-  destination: {
-    name: string;
-    displayCode: string;
-  };
-  departure: string;
-  arrival: string;
-  durationInMinutes: number;
-  operatingCarrier: string;
-  flightNumber: string;
-};
 
 type DetailModalProps = {
-  segments: SegmentsProps[];
-  durationInMinutes: number;
+  children: ReactNode;
 };
 
-const DetailModal: FC<DetailModalProps> = ({ durationInMinutes, segments }) => {
-  const { departureDate } = useAppSelector((state) => state.app);
+const DetailModal: FC<DetailModalProps> = ({ children }) => {
   const dispatch = useDisPatch();
   const handleHideModal = () => {
     dispatch(appAction.toggleFlightDetail(false));
@@ -48,43 +28,8 @@ const DetailModal: FC<DetailModalProps> = ({ durationInMinutes, segments }) => {
                 &times;
               </span>
             </div>
+            {children}
 
-            <div className="p-4 md:p-5">
-              <div className="mb-3">
-                <h3 className="flex items-start mb-1 text-sm font-bold text-gray-900 dark:text-black">
-                  Depart - {formatTime(departureDate).fullDateWithDay}
-                </h3>
-                <p className="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">
-                  Journey duration: {durationInHour(durationInMinutes)}
-                </p>
-              </div>
-              {segments.map(
-                ({
-                  origin,
-                  destination,
-                  departure,
-                  arrival,
-                  durationInMinutes,
-                  operatingCarrier,
-                  flightNumber,
-                }) => (
-                  <FlightDetailItem
-                    key={flightNumber}
-                    originCode={origin.displayCode}
-                    origin={origin.name}
-                    originTime={formattedDate(departure).formattedTime}
-                    departureDate={formattedDate(departure).formattedDateShort}
-                    destination={destination.name}
-                    destinationCode={destination.displayCode}
-                    returnDate={formattedDate(arrival).formattedDateShort}
-                    destinationTime={formattedDate(arrival).formattedTime}
-                    duration={durationInMinutes}
-                    flightNumber={flightNumber}
-                    operatingCarrier={operatingCarrier}
-                  />
-                ),
-              )}
-            </div>
             <div className="p-2 md:p-5 border-t  dark:border-gray-600">
               <Buttons
                 className="bg-transparent px-7 rounded-3xl text-black hover:bg-gray-300"

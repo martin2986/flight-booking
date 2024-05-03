@@ -1,9 +1,8 @@
-import { FC } from 'react';
 import AppLayout from '../layout/AppLayout';
 
-type BookingsProps = {};
 
-const Bookings: FC<BookingsProps> = () => {
+
+const Bookings= () => {
   return <AppLayout>Bookings</AppLayout>;
 };
 

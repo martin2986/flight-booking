@@ -26,7 +26,7 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
   const dispatch = useDisPatch();
   const {
     handleSubmit,
-    reset,
+
     setError,
     control,
     formState: { errors, isSubmitting },
@@ -54,7 +54,7 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
         fromId: origin?.id,
         toId: destination?.id,
         departDate: moment(departureDate.$d).format('YYYY-MM-DD'),
-        returnDate: moment(arrivalDate.$d).format('YYYY-MM-DD'),
+        returnDate: '',
         adults: `${passenger}`,
         currency: 'USD',
         market: 'US',
@@ -70,8 +70,10 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
       const { data } = response;
       dispatch(appAction.clearSelectedFlight());
       if (data) dispatch(appAction.setIsLoading(false));
-      // reset();
-      navigate('/schedule', { state: data });
+      navigate(
+        `/schedule?origin=${origin.presentation.suggestionTitle}&destination=${destination.presentation.suggestionTitle}&isRoundTrip=${roundTrip}&departDate=${moment(departureDate.$d).format('YYYY-MM-DD')}&returnDate=&${moment(arrivalDate.$d).format('YYYY-MM-DD')}`,
+        { state: data },
+      );
     } catch (err: any) {
       setError('root', {
         message: err.response.data.message,
@@ -81,22 +83,6 @@ const SearchFlight: FC<SearchFlightTypes> = () => {
 
   return (
     <>
-      <div className="mb-2">
-        <Buttons
-          className="text-xs no-underline hover:text-indigo-500 hover:bg-transparent p-0 mr-3"
-          variant="borderless"
-          onClick={() => dispatch(appAction.selectTripType(true))}
-        >
-          Round Trip
-        </Buttons>
-        <Buttons
-          className="text-xs no-underline hover:text-indigo-500 hover:bg-transparent p-0"
-          variant="borderless"
-          onClick={() => dispatch(appAction.selectTripType(false))}
-        >
-          One way
-        </Buttons>
-      </div>
       <form
         onSubmit={handleSubmit(onSubmit)}
         className="flex flex-col md:flex-row items-center gap-4"

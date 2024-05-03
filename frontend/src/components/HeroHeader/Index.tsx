@@ -1,11 +1,8 @@
-import { FC } from 'react';
+import SearchFLightLayout from '../../layout/SearchFLightLayout';
 import { Buttons } from '../Button';
 import SearchFlight from '../SearchFLight/SearchFlight';
-import { Card } from '../UI/Card';
 
-export type HeaderTypes = {};
-
-const Index: FC<HeaderTypes> = () => {
+const Index = () => {
   return (
     <div className=" container mx-auto">
       <div className=" top-24 mb-8">
@@ -16,29 +13,9 @@ const Index: FC<HeaderTypes> = () => {
           Explore &rarr;
         </Buttons>
       </div>
-      <Card className="bg-white mt-28">
-        <div className="flex gap-2 md:gap-5 items-center mb-3">
-          <Buttons
-            className="text-xs no-underline hover:text-indigo-500 hover:bg-transparent"
-            variant="outline"
-          >
-            Flights
-          </Buttons>
-          <Buttons
-            className="text-xs no-underline hover:text-indigo-500 hover:bg-transparent"
-            variant="outline"
-          >
-            Hotels
-          </Buttons>
-          <Buttons
-            className="text-xs no-underline hover:text-indigo-500 hover:bg-transparent"
-            variant="outline"
-          >
-            Cars Hire
-          </Buttons>
-        </div>
+      <SearchFLightLayout>
         <SearchFlight />
-      </Card>
+      </SearchFLightLayout>
     </div>
   );
 };

@@ -1,5 +1,5 @@
-import { FC, ReactNode } from 'react';
-import { VariantProps, cva } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
+import { FC, HTMLProps } from 'react';
 import { cn } from '../../utils/helperFn';
 
 const cardVariants = cva('relative border border-gray-300 rounded-lg mb-3 w-full', {
@@ -18,12 +18,11 @@ const cardVariants = cva('relative border border-gray-300 rounded-lg mb-3 w-full
   },
 });
 
-interface CardTypes extends VariantProps<typeof cardVariants> {
-  children: ReactNode;
-  className?: string;
-}
+interface CardProps
+  extends Omit<HTMLProps<HTMLDivElement>, 'size'>,
+    VariantProps<typeof cardVariants> {}
 
-const Card: FC<CardTypes> = ({ variant, size, className, children, ...props }) => {
+const Card: FC<CardProps> = ({ variant, size, className, children, ...props }) => {
   return (
     <div className={cn(cardVariants({ variant, size, className }))} {...props}>
       {children}

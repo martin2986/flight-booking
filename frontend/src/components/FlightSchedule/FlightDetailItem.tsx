@@ -13,7 +13,7 @@ type FlightDetailItemProps = {
   returnDate: string;
   duration: number;
   operatingCarrier: any;
-  flightNumber: string;
+  flightNumber: number;
 };
 
 const FlightDetailItem: FC<FlightDetailItemProps> = ({

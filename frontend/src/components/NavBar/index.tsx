@@ -1,14 +1,14 @@
 import { AnimatePresence } from 'framer-motion';
-import { FC, useState } from 'react';
+import { useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
 import { buttonVariants } from '../Button';
 import SideBar from '../SideBar';
 import UserIcon from '../UserIcon';
-type NavProps = {};
 
-const Index: FC<NavProps> = () => {
+
+const Index = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [userNavIsOpen, setUserNavIsOpen] = useState<boolean>(false);
   const { isLoggedIn } = useAppSelector((state) => state.auth);

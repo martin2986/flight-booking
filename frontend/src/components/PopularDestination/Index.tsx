@@ -10,7 +10,6 @@ import img6 from '../../assets/paris.jpg';
 import img5 from '../../assets/venice.jpg';
 import img1 from '../../assets/warsaw.jpg';
 import Card from './Card';
-type PopularDestinationProps = {};
 
 const Index = () => {
   return (
@@ -25,7 +24,6 @@ const Index = () => {
         onSlideChange={() => console.log('slide change')}
         navigation
         scrollbar={{ draggable: true }}
-        onSwiper={(swiper: any) => console.log(swiper)}
       >
         <SwiperSlide>
           <Card country="Warsaw, Poland" image={img1} />

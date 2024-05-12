@@ -4,7 +4,6 @@ import SearchFlight from '@/features/SearchFlight/SearchFlight';
 import SearchFLightLayout from '@/features/SearchFlight/SearchFLightLayout';
 import TextInfo from '../components/TextInfo';
 import Accordion from '../UI/Accordion';
-import AppLayout from '../layout/AppLayout';
 import { accordionsData, textInfoData } from '../utils/data';
 
 const Dashboard = () => {
@@ -14,7 +13,7 @@ const Dashboard = () => {
   //   });
   // }, []);
   return (
-    <AppLayout>
+    <>
       <div className=" container mx-auto">
         <div className=" top-24 mb-8">
           <h1 className="text-xl w-2/4 mb-6 md:text-4xl pt-14">
@@ -41,7 +40,7 @@ const Dashboard = () => {
           <Accordion title={title} description={description} key={id} />
         ))}
       </div>
-    </AppLayout>
+    </>
   );
 };
 

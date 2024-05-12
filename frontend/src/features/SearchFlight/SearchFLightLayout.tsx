@@ -1,8 +1,8 @@
-import { FC, ReactNode } from 'react';
+import { useDisPatch } from '@/redux/hooks';
 import { Buttons } from '@/UI/Button';
 import { Card } from '@/UI/Card';
-import { appAction } from '@/redux/app/appSlice';
-import { useDisPatch } from '@/redux/hooks';
+import { FC, ReactNode } from 'react';
+import { searchAction } from './searchSlice';
 
 type SearchFLightLayoutProps = {
   children: ReactNode;
@@ -36,14 +36,14 @@ const SearchFLightLayout: FC<SearchFLightLayoutProps> = ({ children }) => {
         <Buttons
           className="text-xs no-underline hover:text-indigo-500 hover:bg-transparent p-0 mr-3"
           variant="borderless"
-          onClick={() => dispatch(appAction.selectTripType(true))}
+          onClick={() => dispatch(searchAction.selectTripType(true))}
         >
           Round Trip
         </Buttons>
         <Buttons
           className="text-xs no-underline hover:text-indigo-500 hover:bg-transparent p-0"
           variant="borderless"
-          onClick={() => dispatch(appAction.selectTripType(false))}
+          onClick={() => dispatch(searchAction.selectTripType(false))}
         >
           One way
         </Buttons>

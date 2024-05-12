@@ -1,14 +1,14 @@
+import Inputs from '@/components/Inputs';
+import OverviewLayout from '@/layout/OverviewLayout';
+import { useAppSelector, useDisPatch } from '@/redux/hooks';
+import { Buttons } from '@/UI/Button';
+import Dropdown from '@/UI/Dropdown';
+import { getYear, monthsOfYear, numbersFrom1To31 } from '@/utils/helperFn';
 import { FC } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { IoPersonSharp } from 'react-icons/io5';
 import { useNavigate } from 'react-router-dom';
-import OverviewLayout from '@/layout/OverviewLayout';
-import { useAppSelector } from '@/redux/hooks';
-import { getYear, monthsOfYear, numbersFrom1To31 } from '@/utils/helperFn';
-import { Buttons } from '@/UI/Button';
-import Dropdown from '@/UI/Dropdown';
-import Inputs from '@/components/Inputs';
-import SearchInfo from '../SearchFlight/SearchInfo';
+import { checkoutAction } from './checkoutSlice';
 
 interface formFields {
   [key: string]: string;
@@ -18,26 +18,25 @@ export interface CheckoutProps {
 }
 const Form: FC<CheckoutProps> = ({ changeActiveStep }) => {
   const navigate = useNavigate();
-  const { adultCount, childrenCount, infantCount } = useAppSelector((state) => state.app);
+  const { passengers } = useAppSelector((state) => state.search);
+  const dispatch = useDisPatch();
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
   } = useForm<formFields>();
-  const totalPassengers = adultCount + childrenCount + infantCount;
   const onSubmit = (data: formFields) => {
-    console.log(data);
+    dispatch(checkoutAction.setCheckoutUser([data]));
     changeActiveStep(2);
   };
   return (
     <>
-      {/* <SearchInfo /> */}
       <OverviewLayout>
         <form onSubmit={handleSubmit(onSubmit)} className="w-full mt-5">
           {errors.root && <p>{errors.root.message || 'Something went wrong'}</p>}
           <h2 className="mb-2 text-base font-medium">Passengers</h2>
-          {[...Array(totalPassengers)].map((_, index) => (
+          {[...Array(passengers)].map((_, index) => (
             <div className="rounded-sm border shadow-md p-2 mb-8" key={index}>
               <div className="flex flex-row gap-4 mb-3 h-8 items-center">
                 <IoPersonSharp className="text-2xl" />

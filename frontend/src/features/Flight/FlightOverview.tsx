@@ -5,27 +5,20 @@ import SelectedFlight from './SelectedFlight';
 import { segment } from './types';
 
 const FlightOverview = () => {
-  const {
-    selectedFlight,
-    adultCount,
-    infantCount,
-    childrenCount,
-    origin,
-    destination,
-    selectedReturnFlight,
-    protectedInsurance,
-    extraLuggage,
-  } = useAppSelector((state) => state.app);
+  const { selectedFlight, origin, destination, selectedReturnFlight } = useAppSelector(
+    (state) => state.app,
+  );
+  const { passengers } = useAppSelector((state) => state.search);
+  const { protectedInsurance, extraLuggage } = useAppSelector((state) => state.checkout);
   const { price, segments, isSelected } = selectedFlight;
   const {
     price: returnPrice,
     segments: returnSegment,
     isSelected: returnIsSelected,
   } = selectedReturnFlight || {};
-  const totalPassenger = adultCount + infantCount + childrenCount;
 
-  let totalPrice = totalPassenger * price?.raw || 0;
-  if (returnIsSelected) totalPrice = totalPassenger * returnPrice?.raw + returnPrice?.raw;
+  let totalPrice = passengers * price?.raw || 0;
+  if (returnIsSelected) totalPrice = passengers * returnPrice?.raw + returnPrice?.raw;
   const connectionFee = 24;
 
   const flightPrice = totalPrice + connectionFee + extraLuggage + protectedInsurance;
@@ -46,7 +39,7 @@ const FlightOverview = () => {
                 className="flex flex-row  items-center justify-between mb-2
           "
               >
-                <p className="text-sm font-light">{`${totalPassenger} passengers`}</p>
+                <p className="text-sm font-light">{`${passengers} passengers`}</p>
                 <p className="text-sm md:text-base font-bold">${totalPrice.toFixed(1)}</p>
               </div>
               <div

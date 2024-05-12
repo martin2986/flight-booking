@@ -1,19 +1,19 @@
 import { FC, useState } from 'react';
-import { Buttons } from '../../UI/Button';
-import OverviewLayout from '../../layout/OverviewLayout';
-import { type CheckoutProps } from './Form';
+import { FaCheck } from 'react-icons/fa';
+import { GoShieldCheck, GoShieldX } from 'react-icons/go';
+import { IoMdCheckmark } from 'react-icons/io';
 import { LuBackpack } from 'react-icons/lu';
 import { MdOutlineLuggage } from 'react-icons/md';
-import { FaCheck } from 'react-icons/fa';
-import { GoShieldX } from 'react-icons/go';
-import { GoShieldCheck } from 'react-icons/go';
-import { IoMdCheckmark } from 'react-icons/io';
+import OverviewLayout from '../../layout/OverviewLayout';
 import { useDisPatch } from '../../redux/hooks';
-import { appAction } from '../../redux/app/appSlice';
+import { Buttons } from '../../UI/Button';
+import { checkoutAction } from './checkoutSlice';
+import { type CheckoutProps } from './Form';
 
 const Extras: FC<CheckoutProps> = ({ changeActiveStep }) => {
   const [selectExtraBag, setSelectExtraBag] = useState(false);
   const [extraInsurance, setExtraInsurance] = useState(false);
+
   const dispatch = useDisPatch();
 
   const extraLuggageHandler = () => {
@@ -22,9 +22,9 @@ const Extras: FC<CheckoutProps> = ({ changeActiveStep }) => {
     const isExtraLuggageSelected = !selectExtraBag;
 
     if (isExtraLuggageSelected) {
-      dispatch(appAction.addExtraLuggage());
+      dispatch(checkoutAction.addExtraLuggage());
     } else {
-      dispatch(appAction.removeExtraLuggage());
+      dispatch(checkoutAction.removeExtraLuggage());
     }
   };
 
@@ -32,21 +32,21 @@ const Extras: FC<CheckoutProps> = ({ changeActiveStep }) => {
     setExtraInsurance(true);
     const isExtraInsuranceSelected = !extraInsurance;
     if (isExtraInsuranceSelected) {
-      dispatch(appAction.addProtectedInsurance());
+      dispatch(checkoutAction.addProtectedInsurance());
     }
   };
   const removeProtectedInsuranceHandler = () => {
     setExtraInsurance(false);
     const isExtraInsuranceSelected = extraInsurance;
     if (isExtraInsuranceSelected) {
-      dispatch(appAction.removeExtraInsurance());
+      dispatch(checkoutAction.removeExtraInsurance());
     }
   };
   return (
     <>
       <OverviewLayout>
         <h3 className="text-sm font-bold">Baggage allowance</h3>
-        <h5 className="text-sm">Next Js</h5>
+        {/* <h5 className="text-sm">Passenger Name</h5> */}
         <p className="text-sm">On each flight</p>
         <div className="mt-3 flex flex-row gap-3 items-start">
           <LuBackpack />
@@ -157,7 +157,9 @@ const Extras: FC<CheckoutProps> = ({ changeActiveStep }) => {
         <Buttons variant="outline" onClick={() => changeActiveStep(1)}>
           Back
         </Buttons>
-        <Buttons onClick={() => changeActiveStep(3)}>Continue</Buttons>
+        <Buttons className=" rounded-3xl" onClick={() => changeActiveStep(3)}>
+          Continue
+        </Buttons>
       </div>
     </>
   );

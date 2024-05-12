@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import NavBar from '../components/NavBar/index';
 type AuthLayoutProps = {
   children: React.ReactNode;
   AUTH_TITLE: 'Log in to your account' | 'Create an account' | 'Verify Account';
@@ -8,7 +7,6 @@ type AuthLayoutProps = {
 const AuthLayout: FC<AuthLayoutProps> = ({ children, AUTH_TITLE = '' }) => {
   return (
     <>
-      <NavBar />
       <div className=" min-h-screen bg-transparent">
         <div className="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">

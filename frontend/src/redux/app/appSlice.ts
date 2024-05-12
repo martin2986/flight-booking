@@ -13,22 +13,9 @@ interface selectedFlightPayloadTypes {
 interface FlightState {
   selectedFlight: selectedFlightPayloadTypes;
   toggleFlightDetail: boolean;
-  departureDate: string;
-  returnDate: string;
-  cabinClass: string;
-  passengers: string;
-  tripType: string;
-  roundTrip: boolean;
   isLoading: boolean;
-  adultCount: number;
-  childrenCount: number;
-  infantCount: number;
-  origin: string;
-  destination: string;
   selectedReturnFlight: selectedFlightPayloadTypes;
   totalAmount: number;
-  extraLuggage: number;
-  protectedInsurance: number;
 }
 
 const initialState: FlightState = {
@@ -89,24 +76,10 @@ const initialState: FlightState = {
     isSelected: false,
   },
   toggleFlightDetail: false,
-  origin: '',
-  destination: '',
-  departureDate: '',
-  returnDate: '',
-  cabinClass: '',
-  passengers: '',
-  tripType: '',
-  roundTrip: true,
   isLoading: false,
-  adultCount: 1,
-  childrenCount: 0,
-  infantCount: 0,
-  extraLuggage: 0,
-  protectedInsurance: 0,
   totalAmount: 0,
 };
-const extraLuggagePrice = 60.02;
-const protectedInsurancePrice = 27.48;
+
 const appSlice = createSlice({
   name: 'flight',
   initialState,
@@ -120,63 +93,12 @@ const appSlice = createSlice({
     toggleFlightDetail: (state, action: PayloadAction<boolean>) => {
       state.toggleFlightDetail = action.payload;
     },
-    selectDepartureDate: (state, action) => {
-      state.departureDate = action.payload;
-    },
-    selectArrivalDate: (state, action) => {
-      state.returnDate = action.payload;
-    },
-    selectPassenger: (state, action) => {
-      state.passengers = action.payload;
-    },
-    selectCabinClass: (state, action) => {
-      state.cabinClass = action.payload;
-    },
-    selectTripType: (state, action) => {
-      state.roundTrip = action.payload;
-    },
     setIsLoading: (state, action) => {
       state.isLoading = action.payload;
-    },
-    incrementAdult: (state) => {
-      state.adultCount++;
-    },
-    decrementAdult: (state) => {
-      state.adultCount--;
-    },
-    incrementChildren: (state) => {
-      state.childrenCount++;
-    },
-    decrementChildren: (state) => {
-      state.childrenCount--;
-    },
-    incrementInfant: (state) => {
-      state.infantCount++;
-    },
-    decrementInfant: (state) => {
-      state.infantCount--;
-    },
-    setOrigin: (state, action) => {
-      state.origin = action.payload;
-    },
-    setDestination: (state, action) => {
-      state.destination = action.payload;
     },
     clearSelectedFlight: (state) => {
       state.selectedFlight = initialState.selectedFlight;
       state.selectedReturnFlight = initialState.selectedReturnFlight;
-    },
-    addExtraLuggage: (state) => {
-      state.extraLuggage += extraLuggagePrice;
-    },
-    addProtectedInsurance: (state) => {
-      state.protectedInsurance += protectedInsurancePrice;
-    },
-    removeExtraLuggage: (state) => {
-      state.extraLuggage -= extraLuggagePrice;
-    },
-    removeExtraInsurance: (state) => {
-      state.protectedInsurance -= protectedInsurancePrice;
     },
   },
 });

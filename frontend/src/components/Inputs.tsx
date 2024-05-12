@@ -9,7 +9,7 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const Inputs: FC<InputProps> = ({ label, error, name, register, ...props }) => {
   return (
-    <div className="w-full">
+    <div className="w-full mb-4">
       <label htmlFor={label} className="block text-sm font-medium text-black">
         {label}
       </label>

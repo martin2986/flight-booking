@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import { IoPersonSharp } from 'react-icons/io5';
-import { appAction } from '../../../redux/app/appSlice';
 import { useAppSelector, useDisPatch } from '../../../redux/hooks';
+import { searchAction } from '../searchSlice';
 import PassengersList from './PassengersList';
 
 const Index = () => {
   const [show, setShow] = useState<boolean>(false);
-  const { adultCount, childrenCount, infantCount } = useAppSelector((state) => state.app);
+  const { adultCount, childrenCount, infantCount, passengers } = useAppSelector(
+    (state) => state.search,
+  );
   const dispatch = useDisPatch();
   const dropDownRef = useRef<any | null>(null);
 
@@ -22,8 +24,6 @@ const Index = () => {
       document.removeEventListener('click', handleClickOutside);
     };
   }, []);
-
-  const totalPassengers = adultCount + childrenCount + infantCount;
   return (
     <div
       ref={dropDownRef}
@@ -33,7 +33,7 @@ const Index = () => {
         <p className="text-xs mb-1">Passengers</p>
         <div className="flex gap-2">
           <IoPersonSharp />
-          <p className="text-sm text-nowrap">{`${totalPassengers} Passenger${totalPassengers > 1 ? 's' : ''}`}</p>
+          <p className="text-sm text-nowrap">{`${passengers} Passenger${passengers > 1 ? 's' : ''}`}</p>
         </div>
       </div>
       {show && (
@@ -41,24 +41,24 @@ const Index = () => {
           <PassengersList
             title="Adults"
             detail="16+"
-            increment={() => dispatch(appAction.incrementAdult())}
-            decrement={() => dispatch(appAction.decrementAdult())}
+            increment={() => dispatch(searchAction.incrementAdult())}
+            decrement={() => dispatch(searchAction.decrementAdult())}
             value={adultCount}
             type="adults"
           />
           <PassengersList
             title="Children"
             detail="2 - 15"
-            increment={() => dispatch(appAction.incrementChildren())}
-            decrement={() => dispatch(appAction.decrementChildren())}
+            increment={() => dispatch(searchAction.incrementChildren())}
+            decrement={() => dispatch(searchAction.decrementChildren())}
             value={childrenCount}
           />
           <PassengersList
             title="Infants"
             detail="0 - 1"
             bottom
-            increment={() => dispatch(appAction.incrementInfant())}
-            decrement={() => dispatch(appAction.decrementInfant())}
+            increment={() => dispatch(searchAction.incrementInfant())}
+            decrement={() => dispatch(searchAction.decrementInfant())}
             value={infantCount}
           />
         </div>

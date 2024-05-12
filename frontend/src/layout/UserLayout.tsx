@@ -1,6 +1,5 @@
 import { FC, ReactNode } from 'react';
 import { Link } from 'react-router-dom';
-import AppLayout from './AppLayout';
 
 type UserLayoutProps = {
   children: ReactNode;
@@ -8,7 +7,7 @@ type UserLayoutProps = {
 
 const UserLayout: FC<UserLayoutProps> = ({ children }) => {
   return (
-    <AppLayout>
+    <>
       <div className="flex flex-row mt-8">
         <div className="w-1/4 hidden md:block ">
           <div className="py-3 hover:bg-gray-400 px-3 -px-3">
@@ -20,7 +19,7 @@ const UserLayout: FC<UserLayoutProps> = ({ children }) => {
         </div>
         {children}
       </div>
-    </AppLayout>
+    </>
   );
 };
 

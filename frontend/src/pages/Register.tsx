@@ -28,7 +28,7 @@ const Register = () => {
     try {
       await dispatch(registerAuth(data));
       reset();
-      navigate('/verify');
+      navigate('/');
     } catch (err: any) {
       setError('root', {
         message: err.response.data.message || 'An error occurred during login.',

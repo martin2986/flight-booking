@@ -1,4 +1,3 @@
-import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { Suspense } from 'react';
 import PageLoader from './UI/PageLoader';
@@ -9,6 +8,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { queryClient } from './services/auth/apiClient';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
+import { BrowserRouter } from 'react-router-dom';
 const RootApp = () => {
   return (
     <BrowserRouter>

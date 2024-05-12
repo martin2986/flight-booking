@@ -1,8 +1,8 @@
+import { useDisPatch } from '@/redux/hooks';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { AnimatePresence, motion } from 'framer-motion';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
-import { appAction } from '@/redux/app/appSlice';
-import { useDisPatch } from '@/redux/hooks';
+import { searchAction } from './searchSlice';
 type DatePickerProps<TField extends FieldValues> = {
   control: Control<TField>;
   name: Path<TField>;
@@ -33,8 +33,9 @@ const Date = <TField extends FieldValues>({ control, name, show }: DatePickerPro
                   onChange={(newValue: any) => {
                     onChange(newValue ? newValue : null);
                     if (name === 'departureDate')
-                      dispatch(appAction.selectDepartureDate(newValue.$d));
-                    if (name === 'arrivalDate') dispatch(appAction.selectArrivalDate(newValue.$d));
+                      dispatch(searchAction.selectDepartureDate(newValue.$d));
+                    if (name === 'arrivalDate')
+                      dispatch(searchAction.selectArrivalDate(newValue.$d));
                   }}
                   sx={{ width: '100%' }}
                 />

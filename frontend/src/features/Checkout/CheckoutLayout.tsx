@@ -1,9 +1,8 @@
 import { useMemo, useState } from 'react';
-import Form from './Form';
-import Stepper from './Stepper';
 import Extras from './Extras';
+import Form from './Form';
 import Payment from './Payment';
-import AppLayout from '@/layout/AppLayout';
+import Stepper from './Stepper';
 
 const CheckoutLayout = () => {
   const [activeStep, setActiveStep] = useState<number>(1);
@@ -26,7 +25,7 @@ const CheckoutLayout = () => {
       },
       {
         value: 3,
-        title: 'Check and pay',
+        title: 'Payment',
         component: <Payment changeActiveStep={changeActiveStep} />,
       },
     ],
@@ -37,10 +36,10 @@ const CheckoutLayout = () => {
     return steps.find(({ value }) => value === activeStep)?.component || null;
   }, [activeStep, steps]);
   return (
-    <AppLayout>
+    <>
       <Stepper activeStep={activeStep} steps={steps} changeActiveStep={changeActiveStep} />
       {activeComponent}
-    </AppLayout>
+    </>
   );
 };
 

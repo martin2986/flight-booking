@@ -17,9 +17,7 @@ export type InputStateTypes = {
 };
 
 const SearchFlight = () => {
-  const { roundTrip, adultCount, childrenCount, infantCount } = useAppSelector(
-    (state) => state.app,
-  );
+  const { roundTrip, passengers } = useAppSelector((state) => state.search);
   const navigate = useNavigate();
   const dispatch = useDisPatch();
   const {
@@ -35,7 +33,6 @@ const SearchFlight = () => {
       arrivalDate: '',
     },
   });
-  const passenger = adultCount + childrenCount + infantCount;
   let url: string;
   if (roundTrip) {
     url = '/search-roundtrip';
@@ -45,6 +42,10 @@ const SearchFlight = () => {
   if (isSubmitting) dispatch(appAction.setIsLoading(true));
   const onSubmit: SubmitHandler<InputStateTypes> = async (data: any) => {
     const { origin, destination, departureDate, arrivalDate } = data;
+    if (origin === '' && destination === '') {
+      dispatch(appAction.setIsLoading(false));
+      return;
+    }
 
     const params = {
       params: {
@@ -52,7 +53,7 @@ const SearchFlight = () => {
         toId: destination.id,
         departDate: moment(departureDate.$d).format('YYYY-MM-DD'),
         returnDate: '',
-        adults: `${passenger}`,
+        adults: `${passengers}`,
         currency: 'USD',
         market: 'US',
         locale: 'en-US',
@@ -66,11 +67,11 @@ const SearchFlight = () => {
       if (!response) throw new Error(`Error occurred while fetching data Data`);
       const { data } = response;
       dispatch(appAction.clearSelectedFlight());
-      if (data) dispatch(appAction.setIsLoading(false));
       navigate(
         `/flight-schedule?origin=${origin.city}&destination=${destination.city}&isRoundTrip=${roundTrip}&departDate=${moment(departureDate.$d).format('YYYY-MM-DD')}&returnDate=&${moment(arrivalDate.$d).format('YYYY-MM-DD')}`,
         { state: data },
       );
+      dispatch(appAction.setIsLoading(false));
     } catch (err: any) {
       setError('root', {
         message: err.response.data.message,

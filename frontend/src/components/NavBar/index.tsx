@@ -9,12 +9,8 @@ import UserIcon from '../../features/User/UserIcon';
 
 const Index = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [userNavIsOpen, setUserNavIsOpen] = useState<boolean>(false);
   const { isLoggedIn } = useAppSelector((state) => state.auth);
 
-  const toggleUserNavHandler = () => {
-    setUserNavIsOpen((prev) => !prev);
-  };
   const toggleOpenNavHandler = () => {
     setIsOpen((prev) => !prev);
   };
@@ -42,11 +38,10 @@ const Index = () => {
               </Link>
             </>
           ) : (
-            <UserIcon onClick={() => setUserNavIsOpen((prev) => !prev)} />
+            <UserIcon onClick={() => setIsOpen((prev) => !prev)} />
           )}
         </div>
       </nav>
-      {userNavIsOpen && <SideBar setIsOpen={toggleUserNavHandler} type="side" />}
       <AnimatePresence>
         {isOpen && <SideBar setIsOpen={toggleOpenNavHandler} type="nav" />}
       </AnimatePresence>

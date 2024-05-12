@@ -13,16 +13,10 @@ type SearchInfoProps = {
 };
 
 const SearchInfo: FC<SearchInfoProps> = ({ origin, destination }) => {
-  const {
-    departureDate,
-    returnDate,
-    adultCount,
-    childrenCount,
-    infantCount,
-    selectedFlight,
-    roundTrip,
-  } = useAppSelector((state) => state.app);
-  const passengers = adultCount + childrenCount + infantCount;
+  const { selectedFlight } = useAppSelector((state) => state.app);
+  const { passengers, roundTrip, departureDate, returnDate } = useAppSelector(
+    (state) => state.search,
+  );
   const { isSelected } = selectedFlight;
   return (
     <>

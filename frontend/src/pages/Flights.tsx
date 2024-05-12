@@ -7,7 +7,6 @@ import DetailModal from '../components/DetailModal';
 import FlightDetailItem from '../features/Flight/FlightDetailItem';
 import FlightList from '../features/Flight/FlightList';
 import { selectedFLight } from '../features/Flight/types';
-import AppLayout from '../layout/AppLayout';
 import OverviewLayout from '../layout/OverviewLayout';
 import { useAppSelector } from '../redux/hooks';
 import { durationInHour, formattedDate, formatTime } from '../utils/helperFn';
@@ -32,7 +31,7 @@ const Schedules: FC<SchedulesProps> = () => {
   };
   if (!data) return <h3>No selected flight </h3>;
   return (
-    <AppLayout>
+    <>
       <SearchInfo origin={origin} destination={destination} />
       <OverviewLayout>
         <AnimatePresence>
@@ -90,7 +89,7 @@ const Schedules: FC<SchedulesProps> = () => {
           <FlightList flightData={data?.itineraries} onSelectFlight={showID} />
         </div>
       </OverviewLayout>
-    </AppLayout>
+    </>
   );
 };
 

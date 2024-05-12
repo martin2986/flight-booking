@@ -6,10 +6,7 @@
   "scripts": {
     "build": "tsc",
     "start": "node dist/server.js",
-    "dev": "nodemon ",
-    "debug": "ndb server.ts",
-    "production": "NODE_ENV=production",
-    "test": "jest"
+    "dev": "nodemon "
   },
   "author": "",
   "license": "ISC",

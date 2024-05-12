@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/server.js",
+  "main": "dist/app.js",
   "scripts": {
     "build": "tsc",
-    "start": "tsc && node dist/server.js",
+    "start": "tsc && node dist/app.js",
     "dev": "nodemon ",
     "debug": "ndb server.ts",
     "production": "NODE_ENV=production",

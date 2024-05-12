@@ -69,5 +69,8 @@
   },
   "_moduleAliases": {
     "@": "src"
+  },
+  "engines": {
+    "node": ">=20.9.0"
   }
 }

@@ -3,10 +3,9 @@ import { useState } from 'react';
 import { RxHamburgerMenu } from 'react-icons/rx';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../redux/hooks';
-import { buttonVariants } from '../Button';
+import { buttonVariants } from '../../UI/Button';
 import SideBar from '../SideBar';
-import UserIcon from '../UserIcon';
-
+import UserIcon from '../../features/User/UserIcon';
 
 const Index = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);

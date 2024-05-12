@@ -1,15 +1,7 @@
 export const menuVar = {
-  initial: {
-    scaleY: 0,
-  },
-  animate: {
-    scaleY: 1,
-    transition: { duration: 1, ease: [0.12, 0, 0.59, 1] },
-  },
-  exit: {
-    scaleY: 0,
-    transition: { duration: 0.5, ease: [0.12, 0, 0.39, 1] },
-  },
+  initial: { opacity: 0, width: 0 },
+  animate: { opacity: 1, width: '100%', transition: { duration: 0.5 } },
+  exit: { opacity: 0, width: 0 },
 };
 
 export const mobileLinkAnimation = {

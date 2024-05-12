@@ -1,8 +1,8 @@
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { Buttons } from '../components/Button';
+import { Buttons } from '../UI/Button';
 import Inputs from '../components/Inputs';
-import Notification from '../components/UI/Notification';
-import UserIcon from '../components/UserIcon';
+import Notification from '../UI/Notification';
+import UserIcon from '../features/User/UserIcon';
 import UserLayout from '../layout/UserLayout';
 import { updateMe } from '../redux/auth/AuthAction';
 import { useAppSelector, useDisPatch } from '../redux/hooks';

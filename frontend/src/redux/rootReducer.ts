@@ -3,15 +3,15 @@ import persistReducer from 'redux-persist/es/persistReducer';
 import authReducer from './auth/authSlice';
 import appReducer from './app/appSlice';
 import storage from 'redux-persist/lib/storage';
-const rootReducer = combineReducers({
-  auth: authReducer,
-  app: appReducer,
-});
 const persistConfig = {
   key: 'root',
   version: 1,
   storage,
 };
-const persistedReducer = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, authReducer);
+const rootReducer = combineReducers({
+  auth: persistedReducer,
+  app: appReducer,
+});
 
-export default persistedReducer;
+export default rootReducer;

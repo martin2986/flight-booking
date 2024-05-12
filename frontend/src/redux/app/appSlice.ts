@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { segment } from '../../components/FlightSchedule/types';
+import { segment } from '../../features/Flight/types';
 interface selectedFlightPayloadTypes {
   segments: segment[];
   durationInMinutes: number;

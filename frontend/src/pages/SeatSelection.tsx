@@ -1,12 +1,10 @@
 import { FC } from 'react';
 import { MdKeyboardDoubleArrowLeft, MdOutlineKeyboardDoubleArrowRight } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
-import { Buttons } from '../components/Button';
-import SeatItem from '../components/Seats/SeatItem';
-import { type CheckoutProps } from './Checkout';
+import { Buttons } from '../UI/Button';
+import { CheckoutProps } from '../features/Checkout/Form';
+import SeatItem from '../features/Checkout/Seats/SeatItem';
 
 const SeatSelection: FC<CheckoutProps> = ({ changeActiveStep }) => {
-  const navigate = useNavigate();
   return (
     <div>
       <div className="flex flex-row justify-around">

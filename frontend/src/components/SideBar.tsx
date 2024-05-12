@@ -4,8 +4,8 @@ import { MdOutlineClose } from 'react-icons/md';
 import { Link } from 'react-router-dom';
 import { logout } from '../redux/auth/AuthAction';
 import { useAppSelector, useDisPatch } from '../redux/hooks';
-import { buttonVariants } from './Button';
-import UserIcon from './UserIcon';
+import { buttonVariants } from '../UI/Button';
+import UserIcon from '../features/User/UserIcon';
 import { sideLinks } from './NavBar/navUtil';
 import { menuVar, mobileLinkAnimation } from './NavBar/navUtil';
 type SideBarProps = {

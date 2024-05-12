@@ -2,7 +2,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { useDisPatch } from '../redux/hooks';
 import { z } from 'zod';
-import { Buttons } from '../components/Button';
+import { Buttons } from '../UI/Button';
 import AuthLayout from '../layout/AuthLayout';
 import { registerFormSchema } from '../utils/formSchema';
 import { register as registerAuth } from '../redux/auth/AuthAction';

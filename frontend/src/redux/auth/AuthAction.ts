@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { authApi, userApi } from '../../auth/apiClient';
+import { authApi, userApi } from '../../services/auth/apiClient';
 import { authAction } from './authSlice';
 export type loginTypes = {
   email: string;

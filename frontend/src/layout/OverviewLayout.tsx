@@ -1,5 +1,5 @@
+import FlightOverview from '@/features/Flight/FlightOverview';
 import { FC, ReactNode } from 'react';
-import FlightOverview from '../components/FlightSchedule/FlightOverview';
 
 type OverviewLayoutProps = {
   children: ReactNode;

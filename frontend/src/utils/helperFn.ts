@@ -1,6 +1,7 @@
 import { type ClassValue, clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import moment from 'moment';
+import { segment } from '../features/Flight/types';
 declare global {
   interface Array<T> {
     capitalizeFirstLetter(): T | null;
@@ -82,8 +83,8 @@ export const monthsOfYear = [
 ];
 export const numbersFrom1To31 = Array.from({ length: 31 }, (_, index) => index + 1);
 
-export const filterList = (data: any[]) => {
-  let returnData: any = [];
+export const filterList = (data: segment[]) => {
+  let returnData: any[] = [];
   if (data.length > 1) {
     data.map(({ origin, departure, flightNumber }, index) => {
       if (index === 0)

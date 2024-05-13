@@ -30,7 +30,7 @@ const FlightDuration: FC<FlightDurationProps> = ({ time = 65, stopCount = 1 }) =
       <p className=" w-full text-center text-xs md:text-sm mt-1">{stop}</p>
       <div
         onClick={toggleDetailHandler}
-        className=" w-full text-center text-xs md:text-sm pt-2 cursor-pointer"
+        className=" w-full text-center text-xs md:text-sm pt-2 cursor-pointer text-indigo-500"
       >
         Flight details
       </div>

@@ -2,7 +2,7 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "dist/server.js",
+  "main": "app.ts",
   "scripts": {
     "build": "tsc",
     "start": "ts-node-dev app.ts",
@@ -27,6 +27,7 @@
     "nodemailer": "^6.9.9",
     "resend": "^3.1.0",
     "short-unique-id": "^5.0.3",
+    "ts-node-dev": "^2.0.0",
     "validator": "^13.11.0"
   },
   "devDependencies": {

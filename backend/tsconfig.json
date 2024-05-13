@@ -3,18 +3,18 @@
     "module": "CommonJS",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
-    "target": "ESNext",
+    "target": "es6",
     "noImplicitAny": true,
     "moduleResolution": "Node",
     "sourceMap": true,
-    "outDir": "./dist",
+    "outDir": "dist",
     "baseUrl": "/",
     "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "src/**/*.ts",
     "src/emailTemplate/SendEmailTemplate.ts",
-    "src/emailTemplate/EmailVerification.ts",
-  ],
+    "src/emailTemplate/EmailVerification.ts"
+  ]
 }

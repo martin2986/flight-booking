@@ -2,10 +2,10 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "app.ts",
+  "main": "server.ts",
   "scripts": {
     "build": "tsc",
-    "start": "ts-node-dev app.ts",
+    "start": "ts-node-dev server.ts",
     "dev": "nodemon "
   },
   "author": "",

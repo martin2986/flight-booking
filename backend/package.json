@@ -62,9 +62,6 @@
     "tslib": "^2.6.2",
     "typescript": "^5.3.3"
   },
-  "_moduleAliases": {
-    "@": "src"
-  },
   "engines": {
     "node": ">=21.5.0",
     "typescript": "^5.3.3"

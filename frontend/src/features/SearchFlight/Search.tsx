@@ -41,10 +41,10 @@ const Search = <T extends any, TField extends FieldValues>({
             clearOnBlur
             value={value || ''}
             options={options}
-            onChange={(event, newValue: any) => {
+            onChange={(_, newValue: any) => {
               onChange(newValue);
             }}
-            onInputChange={(event, newInputValue) => {
+            onInputChange={(_, newInputValue) => {
               setInputValue(newInputValue);
             }}
             sx={{ width: '100%' }}

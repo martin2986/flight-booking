@@ -13,7 +13,8 @@ const FlightList: FC<FlightListInfoProps> = ({ flightData, onSelectFlight, ...re
   const navigate = useNavigate();
   const dispatch = useDisPatch();
   const [currentIndex, setCurrentIndex] = useState<number>(0);
-  const { roundTrip, selectedFlight } = useAppSelector((state) => state.app);
+  const { selectedFlight } = useAppSelector((state) => state.app);
+  const { roundTrip } = useAppSelector((state) => state.search);
   const { isSelected } = selectedFlight;
 
   const selectHandler = (data: any) => {

@@ -3,10 +3,6 @@ import { CheckoutProps } from './Form';
 import OverviewLayout from '@/layout/OverviewLayout';
 
 const Payment: FC<CheckoutProps> = ({ changeActiveStep }) => {
-  const comepleteSteps = () => {
-    changeActiveStep(4);
-    console.log('Complete Steps');
-  };
   return (
     <OverviewLayout>
       <div className="font-[sans-serif] bg-white">

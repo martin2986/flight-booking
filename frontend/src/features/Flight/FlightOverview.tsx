@@ -5,10 +5,8 @@ import SelectedFlight from './SelectedFlight';
 import { segment } from './types';
 
 const FlightOverview = () => {
-  const { selectedFlight, origin, destination, selectedReturnFlight } = useAppSelector(
-    (state) => state.app,
-  );
-  const { passengers } = useAppSelector((state) => state.search);
+  const { selectedReturnFlight, selectedFlight } = useAppSelector((state) => state.app);
+  const { passengers, destination, origin } = useAppSelector((state) => state.search);
   const { protectedInsurance, extraLuggage } = useAppSelector((state) => state.checkout);
   const { price, segments, isSelected } = selectedFlight;
   const {

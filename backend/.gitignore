@@ -7,7 +7,6 @@ notes.md
 *.env
 *.pdf
 *.txt
-emailTemplate
-dist/
+
 __test__/
 files/

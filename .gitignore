@@ -7,5 +7,3 @@ notes.md
 *.env
 *.pdf
 *.txt
-emailTemplate
-dist/

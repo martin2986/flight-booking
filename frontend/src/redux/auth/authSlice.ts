@@ -2,6 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 type PayLoadTypes = {
   name: string;
   email: string;
+  profilePhoto: string;
 };
 const INITIAL_STATE = {
   isSuccess: false,
@@ -9,6 +10,7 @@ const INITIAL_STATE = {
   user: {
     name: '',
     email: '',
+    profilePhoto: '',
   },
 };
 
@@ -32,6 +34,7 @@ const authSlice = createSlice({
       state.user = {
         name: '',
         email: '',
+        profilePhoto: '',
       };
     },
     updateMe(state, action: PayloadAction<PayLoadTypes>) {

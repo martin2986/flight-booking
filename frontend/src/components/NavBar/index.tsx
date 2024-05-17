@@ -6,7 +6,7 @@ import { useAppSelector } from '../../redux/hooks';
 import { buttonVariants } from '../../UI/Button';
 import SideBar from '../SideBar';
 import UserIcon from '../../features/User/UserIcon';
-
+import logo from '@/assets/logo.png';
 const Index = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const { isLoggedIn } = useAppSelector((state) => state.auth);
@@ -18,7 +18,9 @@ const Index = () => {
     <div className={`bg-transparent text-black `}>
       <nav className="container mx-auto flex justify-between p-1 items-center ">
         <div className="text-xl lg:flex-1">
-          <Link to="/">Eazy jet</Link>
+          <Link to="/">
+            <img src={logo} alt="" className="h-16 -mx-10" />
+          </Link>
         </div>
         <div className="lg:hidden cursor-pointer" onClick={() => setIsOpen((prev) => !prev)}>
           <RxHamburgerMenu />

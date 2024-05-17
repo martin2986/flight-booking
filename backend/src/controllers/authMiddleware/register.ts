@@ -5,6 +5,7 @@ import Joi from 'joi';
 import User from '../../models/UserModel';
 import { catchErrors } from '../../handlers/catchError';
 import AppError from '../../handlers/appError';
+import { generateJWT } from './authUtil';
 
 type userType = {
   _id?: mongoose.Types.ObjectId;
@@ -13,26 +14,19 @@ type userType = {
   name: string;
 };
 
-const signToken = (id: mongoose.Types.ObjectId) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, {
-    expiresIn: process.env.JWT_EXPIRES_IN,
-  });
-};
-
 const createAndSendToken = (user: userType, statusCode: number, res: Response) => {
-  const token = signToken(user._id);
+  const token = generateJWT({ id: user._id });
   const cookieOption = {
     secure: true,
     httpOnly: true,
   };
   if (process.env.NODE_ENV === 'production') cookieOption.secure = true;
-  res.cookie('jwt', token, cookieOption);
+  res.cookie('token', token, cookieOption);
 
   user.password = undefined;
 
   return res.status(200).json({
     success: true,
-
     result: {
       _id: user._id,
       name: user.name,

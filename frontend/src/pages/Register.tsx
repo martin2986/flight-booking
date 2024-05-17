@@ -9,6 +9,7 @@ import { register as registerAuth } from '../redux/auth/AuthAction';
 import Inputs from '../components/Inputs';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
+import OAuth from '@/services/auth/OAuth';
 type formFields = z.infer<typeof registerFormSchema>;
 
 const Register = () => {
@@ -36,7 +37,7 @@ const Register = () => {
     }
   };
   return (
-    <AuthLayout AUTH_TITLE="Create an account">
+    <AuthLayout AUTH_TITLE="Sign Up">
       {errors.root && <div className="text-red-500 text-sm mb-4">{errors.root.message}</div>}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Inputs
@@ -71,9 +72,13 @@ const Register = () => {
         <Buttons className="w-full mt-5" disabled={isSubmitting}>
           {isSubmitting ? 'Loading...' : 'Sign Up'}
         </Buttons>
-        <Link to="/login" className="text-black text-sm">
-          Login Now!
-        </Link>
+        <p className="uppercase my-1 text-xs text-center ">or</p>
+        <OAuth />
+        <div className="mt-4">
+          <Link to="/login" className="text-black text-sm">
+            Login Now!
+          </Link>
+        </div>
       </form>
     </AuthLayout>
   );

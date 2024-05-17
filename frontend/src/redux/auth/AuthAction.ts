@@ -14,6 +14,7 @@ export type registerTypes = {
 export type updateMeTypes = {
   email: string;
   name: string;
+  profilePhoto: string;
 };
 export const login = (loginData: loginTypes) => async (dispatch: Dispatch<any>) => {
   const response = await authApi.post('/login', loginData);
@@ -33,7 +34,7 @@ export const register = (registerData: registerTypes) => async (dispatch: Dispat
 };
 export const logout = () => async (dispatch: Dispatch<any>) => {
   try {
-    const response = await userApi.get('/logout');
+    const response = await authApi.get('/logout');
     if (!response) throw new Error('Ops there seems to be an error, Please try again');
     const { data } = response;
     if (data.success === true) {

@@ -8,9 +8,9 @@ import ExpressMongoSanitize from 'express-mongo-sanitize';
 import { errorHandler } from './handlers/errorHandler';
 import AppError from './handlers/appError';
 import userRouter from './routes/userRoute';
-import appRouter from './routes/appRoute';
 import { rateLimit } from 'express-rate-limit';
-
+import dotenv from 'dotenv';
+dotenv.config({ path: '.env' });
 const app = express();
 
 app.disable('x-powered-by');
@@ -19,7 +19,7 @@ const corsOptions = {
   optionsSuccessStatus: 200,
   credentials: true,
 };
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(compression());
 
 app.use(bodyParser.json());
@@ -33,10 +33,9 @@ const limiter = rateLimit({
   max: 100,
   message: 'Too many requests from this IP, please try again in an hour',
 });
-app.use('/api', limiter);
+app.use(limiter);
 app.use('/api/auth/v1', authRouter);
 app.use('/api/users/v1', userRouter);
-app.use('/api/v1', appRouter);
 app.all('*', (req, res, next) => {
   next(new AppError(`Api url ${req.originalUrl} does not exist`, 404));
 });

@@ -1,17 +1,9 @@
 import { Response, Request, NextFunction } from 'express';
 import { catchErrors } from '../../handlers/catchError';
-import jwt from 'jsonwebtoken';
 import User from '../../models/UserModel';
 import AppError from '../../handlers/appError';
 import crypto from 'crypto';
-
-const generateJWT = function (payload: { id: string }, options: object = {}): string {
-  const privateKey: any = process.env.JWT_SECRET;
-  const defaultOptions: object = {
-    expiresIn: '1h',
-  };
-  return jwt.sign(payload, privateKey, Object.assign(defaultOptions, options));
-};
+import { expiryDate, generateJWT } from './authUtil';
 
 export const resetPassword = catchErrors(
   async (req: Request, res: Response, next: NextFunction) => {
@@ -31,10 +23,10 @@ export const resetPassword = catchErrors(
     user.passwordResetExpires = undefined;
     await user.save();
 
-    const token = generateJWT({ id: user._id }, { expiresIn: '1h' });
+    const token = generateJWT({ id: user._id });
 
     const cookieOption = {
-      maxAge: 1000 * 60 * 60,
+      expires: expiryDate,
       httpOnly: true,
       secure: false,
       domain: req.hostname,

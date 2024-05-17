@@ -35,7 +35,11 @@ export const updateUser = catchErrors(async (req: Request, res: Response, next: 
 
   res.status(200).json({
     success: true,
-    result: user,
+    result: {
+      name: user.name,
+      email: user.email,
+      profilePhoto: user.profilePhoto,
+    },
   });
 });
 

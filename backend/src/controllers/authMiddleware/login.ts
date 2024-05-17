@@ -1,12 +1,13 @@
 import { NextFunction, Request, Response } from 'express';
+import bcryptjs from 'bcryptjs';
 import Joi from 'joi';
 import AppError from '../../handlers/appError';
 import { catchErrors } from '../../handlers/catchError';
 import User from '../../models/UserModel';
-import { generateJWT } from './authUtil';
+import { expiryDate, generateJWT } from './authUtil';
 const objectSchema = Joi.object({
   email: Joi.string()
-    .email({ tlds: { allow: true } }) //check tlds
+    .email({ tlds: { allow: true } })
     .required(),
   password: Joi.string().required(),
 });
@@ -22,7 +23,7 @@ export const login = catchErrors(async (req: Request, res: Response, next: NextF
 
   if (error) return next(new AppError('Invalid/Missing credentials.', 409));
 
-  const user = await await User.findOne({ email, removed: false }).select('+password +salt');
+  const user = await User.findOne({ email, removed: false }).select('+password +salt');
 
   if (!user) return next(new AppError('No account with this email has been registered.', 404));
 
@@ -31,25 +32,60 @@ export const login = catchErrors(async (req: Request, res: Response, next: NextF
   if (!isMatch) return next(new AppError('Invalid/Missing credentials.', 403));
 
   const token = generateJWT({ id: user._id });
-
   const cookieOption = {
-    maxAge: 1000 * 60 * 60,
+    expires: expiryDate,
     httpOnly: true,
     secure: false,
-    domain: req.hostname,
+    // domain: req.hostname,
     path: '/',
   };
   if (process.env.NODE_ENV === 'production') cookieOption.secure = true;
   res
-    .status(200)
     .cookie('token', token, cookieOption)
+    .status(200)
     .json({
       success: true,
-      token,
       result: {
         name: user.name,
         email: user.email,
       },
       message: 'Successfully login user',
     });
+});
+
+export const google = catchErrors(async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const user = await User.findOne({ email: req.body.email });
+    if (user) {
+      const token = generateJWT({ id: user._id });
+      res.cookie('token', token, { httpOnly: true, expires: expiryDate }).status(200).json({
+        message: 'User logged in successfully',
+        name: user.name,
+        email: user.email,
+        profilePhoto: user.profilePhoto,
+      });
+    } else {
+      const generatePassword =
+        Math.random().toString(36).slice(-8) + Math.random().toString(36).slice(-8);
+      const hashedPassword = bcryptjs.hashSync(generatePassword, 10);
+      const newUser = new User({
+        name: req.body.name,
+        email: req.body.email,
+        password: hashedPassword,
+        confirmPassword: hashedPassword,
+        profilePhoto: req.body.photo,
+      });
+      await newUser.save();
+      const token = generateJWT({ id: newUser._id });
+      res
+        .cookie('token', token, {
+          httpOnly: true,
+          expires: expiryDate,
+        })
+        .status(200)
+        .json({ name: newUser.name, email: newUser.email, profilePhoto: newUser.profilePhoto });
+    }
+  } catch (err) {
+    next(err);
+  }
 });

@@ -7,15 +7,7 @@ type ProtectedRouteProps = {
 
 const ProtectedRoute: FC<ProtectedRouteProps> = ({ redirectPath = '/' }) => {
   const { isLoggedIn } = useAppSelector((state) => state.auth);
-  if (isLoggedIn) {
-    return (
-      <div>
-        <Outlet />
-      </div>
-    );
-  } else {
-    return <Navigate to={redirectPath} replace />;
-  }
+  return isLoggedIn ? <Outlet /> : <Navigate to={redirectPath} replace />;
 };
 
 export default ProtectedRoute;

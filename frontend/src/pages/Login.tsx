@@ -8,6 +8,7 @@ import Notification from '../UI/Notification';
 import AuthLayout from '../layout/AuthLayout';
 import { login as authLogin } from '../redux/auth/AuthAction';
 import { useDisPatch } from '../redux/hooks';
+import OAuth from '@/services/auth/OAuth';
 const schema = z.object({
   email: z.string().email(),
   password: z.string().min(6),
@@ -24,8 +25,8 @@ const Login = () => {
     formState: { errors, isSubmitting },
   } = useForm<formFields>({
     defaultValues: {
-      email: '',
-      password: '',
+      email: 'james1@hotmail.com',
+      password: 'James123',
     },
     resolver: zodResolver(schema),
   });
@@ -43,7 +44,7 @@ const Login = () => {
   };
 
   return (
-    <AuthLayout AUTH_TITLE="Log in to your account">
+    <AuthLayout AUTH_TITLE="Sign In">
       {errors.root && <Notification message={errors.root.message} type="error" />}
       <form onSubmit={handleSubmit(onSubmit)}>
         <Inputs
@@ -64,7 +65,9 @@ const Login = () => {
         <Buttons className="w-full mt-5" disabled={isSubmitting}>
           {isSubmitting ? 'Loading...' : 'Log In'}
         </Buttons>
-        <div className="flex flex-row items-center justify-between text-sm mt-3">
+        <p className="uppercase my-1 text-xs text-center ">or</p>
+        <OAuth />
+        <div className="flex flex-row items-center justify-between text-sm mt-6">
           <Link to="/register" className="text-black underline">
             Sign Up
           </Link>

@@ -25,8 +25,8 @@ const Login = () => {
     formState: { errors, isSubmitting },
   } = useForm<formFields>({
     defaultValues: {
-      email: 'james1@hotmail.com',
-      password: 'James123',
+      email: '',
+      password: '',
     },
     resolver: zodResolver(schema),
   });

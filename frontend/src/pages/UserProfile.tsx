@@ -53,7 +53,7 @@ const UserProfile = () => {
         setImagePercent(Math.round(progress));
       },
       (error: any) => {
-        setImageError(true);
+        setImageError(error);
       },
       () => {
         getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => setImageData(downloadURL));

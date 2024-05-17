@@ -86,7 +86,7 @@ export const numbersFrom1To31 = Array.from({ length: 31 }, (_, index) => index +
 export const filterList = (data: segment[]) => {
   let returnData: any[] = [];
   if (data.length > 1) {
-    data.map(({ origin, departure, flightNumber }, index) => {
+    return data.map(({ origin, departure, flightNumber }, index) => {
       if (index === 0)
         returnData = [
           {

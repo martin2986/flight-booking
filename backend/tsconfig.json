@@ -10,10 +10,11 @@
     "outDir": "dist",
     "baseUrl": "/",
     "resolveJsonModule": true,
-    "forceConsistentCasingInFileNames": true
+    "forceConsistentCasingInFileNames": true,
+    "rootDir": "src"
   },
   "include": [
-    "src/**/*.ts",
+    "src/**/*",
     "src/emailTemplate/SendEmailTemplate.ts",
     "src/emailTemplate/EmailVerification.ts"
   ]

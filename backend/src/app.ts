@@ -10,7 +10,7 @@ import AppError from './handlers/appError';
 import userRouter from './routes/userRoute';
 import { rateLimit } from 'express-rate-limit';
 import dotenv from 'dotenv';
-dotenv.config({ path: '.env' });
+
 const app = express();
 
 app.disable('x-powered-by');

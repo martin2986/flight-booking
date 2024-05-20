@@ -1,5 +1,5 @@
 import { Dispatch } from 'redux';
-import { authApi, userApi } from '../../services/auth/apiClient';
+import { appApi, authApi } from '../../services/auth/apiClient';
 import { authAction } from './authSlice';
 export type loginTypes = {
   email: string;
@@ -45,7 +45,7 @@ export const logout = () => async (dispatch: Dispatch<any>) => {
   }
 };
 export const updateMe = (updateMeData: updateMeTypes) => async (dispatch: Dispatch<any>) => {
-  const response = await userApi.patch('/updateMe', updateMeData);
+  const response = await appApi.patch('/updateMe', updateMeData);
   if (!response) throw new Error('Error updating details, Please try again');
   const { data } = response;
   if (data.success === true) {

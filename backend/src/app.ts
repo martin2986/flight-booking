@@ -34,8 +34,8 @@ const limiter = rateLimit({
   message: 'Too many requests from this IP, please try again in an hour',
 });
 app.use(limiter);
-app.use('/api/auth/v1', authRouter);
-app.use('/api/users/v1', userRouter);
+app.use('/api/v1/auth', authRouter);
+app.use('/api/v1/users', userRouter);
 app.all('*', (req, res, next) => {
   next(new AppError(`Api url ${req.originalUrl} does not exist`, 404));
 });

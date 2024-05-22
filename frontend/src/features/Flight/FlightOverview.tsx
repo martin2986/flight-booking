@@ -6,7 +6,7 @@ import { segment } from './types';
 
 const FlightOverview = () => {
   const { selectedReturnFlight, selectedFlight } = useAppSelector((state) => state.app);
-  const { passengers, destination, origin } = useAppSelector((state) => state.search);
+  const { passengers } = useAppSelector((state) => state.search);
   const { protectedInsurance, extraLuggage } = useAppSelector((state) => state.checkout);
   const { price, segments, isSelected } = selectedFlight;
   const {
@@ -56,7 +56,7 @@ const FlightOverview = () => {
           )}
 
           <div className="bg-gray-100 mt-3 py-4 px-3 ">
-            {isSelected ? (
+            {isSelected &&
               selectedData.map(({ origin, destination, departure, flightNumber }) => (
                 <SelectedFlight
                   key={flightNumber}
@@ -65,15 +65,7 @@ const FlightOverview = () => {
                   origin={origin.displayCode}
                   destination={destination.displayCode}
                 />
-              ))
-            ) : (
-              <div>
-                <p className="text-sm">From</p>
-                <h3 className="text-sm font-semibold">{origin}</h3>
-                <p className="text-sm mt-3">To</p>
-                <h3 className="text-sm font-semibold">{destination}</h3>
-              </div>
-            )}
+              ))}
             {returnIsSelected &&
               selectedReturnData.map(({ origin, destination, departure, flightNumber }) => (
                 <SelectedFlight

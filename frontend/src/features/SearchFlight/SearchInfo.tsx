@@ -10,13 +10,14 @@ import TitleWithIcon from '@/components/TitleWithIcon';
 type SearchInfoProps = {
   origin: string | null;
   destination: string | null;
+  departDate: string | null;
+  returnDate: string | null;
+  isRoundTrip: string | null;
 };
 
-const SearchInfo: FC<SearchInfoProps> = ({ origin, destination }) => {
+const SearchInfo: FC<SearchInfoProps> = ({ origin, destination, departDate, returnDate }) => {
   const { selectedFlight } = useAppSelector((state) => state.app);
-  const { passengers, roundTrip, departureDate, returnDate } = useAppSelector(
-    (state) => state.search,
-  );
+  const { passengers, roundTrip } = useAppSelector((state) => state.search);
   const { isSelected } = selectedFlight;
   return (
     <>
@@ -37,7 +38,7 @@ const SearchInfo: FC<SearchInfoProps> = ({ origin, destination }) => {
               name={
                 isSelected && roundTrip
                   ? formatTime(returnDate)?.formattedDateShort
-                  : formatTime(departureDate)?.formattedDateShort
+                  : formatTime(departDate)?.formattedDateShort
               }
               title="When"
               icon={<FaRegCalendarAlt />}

@@ -68,7 +68,7 @@ const SearchFlight = () => {
       const { data } = response;
       dispatch(appAction.clearSelectedFlight());
       navigate(
-        `/flight-schedule?origin=${origin.city}&destination=${destination.city}&isRoundTrip=${roundTrip}&departDate=${moment(departureDate.$d).format('YYYY-MM-DD')}&returnDate=&${moment(arrivalDate.$d).format('YYYY-MM-DD')}`,
+        `/flight-schedule?origin=${origin.city}&destination=${destination.city}&isRoundTrip=${roundTrip}&departDate=${moment(departureDate.$d).format('YYYY-MM-DD')}${roundTrip && `&returnDate=&${moment(arrivalDate.$d).format('YYYY-MM-DD')}`}`,
         { state: data },
       );
       dispatch(appAction.setIsLoading(false));

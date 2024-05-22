@@ -20,7 +20,7 @@ const Schedules: FC<SchedulesProps> = () => {
   const destination = searchParams.get('destination');
   const isRoundTrip = searchParams.get('isRoundTrip');
   const departureDate = searchParams.get('departDate');
-
+  const returnDate = searchParams.get('returnDate');
   const location = useLocation();
   const { toggleFlightDetail, selectedFlight } = useAppSelector((state) => state.app);
   const { isSelected } = selectedFlight;
@@ -32,7 +32,13 @@ const Schedules: FC<SchedulesProps> = () => {
   if (!data) return <h3>No selected flight </h3>;
   return (
     <>
-      <SearchInfo origin={origin} destination={destination} />
+      <SearchInfo
+        origin={origin}
+        destination={destination}
+        departDate={departureDate}
+        returnDate={returnDate}
+        isRoundTrip={isRoundTrip}
+      />
       <OverviewLayout>
         <AnimatePresence>
           {toggleFlightDetail && modalInfo && (

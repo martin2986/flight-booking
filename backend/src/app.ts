@@ -9,7 +9,6 @@ import { errorHandler } from './handlers/errorHandler';
 import AppError from './handlers/appError';
 import userRouter from './routes/userRoute';
 import { rateLimit } from 'express-rate-limit';
-import dotenv from 'dotenv';
 
 const app = express();
 

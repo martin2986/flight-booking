@@ -21,12 +21,10 @@ export default ({ mode }) => {
       },
     },
     server: {
-      port: 3000,
       proxy: {
         '/api': {
           target: url,
           changeOrigin: true,
-          secure: false,
         },
       },
     },

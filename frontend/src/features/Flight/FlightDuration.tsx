@@ -20,10 +20,10 @@ const FlightDuration: FC<FlightDurationProps> = ({ time = 65, stopCount = 1 }) =
     dispatch(appAction.toggleFlightDetail(true));
   };
   return (
-    <div className=" w-1/3  h-full">
+    <div className=" w-1/3">
       <p className=" w-full text-center text-xs md:text-sm">{durationInHour(time)}</p>
       <div className=" flex items-center ">
-        <div className="flex-grow border-t border-gray-400 border-dotted"></div>
+        <div className="flex-grow border-t border-gray-400 border-dotted "></div>
         <span className="flex-shrink mx-1 md:mx-2 w-1 h-1 rounded-full bg-slate-950"></span>
         <div className="flex-grow border-t border-gray-400 border-dotted"></div>
       </div>

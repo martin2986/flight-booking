@@ -1,8 +1,8 @@
+import { FC, useState } from 'react';
+import { AnimatePresence } from 'framer-motion';
+import { useLocation, useSearchParams } from 'react-router-dom';
 import FlightTitle from '@/features/Flight/FlightTitle';
 import SearchInfo from '@/features/SearchFlight/SearchInfo';
-import { AnimatePresence } from 'framer-motion';
-import { FC, useState } from 'react';
-import { useLocation, useSearchParams } from 'react-router-dom';
 import DetailModal from '../components/DetailModal';
 import FlightDetailItem from '../features/Flight/FlightDetailItem';
 import FlightList from '../features/Flight/FlightList';
@@ -43,7 +43,7 @@ const Schedules: FC<SchedulesProps> = () => {
         <AnimatePresence>
           {toggleFlightDetail && modalInfo && (
             <DetailModal>
-              <div className="p-4 md:p-5">
+              <div className="px-5 py-6 md:p-5 ">
                 <div className="mb-3">
                   <h3 className="flex items-start mb-1 text-sm font-bold text-gray-900 dark:text-black">
                     Depart - {formatTime(departureDate).fullDateWithDay}

@@ -7,23 +7,22 @@ import { segment } from './types';
 const FlightOverview = () => {
   const { selectedReturnFlight, selectedFlight } = useAppSelector((state) => state.app);
   const { passengers } = useAppSelector((state) => state.search);
-  const { protectedInsurance, extraLuggage } = useAppSelector((state) => state.checkout);
+  const { totalCheckoutAmount } = useAppSelector((state) => state.checkout);
   const { price, segments, isSelected } = selectedFlight;
   const {
     price: returnPrice,
     segments: returnSegment,
     isSelected: returnIsSelected,
-  } = selectedReturnFlight || {};
+  } = selectedReturnFlight;
 
   let totalPrice = passengers * price?.raw || 0;
   if (returnIsSelected) totalPrice = passengers * returnPrice?.raw + returnPrice?.raw;
   const connectionFee = 24;
 
-  const flightPrice = totalPrice + connectionFee + extraLuggage + protectedInsurance;
+  const flightPrice = totalPrice + connectionFee + totalCheckoutAmount;
 
   const selectedData: segment[] = filterList(segments);
   const selectedReturnData: segment[] = filterList(returnSegment);
-
   return (
     <div className="hidden md:block md:w-1/3 mx-auto">
       <h1 className="font-bold text-xl mb-3">Overview</h1>

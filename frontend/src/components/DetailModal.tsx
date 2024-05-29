@@ -21,9 +21,9 @@ const DetailModal: FC<DetailModalProps> = ({ children }) => {
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: -50, opacity: 0 }}
         transition={{ duration: 0.3 }}
-        className="  fixed items-center z-20 top-24 left-0 right-0 justify-center md:w-2/3 mx-auto  max-h-full"
+        className="  fixed items-center z-20 top-24 left-0 right-0 justify-center md:w-2/3 mx-auto md:max-h-full"
       >
-        <div className="relative p-4  max-h-full mx-auto">
+        <div className="relative p-4 md:max-h-full mx-auto">
           <div className="relative bg-white rounded-lg shadow b">
             <div className="flex items-center justify-between p-4 md:p-5 border-b rounded-t dark:border-gray-600">
               <h3 className="text-lg font-semibold text-gray-900 dark:text-black">Your Journey</h3>

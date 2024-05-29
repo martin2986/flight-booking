@@ -17,7 +17,7 @@ export type updateMeTypes = {
   profilePhoto: string;
 };
 export const login = (loginData: loginTypes) => async (dispatch: Dispatch<any>) => {
-  const response = await authApi.post('/login', loginData);
+  const response = await authApi.post(`/login`, loginData);
   if (!response) throw new Error('Error logging  in, Please try again');
   const { data } = response;
   if (data.success === true) {

@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { QueryClient } from '@tanstack/react-query';
 export const queryClient = new QueryClient();
+
 export const authApi = axios.create({
   baseURL: `${process.env.SECRET_AUTH}`,
   withCredentials: true,

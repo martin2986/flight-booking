@@ -1,14 +1,14 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useDisPatch } from '../redux/hooks';
 import { z } from 'zod';
+import { useNavigate } from 'react-router-dom';
+import { useDisPatch } from '../redux/hooks';
+import { Link } from 'react-router-dom';
 import { Buttons } from '../UI/Button';
 import AuthLayout from '../layout/AuthLayout';
 import { registerFormSchema } from '../utils/formSchema';
 import { register as registerAuth } from '../redux/auth/AuthAction';
 import Inputs from '../components/Inputs';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
 import OAuth from '@/services/auth/OAuth';
 type formFields = z.infer<typeof registerFormSchema>;
 

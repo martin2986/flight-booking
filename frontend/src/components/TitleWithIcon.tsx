@@ -9,11 +9,11 @@ type TitleWithIconProps = {
 
 const TitleWithIcon: FC<TitleWithIconProps> = ({ name, title, icon }) => {
   return (
-    <div className="flex items-center gap-3 mr-4 md:mr-0">
-      <span className=" text-sm md:text-base ">{icon}</span>
+    <div className="flex items-center gap-1 md:gap-3 mr-2 md:mr-0 text-nowrap">
+      <span className=" text-xs md:text-base ">{icon}</span>
       <div>
-        <p className=" text-xs hidden md:block font-semibold">{title}</p>
-        <p className="text-sm tracking-wider font-light text-nowrap">{name}</p>
+        <p className=" text-xs md:text-sm hidden md:block font-semibold">{title}</p>
+        <p className="text-xs md:text-sm  tracking-wider font-light text-nowrap">{name}</p>
       </div>
     </div>
   );

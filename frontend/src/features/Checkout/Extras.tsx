@@ -46,7 +46,6 @@ const Extras: FC<CheckoutProps> = ({ changeActiveStep }) => {
     <>
       <OverviewLayout>
         <h3 className="text-sm font-bold">Baggage allowance</h3>
-        {/* <h5 className="text-sm">Passenger Name</h5> */}
         <p className="text-sm">On each flight</p>
         <div className="mt-3 flex flex-row gap-3 items-start">
           <LuBackpack />
@@ -118,36 +117,35 @@ const Extras: FC<CheckoutProps> = ({ changeActiveStep }) => {
             <div className="inline-flex items-center gap-2 ">
               <IoMdCheckmark className="text-indigo-600" />
               <p className="text-xs">
-                Trip cancellation - Unforeseen covered circumstances that force you to cancel your
-                trip
+                Trip cancellation - Protect your travel investment with our trip cancellation
+                insurance.
               </p>
             </div>
             <div className="inline-flex items-center gap-2 ">
               <IoMdCheckmark className="text-indigo-600" />
               <p className="text-xs">
-                Trip cancellation - Unforeseen covered circumstances that force you to cancel your
-                trip
+                Trip interruption - Travel confidently knowing that help is just a phone call away
+                with our 24/7 travel assistance services.
               </p>
             </div>
             <div className="inline-flex items-center gap-2 ">
               <IoMdCheckmark className="text-indigo-600" />
               <p className="text-xs">
-                Trip cancellation - Unforeseen covered circumstances that force you to cancel your
-                trip
+                Baggage Protection - reimbursement for lost, stolen, or damaged luggage, as well as
+                coverage for essential items if your baggage is delayed.
               </p>
             </div>
             <div className="inline-flex items-center gap-2 ">
               <IoMdCheckmark className="text-indigo-600" />
               <p className="text-xs">
-                Trip cancellation - Unforeseen covered circumstances that force you to cancel your
-                trip
+                Emergency Medical Coverage - Travel with peace of mind knowing you're covered with
+                our emergency medical insurance.
               </p>
             </div>
             <div className="inline-flex items-center gap-2 ">
               <IoMdCheckmark className="text-indigo-600" />
               <p className="text-xs">
-                Trip cancellation - Unforeseen covered circumstances that force you to cancel your
-                trip
+                Travel Delay Coverage - coverage provides reimbursement for additional expenses.
               </p>
             </div>
           </div>

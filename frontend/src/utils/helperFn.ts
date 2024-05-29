@@ -84,22 +84,21 @@ export const monthsOfYear = [
 export const numbersFrom1To31 = Array.from({ length: 31 }, (_, index) => index + 1);
 
 export const filterList = (data: segment[]) => {
-  let returnData: any[] = [];
-  if (data.length > 1) {
-    return data.map(({ origin, departure, flightNumber }, index) => {
-      if (index === 0)
-        returnData = [
-          {
-            origin,
-            arrival: data[data.length - 1].arrival,
-            destination: data[data.length - 1].destination,
-            departure,
-            flightNumber,
-          },
-        ];
-    });
-  } else {
-    returnData = data;
+  if (data.length <= 1) {
+    return data;
   }
-  return returnData;
+  const {
+    origin: firstOrigin,
+    departure: firstDeparture,
+    flightNumber: firstFlightNumber,
+  } = data[0];
+  const { arrival: lastArrival, destination: lastDestination } = data[data.length - 1];
+  const modifiedFirstSegment = {
+    origin: firstOrigin,
+    arrival: lastArrival,
+    destination: lastDestination,
+    departure: firstDeparture,
+    flightNumber: firstFlightNumber,
+  };
+  return [modifiedFirstSegment] as segment[];
 };

@@ -1,7 +1,8 @@
 import { useDisPatch } from '@/redux/hooks';
-import { Buttons } from '@/UI/Button';
+import { Buttons, buttonVariants } from '@/UI/Button';
 import { Card } from '@/UI/Card';
 import { FC, ReactNode } from 'react';
+import { Link } from 'react-router-dom';
 import { searchAction } from './searchSlice';
 
 type SearchFLightLayoutProps = {
@@ -19,22 +20,29 @@ const SearchFLightLayout: FC<SearchFLightLayoutProps> = ({ children }) => {
         >
           Flights
         </Buttons>
-        <Buttons
-          className="text-xs no-underline hover:text-indigo-500 hover:bg-transparent"
-          variant="outline"
+
+        <Link
+          to={{ pathname: 'hotel-booking' }}
+          target="_blank"
+          className={`${buttonVariants({
+            variant: 'outline',
+          })} text-xs no-underline hover:text-indigo-500 hover:bg-transparent `}
         >
           Hotels
-        </Buttons>
-        <Buttons
-          className="text-xs no-underline hover:text-indigo-500 hover:bg-transparent"
-          variant="outline"
+        </Link>
+        <Link
+          to={{ pathname: 'car-booking' }}
+          target="_blank"
+          className={`${buttonVariants({
+            variant: 'outline',
+          })}  text-xs no-underline hover:text-indigo-500 hover:bg-transparent `}
         >
           Cars Hire
-        </Buttons>
+        </Link>
       </div>
       <div className="mb-2">
         <Buttons
-          className="text-xs no-underline hover:text-indigo-500 hover:bg-transparent p-0 mr-3"
+          className="text-xs no-underline hover:text-indigo-500 hover:bg-transparent p-0 mr-3 "
           variant="borderless"
           onClick={() => dispatch(searchAction.selectTripType(true))}
         >

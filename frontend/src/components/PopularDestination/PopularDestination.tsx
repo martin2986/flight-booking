@@ -1,6 +1,6 @@
-import 'swiper/css';
-import { A11y, Navigation, Scrollbar } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { A11y, Navigation, Scrollbar } from 'swiper/modules';
+import 'swiper/css';
 import 'swiper/scss/navigation';
 import 'swiper/scss/pagination';
 import img4 from '../../assets/bali.jpg';
@@ -20,8 +20,7 @@ const PopularDestination = () => {
       <Swiper
         modules={[Navigation, Scrollbar, A11y]}
         spaceBetween={50}
-        slidesPerView={4}
-        onSlideChange={() => console.log('slide change')}
+        slidesPerView={3}
         navigation
         scrollbar={{ draggable: true }}
       >

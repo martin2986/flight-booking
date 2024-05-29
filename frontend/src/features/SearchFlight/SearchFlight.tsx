@@ -1,3 +1,5 @@
+import moment from 'moment';
+import { useNavigate } from 'react-router-dom';
 import { flightClient } from '@/services/auth/apiClient';
 import Passengers from '@/features/SearchFlight/Passengers/Index';
 import Search from '@/features/SearchFlight/Search';
@@ -5,9 +7,7 @@ import { Buttons } from '@/UI/Button';
 import ToastNotification from '@/UI/ToastNotification';
 import { appAction } from '@/redux/app/appSlice';
 import { useAppSelector, useDisPatch } from '@/redux/hooks';
-import moment from 'moment';
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useNavigate } from 'react-router-dom';
 import Date from './DatePicker';
 export type InputStateTypes = {
   origin: string;
@@ -68,7 +68,7 @@ const SearchFlight = () => {
       const { data } = response;
       dispatch(appAction.clearSelectedFlight());
       navigate(
-        `/flight-schedule?origin=${origin.city}&destination=${destination.city}&isRoundTrip=${roundTrip}&departDate=${moment(departureDate.$d).format('YYYY-MM-DD')}${roundTrip && `&returnDate=&${moment(arrivalDate.$d).format('YYYY-MM-DD')}`}`,
+        `/flight-schedule?origin=${origin.city}&destination=${destination.city}&isRoundTrip=${roundTrip}&departDate=${moment(departureDate.$d).format('YYYY-MM-DD')}&${roundTrip ? `returnDate=${moment(arrivalDate.$d).format('YYYY-MM-DD')}` : ''}`,
         { state: data },
       );
       dispatch(appAction.setIsLoading(false));
@@ -99,7 +99,7 @@ const SearchFlight = () => {
           <Passengers />
         </div>
         <Buttons
-          className="bg-gray-700 px-5 py-2 w-full md:w-fit text-nowrap"
+          className="bg-gray-700 px-5 py-2 w-full md:w-fit h-12 text-nowrap"
           variant="default"
           type="submit"
         >

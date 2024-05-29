@@ -1,9 +1,8 @@
 import { ButtonHTMLAttributes, FC } from 'react';
 import { VariantProps, cva } from 'class-variance-authority';
 import { cn } from '../utils/helperFn';
-
 const buttonVariants = cva(
-  'bg-indigo-600 text-slate-50 inline-flex items-center rounded-sm text-xs md:text-base',
+  'bg-indigo-600 text-black inline-flex items-center rounded-sm text-xs md:text-base',
   {
     variants: {
       variant: {

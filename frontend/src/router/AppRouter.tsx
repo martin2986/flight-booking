@@ -22,6 +22,20 @@ const AppRouter = () => {
         <Route element={<Dashboard />} path="/" />
         <Route element={<Flights />} path="flight-schedule" />
         <Route element={<CheckoutLayout />} path="checkout" />
+        <Route
+          path="/hotel-booking"
+          Component={() => {
+            window.location.href = 'https://www.booking.com';
+            return null;
+          }}
+        />
+        <Route
+          path="/car-booking"
+          Component={() => {
+            window.location.href = 'https://www.booking.com/cars';
+            return null;
+          }}
+        />
         <Route element={<ProtectedRoute redirectPath="/" />}>
           <Route element={<UserProfile />} path="profile" />
           <Route element={<UpdatePassword />} path="edit-account" />

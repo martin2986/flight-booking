@@ -23,7 +23,7 @@ const SearchInfo: FC<SearchInfoProps> = ({ origin, destination, departDate, retu
     <>
       <div className="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] px-5	py-2 rounded ">
         <div className="flex flex-row items-center justify-between ">
-          <div className="flex flex-row flex-wrap items-center md:gap-8">
+          <div className="flex flex-row  items-center md:gap-8">
             <TitleWithIcon
               name={isSelected && roundTrip ? destination : origin ?? origin}
               title="From"

@@ -46,12 +46,12 @@ const FlightList: FC<FlightListInfoProps> = ({ flightData, onSelectFlight, ...re
           const { marketing } = carriers;
           return (
             <Card
-              className=" mb-3 shadow-[0_3px_10px_rgb(0,0,0,0.2)] border-0"
+              className=" mb-3 shadow-[0_3px_10px_rgb(0,0,0,0.2)] border-0  "
               {...rest}
               key={id}
               onClick={() => onSelectFlight({ segments, durationInMinutes, stopCount })}
             >
-              <div className="flex sm:flex-row items-center justify-between">
+              <div className="flex sm:flex-row items-center justify-between my-auto h-24">
                 <ImageList marketing={marketing} />
                 <FlightItem
                   time={departure}
@@ -59,6 +59,7 @@ const FlightList: FC<FlightListInfoProps> = ({ flightData, onSelectFlight, ...re
                   city={origin?.city}
                   countryCode={origin.displayCode}
                 />
+
                 <FlightDuration time={durationInMinutes} stopCount={stopCount} />
                 <FlightItem
                   type="destination"
@@ -72,7 +73,7 @@ const FlightList: FC<FlightListInfoProps> = ({ flightData, onSelectFlight, ...re
                     {price.formatted}
                   </h1>
                   <Buttons
-                    className="rounded-3xl px-3 py-2 md:px-5 lg:px-7  font-semibold"
+                    className="rounded-3xl px-2 py-1 md:py-2 md:px-5 lg:px-7  font-semibold"
                     onClick={
                       isSelected && roundTrip
                         ? () =>

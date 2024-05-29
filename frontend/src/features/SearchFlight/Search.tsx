@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
+import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { search } from '@/services/searchRequest';
 import { LocationOn as PinIcon } from '@mui/icons-material';
 import { Autocomplete, Grid, TextField } from '@mui/material';
-import { useEffect, useState } from 'react';
-import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 type SearchProps<T extends any, TField extends FieldValues> = {
   control: Control<TField>;
   name: Path<TField>;

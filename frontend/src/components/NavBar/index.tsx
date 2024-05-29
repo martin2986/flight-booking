@@ -19,7 +19,7 @@ const Index = () => {
       <nav className="container mx-auto flex justify-between p-1 items-center ">
         <div className="text-xl lg:flex-1">
           <Link to="/">
-            <img src={logo} alt="" className="h-16 -mx-10" />
+            <img src={logo} alt="" className="h-8 -mx-2  md:h-16 md:-mx-10" />
           </Link>
         </div>
         <div className="lg:hidden cursor-pointer" onClick={() => setIsOpen((prev) => !prev)}>

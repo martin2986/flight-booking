@@ -7,7 +7,7 @@ import { defineConfig, loadEnv } from 'vite';
 export default ({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '');
 
-  const url = env.VITE_BACKEND_SERVER || 'http://localhost:8888/';
+  // const url = env.VITE_BACKEND_SERVER || 'http://localhost:8888/';
 
   const config = {
     plugins: [react(), eslint()],
@@ -20,14 +20,14 @@ export default ({ mode }) => {
         '@': path.resolve(__dirname, 'src'),
       },
     },
-    server: {
-      proxy: {
-        '/api': {
-          target: url,
-          changeOrigin: true,
-        },
-      },
-    },
+    // server: {
+    //   proxy: {
+    //     '/api': {
+    //       target: url,
+    //       changeOrigin: true,
+    //     },
+    //   },
+    // },
   };
   return defineConfig(config);
 };

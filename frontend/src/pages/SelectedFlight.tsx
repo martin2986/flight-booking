@@ -1,7 +1,7 @@
+import { FC } from 'react';
 import FlightDuration from '@/features/Flight/FlightDuration';
 import FlightListItem from '@/features/Flight/FlightItem';
 import FlightTitle from '@/features/Flight/FlightTitle';
-import { FC } from 'react';
 import { segment } from '../features/Flight/types';
 import { useAppSelector } from '../redux/hooks';
 import { filterList } from '../utils/helperFn';

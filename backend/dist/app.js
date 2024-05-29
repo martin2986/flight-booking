@@ -17,7 +17,7 @@ const express_rate_limit_1 = require("express-rate-limit");
 const app = (0, express_1.default)();
 app.disable('x-powered-by');
 const corsOptions = {
-    origin: process.env.CORS_ORIGIN,
+    origin: 'https://flyeasy.fadairomartins.com',
     methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
     credentials: true,
 };

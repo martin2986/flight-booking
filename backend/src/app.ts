@@ -14,7 +14,7 @@ const app = express();
 
 app.disable('x-powered-by');
 const corsOptions = {
-  origin: process.env.CORS_ORIGIN,
+  origin: 'https://flyeasy.fadairomartins.com',
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
   credentials: true,
 };

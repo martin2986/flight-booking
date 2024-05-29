@@ -3,11 +3,11 @@ import { QueryClient } from '@tanstack/react-query';
 export const queryClient = new QueryClient();
 
 export const authApi = axios.create({
-  baseURL: `${process.env.SECRET_AUTH}`,
+  baseURL: 'https://flyeasy-server.fadairomartins.com/api/v1/auth',
   withCredentials: true,
 });
 export const appApi = axios.create({
-  baseURL: `${process.env.SECRET_API}`,
+  baseURL: 'https://flyeasy-server.fadairomartins.com/api/v1/users',
   withCredentials: true,
 });
 export const flightClient = axios.create({

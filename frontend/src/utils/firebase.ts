@@ -1,7 +1,7 @@
 import { initializeApp } from 'firebase/app';
 const firebaseConfig = {
   apiKey: process.env.SECRET_FIREBASE_API,
-  authDomain: 'flyeasy.fadairomartins.com',
+  authDomain: 'mern-auth-db741.firebaseapp.com',
   projectId: process.env.SECRET_PROJECT_ID,
   storageBucket: process.env.SECRET_CLOUD_STORAGE_BUCKET,
   messagingSenderId: process.env.SECRET_MESSAGE_ID,

@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import { Blurhash } from 'react-blurhash';
 import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 type CardProps = {
   country: string;
   image: string;
@@ -30,6 +31,7 @@ const Card: FC<CardProps> = ({ image, country, hash }) => {
           onLoad={() => setImageLoaded(true)}
           className="w-full h-full  object-cover rounded-xl hover:scale-105 transition-all duration-300"
           loading="lazy"
+          effect="blur"
         />
       )}
       <h4 className="text-sm md:text-base text-base-light font-semibold mt-1 absolute bottom-5 left-5">

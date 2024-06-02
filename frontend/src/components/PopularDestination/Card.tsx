@@ -19,25 +19,33 @@ const Card: FC<CardProps> = ({ image, country, hash }) => {
     img.src = image;
   }, [image]);
   return (
-    <div className="h-40 md:h-80 cursor-pointer mt-8 relative">
-      {!imageLoaded && (
-        <Blurhash hash={hash} resolutionX={32} height={320} width={390} resolutionY={2} punch={1} />
-      )}
-
-      {imageLoaded && (
-        <LazyLoadImage
-          alt={country}
-          src={image}
-          onLoad={() => setImageLoaded(true)}
-          className="w-full h-full  object-cover rounded-xl hover:scale-105 transition-all duration-300"
-          loading="lazy"
-          effect="blur"
-        />
-      )}
+    <>
+      <div className="h-40 md:h-80 w-80 cursor-pointer mt-8 relative">
+        {!imageLoaded && (
+          <Blurhash
+            hash={hash}
+            resolutionX={32}
+            height={320}
+            width={390}
+            resolutionY={2}
+            punch={1}
+          />
+        )}
+        {imageLoaded && (
+          <LazyLoadImage
+            onLoad={() => setImageLoaded(true)}
+            className="h-40 md:h-80 w-80 object-cover rounded-xl hover:scale-105 transition-all duration-300"
+            alt={country}
+            src={image}
+            loading="lazy"
+            effect="blur"
+          />
+        )}
+      </div>
       <h4 className="text-sm md:text-base text-base-light font-semibold mt-1 absolute bottom-5 left-5">
         {country}
       </h4>
-    </div>
+    </>
   );
 };
 

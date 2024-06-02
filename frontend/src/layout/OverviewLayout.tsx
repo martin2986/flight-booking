@@ -7,12 +7,10 @@ type OverviewLayoutProps = {
 
 const OverviewLayout: FC<OverviewLayoutProps> = ({ children }) => {
   return (
-    <>
-      <div className="min-h-screen w-screen container mx-auto px-2 md:px-3 py-5 flex flex-row gap-3">
-        <div className="w-full md:w-2/3">{children}</div>
-        <FlightOverview />
-      </div>
-    </>
+    <div className="min-h-screen w-screen text-base-900  container mx-auto px-2 md:px-3 py-4 flex flex-row gap-3">
+      <div className="w-full md:w-2/3">{children}</div>
+      <FlightOverview />
+    </div>
   );
 };
 

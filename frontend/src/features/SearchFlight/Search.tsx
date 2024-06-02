@@ -1,8 +1,8 @@
+import { search } from '@/services/searchRequest';
+import { Autocomplete, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
-import { search } from '@/services/searchRequest';
-import { LocationOn as PinIcon } from '@mui/icons-material';
-import { Autocomplete, Grid, TextField } from '@mui/material';
+import { ImLocation } from 'react-icons/im';
 type SearchProps<T extends any, TField extends FieldValues> = {
   control: Control<TField>;
   name: Path<TField>;
@@ -10,7 +10,6 @@ type SearchProps<T extends any, TField extends FieldValues> = {
   inputValue?: string;
   options?: T[];
 };
-
 const Search = <T extends any, TField extends FieldValues>({
   control,
   name,
@@ -51,15 +50,14 @@ const Search = <T extends any, TField extends FieldValues>({
             getOptionLabel={(option) => option.city || ''}
             renderOption={(props, option: any) => {
               return (
-                <li {...props}>
-                  <Grid container alignItems="center">
-                    <Grid item>
-                      <PinIcon sx={{ width: '25px', marginRight: '0.1rem' }} />
-                    </Grid>
-                    <Grid item xs>
-                      <span>{option.city}</span>
-                    </Grid>
-                  </Grid>
+                <li
+                  {...props}
+                  className="bg-base-light hover:bg-base-500 hover:text-base-light cursor-pointer text-base-900 py-2 border-y border-white transition ease-in-out duration-300"
+                >
+                  <span className="px-2 inline-flex items-center gap-1">
+                    <ImLocation />
+                    {option.city}
+                  </span>
                 </li>
               );
             }}

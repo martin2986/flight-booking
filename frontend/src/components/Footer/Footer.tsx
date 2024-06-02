@@ -1,18 +1,15 @@
-import { FC } from 'react';
 import FooterItem from './FooterItem';
-import logo from '@/assets/logo.png';
-type FooterProps = {};
 
-const Footer: FC<FooterProps> = () => {
+const Footer = () => {
   const productList = ['Angular', 'React', 'Vue', 'Laravel'];
   const usefulLinks = ['Pricing', 'Settings', 'Orders', 'Help'];
 
   return (
-    <footer className="bg-neutral-100 text-center text-neutral-600 dark:bg-neutral-600 dark:text-neutral-200 lg:text-left md:-mx-5 md:px-5 text-sm">
+    <footer className=" bg-base-900 text-center text-base-light dark:bg-neutral-600 dark:text-neutral-200 lg:text-left md:-mx-5 md:px-5 text-sm">
       <div className="mx-6 py-10 text-center md:text-left">
         <div className="grid-1 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
-          <div className="">
-            <img src={logo} alt="logo" className="h-10 -mx-5" />
+          <div>
+            <p className="text-base font-semibold">FlyEasy</p>
             <p className="mt-2">
               Explore the skies with confidence, reliability, and the assurance of a memorable
               journey

@@ -21,7 +21,7 @@ const SearchInfo: FC<SearchInfoProps> = ({ origin, destination, departDate, retu
   const { isSelected } = selectedFlight;
   return (
     <>
-      <div className="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] px-5	py-2 rounded ">
+      <div className="w-full shadow-[0_3px_10px_rgb(0,0,0,0.2)] px-5	py-2 rounded text-base-900">
         <div className="flex flex-row items-center justify-between ">
           <div className="flex flex-row  items-center md:gap-8">
             <TitleWithIcon

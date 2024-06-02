@@ -43,9 +43,9 @@ const Schedules: FC<SchedulesProps> = () => {
         <AnimatePresence>
           {toggleFlightDetail && modalInfo && (
             <DetailModal>
-              <div className="px-5 py-6 md:p-5 ">
+              <div className="px-5 py-6 md:p-5 text-base-900 ">
                 <div className="mb-3">
-                  <h3 className="flex items-start mb-1 text-sm font-bold text-gray-900 dark:text-black">
+                  <h3 className="flex items-start mb-1 text-sm font-bold">
                     Depart - {formatTime(departureDate).fullDateWithDay}
                   </h3>
                   <p className="block mb-3 text-sm font-normal leading-none text-gray-500 dark:text-gray-400">

@@ -6,7 +6,7 @@ const initialState = {
   departureDate: '',
   returnDate: '',
   passengers: 1,
-  roundTrip: true,
+  roundTrip: false,
   cabinClass: '',
   origin: '',
   destination: '',

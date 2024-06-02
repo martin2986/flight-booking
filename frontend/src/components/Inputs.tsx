@@ -10,11 +10,11 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
 const Inputs: FC<InputProps> = ({ label, error, name, register, ...props }) => {
   return (
     <div className="w-full mb-4">
-      <label htmlFor={label} className="block text-sm font-medium text-black">
+      <label htmlFor={label} className="block text-sm font-medium text-black mb-2">
         {label}
       </label>
       <input
-        className="shadow-sm border border-gray-300 text-black   text-sm rounded-sm focus:ring-primary-100 focus:border-primary-100 block w-full p-2  dark:focus:ring-primary-100 dark:focus:border-primary-100 dark:shadow-sm-light"
+        className="shadow-sm border border-gray-300 text-black bg-base-light text-sm rounded-sm focus:ring-primary-100 focus:border-primary-100 block w-full p-2  dark:focus:ring-primary-100 dark:focus:border-primary-100 dark:shadow-sm-light"
         {...register(name, { required: true })}
         {...props}
       />

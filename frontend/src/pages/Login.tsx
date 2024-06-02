@@ -50,9 +50,10 @@ const Login = () => {
         <Inputs
           name="email"
           register={register}
-          label="Email Address"
+          label="Email"
           error={errors?.email?.message}
           type="text"
+          placeholder="Email"
         />
         <Inputs
           name="password"
@@ -60,20 +61,27 @@ const Login = () => {
           label="Password"
           error={errors?.password?.message}
           type="password"
+          placeholder="Password"
         />
 
         <Buttons className="w-full mt-5" disabled={isSubmitting}>
           {isSubmitting ? 'Loading...' : 'Log In'}
         </Buttons>
-        <p className="uppercase my-1 text-xs text-center ">or</p>
+        <p className="uppercase my-2 text-xs text-center ">or</p>
         <OAuth />
         <div className="flex flex-row items-center justify-between text-sm mt-6">
-          <Link to="/register" className="text-black underline">
-            Sign Up
-          </Link>
+          <div>
+            <span className="mr-1 font-semibold">Or</span>
+            <Link
+              to="/register"
+              className="font-semibold hover:text-base-500 transition ease-in-out duration-300"
+            >
+              Register Now!
+            </Link>
+          </div>
           <Link
             to="/"
-            className="font-semibold text-indigo-600 hover:text-indigo-500 hover:scale-105"
+            className="font-semibold hover:text-base-500 transition ease-in-out duration-300"
           >
             Forgot password?
           </Link>

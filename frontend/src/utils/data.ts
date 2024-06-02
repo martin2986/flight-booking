@@ -1,6 +1,6 @@
-import img2 from '../assets/airplane.png';
-import img1 from '../assets/ticket-flight.png';
-import img3 from '../assets/travel.png';
+import img2 from '../assets/airplane.webp';
+import img1 from '../assets/ticket-flight.webp';
+import img3 from '../assets/travel.webp';
 export const accordionsData = [
   {
     id: '01',
@@ -48,7 +48,7 @@ export const textInfoData = [
   {
     title: '24/7 Assistance',
     description:
-      "For your peace-of-mind, your trip includes the 'Dohop Connection Service'. If your connecting flight is delayed or cancelled, our partner, Dohop, will rebook you on an alternative flight to your final destination.",
+      'For your peace-of-mind, If your connecting flight is delayed or cancelled, our partner, will rebook you on an alternative flight to your final destination.',
     icon: img2,
     alt: '',
   },

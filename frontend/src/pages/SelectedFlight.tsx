@@ -21,7 +21,7 @@ const SelectedFlight: FC<SelectedFlightProps> = ({ origin, destination, isRoundT
       )}
       {selectedData.map(
         ({ origin, destination, departure, arrival, durationInMinutes, flightNumber }) => (
-          <div className=" px-3 py-2 mb-3 bg-gray-100 border-0 rounded hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
+          <div className=" px-3 py-2 mb-3 bg-gray-100 border hover:border-0 rounded hover:shadow-[0_3px_10px_rgb(0,0,0,0.2)]">
             <div className="flex sm:flex-row items-center justify-between" key={flightNumber}>
               <FlightListItem
                 time={departure}

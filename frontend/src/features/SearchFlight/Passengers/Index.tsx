@@ -27,17 +27,20 @@ const Index = () => {
   return (
     <div
       ref={dropDownRef}
-      className="relative border border-gray-300 rounded px-2 py-1 cursor-pointer"
+      className="relative border border-gray-300 rounded px-2 py-1 cursor-pointer w-full md:w-56"
     >
       <div onClick={() => setShow((prev) => !prev)}>
         <p className="text-xs mb-1">Passengers</p>
-        <div className="flex gap-2">
+        <div className="flex gap-2 w-full">
           <IoPersonSharp />
-          <p className="text-sm text-nowrap">{`${passengers} Passenger${passengers > 1 ? 's' : ''}`}</p>
+          <p className="text-sm text-nowrap inline-flex gap-1">
+            <span className="px-1 w-3">{passengers}</span>
+            <span> {`Passenger${passengers > 1 ? 's' : ''}`}</span>
+          </p>
         </div>
       </div>
       {show && (
-        <div className="absolute right-0 top-16 w-fit p-0 border shadow-md bg-white z-50">
+        <div className="absolute right-0 top-16  p-0 border shadow-md bg-white z-50">
           <PassengersList
             title="Adults"
             detail="16+"

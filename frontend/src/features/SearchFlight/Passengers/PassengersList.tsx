@@ -36,7 +36,7 @@ const PassengersList: FC<PassengersListProps> = ({
         >
           -
         </button>
-        <p className="text-sm font-medium">{value}</p>
+        <p className="text-sm font-medium w-3 text-center">{value}</p>
         <button
           type="button"
           onClick={increment}

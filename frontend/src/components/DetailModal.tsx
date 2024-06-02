@@ -21,7 +21,7 @@ const DetailModal: FC<DetailModalProps> = ({ children }) => {
         animate={{ y: 0, opacity: 1 }}
         exit={{ y: -50, opacity: 0 }}
         transition={{ duration: 0.3 }}
-        className="  fixed items-center z-20 top-24 left-0 right-0 justify-center md:w-2/3 mx-auto md:max-h-full"
+        className="  fixed items-center text-base-900  z-20 top-24 left-0 right-0 justify-center md:w-2/3 mx-auto md:max-h-full"
       >
         <div className="relative p-4 md:max-h-full mx-auto">
           <div className="relative bg-white rounded-lg shadow b">
@@ -29,7 +29,7 @@ const DetailModal: FC<DetailModalProps> = ({ children }) => {
               <h3 className="text-lg font-semibold text-gray-900 dark:text-black">Your Journey</h3>
               <span
                 onClick={() => dispatch(appAction.toggleFlightDetail(false))}
-                className="text-3xl cursor-pointer hover:bg-gray-300 rounded-full w-9 h-9 inline-flex items-center justify-center"
+                className="text-3xl cursor-pointer hover:bg-base-900 hover:text-base-light rounded-full w-9 h-9 inline-flex items-center justify-center transition ease-in-out duration-300"
               >
                 &times;
               </span>
@@ -38,7 +38,8 @@ const DetailModal: FC<DetailModalProps> = ({ children }) => {
 
             <div className="p-2 md:p-5 border-t  dark:border-gray-600">
               <Buttons
-                className="bg-transparent px-7 rounded-3xl text-black hover:bg-gray-300"
+                className="bg-transparent px-7 rounded-3xl"
+                variant="outline"
                 onClick={() => dispatch(appAction.toggleFlightDetail(false))}
               >
                 Close

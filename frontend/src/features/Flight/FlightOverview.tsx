@@ -47,14 +47,14 @@ const FlightOverview = () => {
                 <p className="text-sm md:text-base font-bold">${connectionFee}</p>
               </div>
 
-              <div className="flex flex-row justify-between text-base font-semibold pb-3 border-b-2">
+              <div className="flex flex-row justify-between text-base font-semibold pb-2 border-b-2">
                 <p className="font-medium">Total:</p>
                 <p>${!price ? '0.00' : flightPrice.toFixed(1)}</p>
               </div>
             </>
           )}
 
-          <div className="bg-gray-100 mt-3 py-4 px-3 ">
+          <div className="bg-gray-100  py-2 px-3 ">
             {isSelected &&
               selectedData.map(({ origin, destination, departure, flightNumber }) => (
                 <SelectedFlight

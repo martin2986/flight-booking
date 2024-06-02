@@ -46,6 +46,7 @@ const Register = () => {
           type="text"
           register={register}
           error={errors?.name?.message}
+          placeholder="Name"
         />
         <Inputs
           name="email"
@@ -53,6 +54,7 @@ const Register = () => {
           type="email"
           register={register}
           error={errors?.email?.message}
+          placeholder="Email"
         />
         <Inputs
           name="password"
@@ -60,6 +62,7 @@ const Register = () => {
           type="password"
           register={register}
           error={errors?.password?.message}
+          placeholder="Password"
         />
         <Inputs
           name="confirmPassword"
@@ -67,6 +70,7 @@ const Register = () => {
           type="password"
           register={register}
           error={errors?.confirmPassword?.message}
+          placeholder="Password"
         />
 
         <Buttons className="w-full mt-5" disabled={isSubmitting}>
@@ -74,9 +78,13 @@ const Register = () => {
         </Buttons>
         <p className="uppercase my-1 text-xs text-center ">or</p>
         <OAuth />
-        <div className="mt-4">
-          <Link to="/login" className="text-black text-sm">
-            Login Now!
+        <div className="mt-4 text-sm ">
+          <span className="mr-1 font-semibold">Or</span>
+          <Link
+            to="/login"
+            className="font-semibold hover:text-base-500 transition ease-in-out duration-300"
+          >
+            Already Have Account Login
           </Link>
         </div>
       </form>

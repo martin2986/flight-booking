@@ -15,7 +15,9 @@ const Index = () => {
     setIsOpen((prev) => !prev);
   };
   return (
-    <div className={`bg-transparent mb-3 ${!isHomePage ? 'text-base-900' : 'text-base-light'} `}>
+    <div
+      className={`bg-transparent md:pt-5 px-2 md:px-0 ${!isHomePage ? 'text-base-900' : 'text-base-light'} `}
+    >
       <nav className="container mx-auto flex justify-between p-1 items-center ">
         <div className="text-xl lg:flex-1">
           <Link to="/" className="text-[20px]">
@@ -23,7 +25,7 @@ const Index = () => {
           </Link>
         </div>
         <div
-          className="lg:hidden text-base-light cursor-pointer"
+          className={`lg:hidden cursor-pointer${isHomePage ? 'text-base-light' : 'text-base-900'}`}
           onClick={() => setIsOpen((prev) => !prev)}
         >
           <RxHamburgerMenu />

@@ -14,7 +14,7 @@ const Inputs: FC<InputProps> = ({ label, error, name, register, ...props }) => {
         {label}
       </label>
       <input
-        className="shadow-sm border border-gray-300 text-black bg-base-light text-sm rounded-sm focus:ring-primary-100 focus:border-primary-100 block w-full p-2  dark:focus:ring-primary-100 dark:focus:border-primary-100 dark:shadow-sm-light"
+        className={`${error ? 'border-red-500' : ''} shadow-sm border border-gray-300 text-black bg-base-light text-sm rounded-sm focus:ring-primary-100 focus:border-primary-100 block w-full p-2  dark:focus:ring-primary-100 dark:focus:border-primary-100 dark:shadow-sm-light`}
         {...register(name, { required: true })}
         {...props}
       />

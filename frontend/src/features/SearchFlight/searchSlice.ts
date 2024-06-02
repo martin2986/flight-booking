@@ -10,6 +10,7 @@ const initialState = {
   cabinClass: '',
   origin: '',
   destination: '',
+  searchIsLoading: false,
 };
 const searchSlice = createSlice({
   name: 'search',
@@ -56,6 +57,9 @@ const searchSlice = createSlice({
     decrementInfant: (state) => {
       state.infantCount--;
       state.passengers = state.adultCount + state.childrenCount + state.infantCount;
+    },
+    setSearchIsLoading: (state, action) => {
+      state.searchIsLoading = action.payload;
     },
   },
 });

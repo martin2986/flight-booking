@@ -15,7 +15,7 @@ const buttonVariants = cva(' text-black inline-flex items-center rounded-sm text
     size: {
       default: 'text-xs md:text-sm px-5 py-2 ',
       wide: 'text-xs md:text-sm px-6 py-2 ',
-      sm: 'px-2 py-1 text-xs md:text-sm min-w-16 md:min-w-22 text-black',
+      sm: 'px-2 py-1 text-xs md:text-sm min-w-16 md:min-w-22',
     },
   },
   defaultVariants: {

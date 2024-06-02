@@ -2,12 +2,11 @@ import { motion } from 'framer-motion';
 import { FC } from 'react';
 import { MdOutlineClose } from 'react-icons/md';
 import { Link } from 'react-router-dom';
+import UserIcon from '../features/User/UserIcon';
 import { logout } from '../redux/auth/AuthAction';
 import { useAppSelector, useDisPatch } from '../redux/hooks';
 import { buttonVariants } from '../UI/Button';
-import UserIcon from '../features/User/UserIcon';
-import { sideLinks } from './NavBar/navUtil';
-import { menuVar } from './NavBar/navUtil';
+import { menuVar, sideLinks } from './NavBar/navUtil';
 type SideBarProps = {
   setIsOpen: () => void;
   type: 'side' | 'nav';
@@ -15,7 +14,6 @@ type SideBarProps = {
 
 const SideBar: FC<SideBarProps> = ({ setIsOpen, type }) => {
   const { user, isLoggedIn } = useAppSelector((state) => state.auth);
-
   const dispatch = useDisPatch();
   const handleLogout = () => {
     dispatch(logout());
@@ -34,7 +32,7 @@ const SideBar: FC<SideBarProps> = ({ setIsOpen, type }) => {
           {isLoggedIn ? (
             <UserIcon />
           ) : (
-            <h3 className="text-base font-semibold leading-7 ">Flight</h3>
+            <h3 className="text-base text-base-900 font-semibold leading-7 ">FlyEasy</h3>
           )}
           {isLoggedIn && (
             <Link to="/profile" onClick={setIsOpen} className=" cursor-pointer hover:text-gray-600">
@@ -43,7 +41,7 @@ const SideBar: FC<SideBarProps> = ({ setIsOpen, type }) => {
             </Link>
           )}
         </div>
-        <div className=" cursor-pointer" onClick={setIsOpen}>
+        <div className="text-base-900 cursor-pointer" onClick={setIsOpen}>
           <MdOutlineClose />
         </div>
       </div>
@@ -66,10 +64,10 @@ const SideBar: FC<SideBarProps> = ({ setIsOpen, type }) => {
 
       <div className="mt-6  ">
         {!isLoggedIn && (
-          <div className="flex items-center gap-2 mt-3">
+          <div className="flex text-base-900 items-center gap-2 mt-3">
             <Link
               to="/register"
-              style={{ color: 'black' }}
+              onClick={setIsOpen}
               className={buttonVariants({
                 variant: 'outline',
                 size: 'sm',
@@ -77,7 +75,7 @@ const SideBar: FC<SideBarProps> = ({ setIsOpen, type }) => {
             >
               Register
             </Link>
-            <Link to="/login" className={buttonVariants({ size: 'sm' })}>
+            <Link to="/login" onClick={setIsOpen} className={buttonVariants({ size: 'sm' })}>
               Sign in
             </Link>
           </div>

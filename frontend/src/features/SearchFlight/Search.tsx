@@ -24,6 +24,7 @@ const Search = <T extends any, TField extends FieldValues>({
     });
     return () => cancel();
   }, [inputValue]);
+
   return (
     <Controller
       name={name}
@@ -69,6 +70,9 @@ const Search = <T extends any, TField extends FieldValues>({
                 variant="outlined"
                 InputProps={{
                   ...props.InputProps,
+                  // endAdornment: (
+                  //   <>{searchIsLoading ? <CircularProgress color="inherit" size={20} /> : null}</>
+                  // ),
                 }}
                 inputRef={ref}
               />

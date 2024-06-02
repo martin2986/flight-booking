@@ -11,6 +11,7 @@ import { useAppSelector, useDisPatch } from '@/redux/hooks';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import Date from './DatePicker';
 import Spinner from '@/UI/Spinner';
+
 export type InputStateTypes = {
   origin: string;
   destination: string;
@@ -41,14 +42,8 @@ const SearchFlight = () => {
   } else {
     url = '/search-one-way';
   }
-  if (isSubmitting) dispatch(appAction.setIsLoading(true));
   const onSubmit: SubmitHandler<InputStateTypes> = async (data: any) => {
     const { origin, destination, departureDate, arrivalDate } = data;
-    if (origin === '' && destination === '') {
-      dispatch(appAction.setIsLoading(false));
-      return;
-    }
-
     const params = {
       params: {
         fromId: origin.id,
@@ -73,7 +68,6 @@ const SearchFlight = () => {
         `/flight-schedule?origin=${origin.city}&destination=${destination.city}&isRoundTrip=${roundTrip}&departDate=${moment(departureDate.$d).format('YYYY-MM-DD')}&${roundTrip ? `returnDate=${moment(arrivalDate.$d).format('YYYY-MM-DD')}` : ''}`,
         { state: data },
       );
-      dispatch(appAction.setIsLoading(false));
     } catch (err: any) {
       setError('root', {
         message: err.response.data.message,

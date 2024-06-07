@@ -71,12 +71,12 @@ const Login = () => {
         <OAuth />
         <div className="flex flex-row items-center justify-between text-sm mt-6">
           <div>
-            <span className="mr-1 font-semibold">Or</span>
+            <span className="mr-1">Don't have an account?</span>
             <Link
               to="/register"
               className="font-semibold hover:text-base-500 transition ease-in-out duration-300"
             >
-              Register Now!
+              Sign up!
             </Link>
           </div>
           <Link

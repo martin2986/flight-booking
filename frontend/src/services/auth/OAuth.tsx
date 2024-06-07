@@ -32,8 +32,8 @@ const OAuth = () => {
       variant="outline"
       className="bg-red-700 text-base-900 rounded-sm p-2 w-full uppercase hover:opacity-95"
     >
-      <span className="mr-1.5">Continue with google </span>
-      <FcGoogle className="text-base" />
+      <FcGoogle className="text-base mr-1.5" />
+      <span>Log in with google </span>
     </Buttons>
   );
 };

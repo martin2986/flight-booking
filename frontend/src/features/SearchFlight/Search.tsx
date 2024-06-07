@@ -1,8 +1,10 @@
 import { search } from '@/services/searchRequest';
 import { Autocomplete, TextField } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Control, Controller, FieldValues, Path } from 'react-hook-form';
 import { ImLocation } from 'react-icons/im';
+import { debounce } from '@mui/material';
+import axios from 'axios';
 type SearchProps<T extends any, TField extends FieldValues> = {
   control: Control<TField>;
   name: Path<TField>;
@@ -16,15 +18,37 @@ const Search = <T extends any, TField extends FieldValues>({
   label,
 }: SearchProps<T, TField>) => {
   const [inputValue, setInputValue] = useState('');
+  const [loadedValue, setLoadedValue] = useState('');
   const [options, setOptions] = useState([]);
+
   useEffect(() => {
-    const { process, cancel } = search(inputValue);
+    let input;
+    if (inputValue) {
+      input = inputValue;
+    } else {
+      input = loadedValue;
+    }
+    const { process, cancel } = search(input);
     process((options: []) => {
       setOptions(options);
     });
     return () => cancel();
-  }, [inputValue]);
+  }, [inputValue, loadedValue]);
 
+  const searchDelayed = useCallback(
+    debounce((newValue: string) => setInputValue(newValue), 2000),
+    [],
+  );
+
+  useEffect(() => {
+    const fetchIP = async () => {
+      const res = await axios.get('https://geolocation-db.com/json/');
+      if (!res.data) throw new Error("Can't fetch data");
+      const returnedData = res.data.country_name.toLowerCase();
+      setLoadedValue(returnedData);
+    };
+    fetchIP();
+  }, []);
   return (
     <Controller
       name={name}
@@ -45,7 +69,7 @@ const Search = <T extends any, TField extends FieldValues>({
               onChange(newValue);
             }}
             onInputChange={(_, newInputValue) => {
-              setInputValue(newInputValue);
+              searchDelayed(newInputValue);
             }}
             sx={{ width: '100%' }}
             getOptionLabel={(option) => option.city || ''}

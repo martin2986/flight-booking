@@ -79,12 +79,12 @@ const Register = () => {
         <p className="uppercase my-1 text-xs text-center ">or</p>
         <OAuth />
         <div className="mt-4 text-sm ">
-          <span className="mr-1 font-semibold">Or</span>
+          <span className="mr-1">Already have an account?</span>
           <Link
             to="/login"
             className="font-semibold hover:text-base-500 transition ease-in-out duration-300"
           >
-            Already Have Account Login
+            Login
           </Link>
         </div>
       </form>
